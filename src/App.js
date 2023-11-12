@@ -1,7 +1,5 @@
-import './App.css'
-
 function App() {
-  return <div>Hello World</div>
+  return <div className="text-highlight-alt">Hello World</div>
 }
 
 export default App
