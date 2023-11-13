@@ -1,13 +1,14 @@
-import sample from './sample.png'
+import PropTypes from 'prop-types'
+import sample from '../../assets/images/sample.png'
 
-function RecipeCard() {
+function RecipeCard({ backgroundColor, headerTextColor, bodyTextColor }) {
   return (
-    <div className="bg-background-alt w-64 p-6 text-center rounded-xl">
+    <div className={`w-64 p-6 text-center rounded-xl ${backgroundColor}`}>
       <img src={sample} className="rounded-md" />
-      <p className="font-bold text-highlight-bright mt-2">Recipe Name</p>
+      <p className={`${headerTextColor} font-bold mt-2`}>Recipe Name</p>
 
       {/* Nutrition Facts */}
-      <div className="text-body-bold">
+      <div className={bodyTextColor}>
         <span>230</span>
         <span className="ml-1 text-sm">kcal</span>
         <span className="ml-2">19g</span>
@@ -15,6 +16,12 @@ function RecipeCard() {
       </div>
     </div>
   )
+}
+
+RecipeCard.propTypes = {
+  backgroundColor: PropTypes.string,
+  headerTextColor: PropTypes.string,
+  bodyTextColor: PropTypes.string,
 }
 
 export default RecipeCard

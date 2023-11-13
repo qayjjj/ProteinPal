@@ -14,7 +14,11 @@ export default function ExploreAllRecipes() {
       {/* Recipes */}
       <div className="flex justify-between mt-12">
         {list.map((item, key) => (
-          <RecipeCard />
+          <RecipeCard
+            backgroundColor="bg-background-alt"
+            headerTextColor="text-highlight-bright"
+            bodyTextColor="text-body-bold"
+          />
         ))}
       </div>
 

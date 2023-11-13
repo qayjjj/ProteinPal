@@ -11,6 +11,7 @@ module.exports = {
       'body-bold': '#416546',
       background: '#F2F7ED',
       'background-alt': '#E0EEC6',
+      'background-bright': '#81B688',
     },
   },
   plugins: [],

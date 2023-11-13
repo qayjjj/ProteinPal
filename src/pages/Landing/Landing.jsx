@@ -1,3 +1,4 @@
+import Footer from '../../components/Footer/Footer'
 import Navigation from '../../components/Navigation/Navigation'
 import BrowseCuisines from './BrowseCuisines/BrowseCuisines'
 import BrowseIngredients from './BrowseIngredients/BrowseIngredients'
@@ -12,6 +13,7 @@ function Landing() {
       <TrackMacros />
       <BrowseIngredients />
       <BrowseCuisines />
+      <Footer />
     </div>
   )
 }
