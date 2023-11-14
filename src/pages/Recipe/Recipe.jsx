@@ -7,7 +7,7 @@ export default function Recipe() {
   return (
     <div>
       <Navigation />
-      <div className="py-28 px-72">
+      <div className="py-28 px-44">
         <Overview />
         <Details />
       </div>

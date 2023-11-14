@@ -25,7 +25,7 @@ export default function Details() {
       </div>
 
       {/* Macro Information */}
-      <div className="flex-1 ml-12 bg-header px-20 py-12 w-1/4 min-h-[30rem] text-background-alt">
+      <div className="flex-1 ml-12 bg-header p-12 w-1/4 min-h-[30rem] text-background-alt">
         <h2 className="text-5xl font-bold text-background-alt">
           Macro Information
         </h2>
