@@ -1,12 +1,16 @@
+import React from 'react'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Landing from './pages/Landing/Landing'
-import NutritionFacts from './components/NutritionFacts/NutritionFacts'
-import RecipeCard from './components/RecipeCard/RecipeCard'
+import Recipe from './pages/Recipe/Recipe'
 
 function App() {
   return (
-    <div>
-      <Landing />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Landing />} />
+        <Route path="/recipe" element={<Recipe />} />
+      </Routes>
+    </BrowserRouter>
   )
 }
 
