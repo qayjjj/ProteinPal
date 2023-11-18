@@ -1,6 +1,6 @@
 import React from 'react'
 import search from '../../../assets/icons/search.svg'
-import RecipeCard from '../../../components/RecipeCard/RecipeCard'
+import Carousel from '../../../components/Carousel/Carousel'
 
 const list = [1, 2, 3, 4]
 
@@ -14,15 +14,12 @@ export default function BrowseCuisines() {
         <img src={search} alt="Search Icon" className="w-6 h-6" />
         {/* <input type="text" className="" /> */}
       </div>
-
-      <div className="flex justify-between mt-12">
-        {list.map((item, key) => (
-          <RecipeCard
-            backgroundColor="bg-background-alt"
-            headerTextColor="text-background-bright"
-            bodyTextColor="text-body-bold"
-          />
-        ))}
+      <div className="w-full grid justify-items-center relative mt-16">
+        <Carousel
+          backgroundColor="bg-background-alt"
+          headerTextColor="text-background-bright"
+          bodyTextColor="text-body-bold"
+        />
       </div>
     </div>
   )
