@@ -7,10 +7,10 @@ const AnimatedInput = ({ inputText, inputType, onChange }) => {
     const handleInputChange = (e) => {
         setInputValue(e.target.value);
         if (onChange) {
-          onChange(e.target.value);
+            onChange(e.target.value);
         }
-      };
-    
+    };
+
     const handleFocus = () => {
         setIsFocused(true);
     };
@@ -24,7 +24,9 @@ const AnimatedInput = ({ inputText, inputType, onChange }) => {
     return (
         <div className="input-container">
             <label className={`absolute px-6 py-3 transition-transform duration-300 text-header ${isFocused ? '-translate-y-3 text-sm text-highlight' : 'translate-y-2 text-base'
-                }`}>
+                }`}
+                style={{ pointerEvents: 'none' }}
+            >
                 {inputText}
             </label>
             <input

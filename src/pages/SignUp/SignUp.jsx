@@ -4,6 +4,7 @@ import Navigation from '../../components/Navigation/Navigation'
 import AnimatedInput from '../../components/Input/AnimatedInput'
 import { auth } from '../../Firebase';
 import { createUserWithEmailAndPassword } from "firebase/auth"
+import { Link } from 'react-router-dom';
 
 const SignUp = () => {
   const [email, setEmail] = useState('');
@@ -42,8 +43,10 @@ const SignUp = () => {
           Create Account
         </button>
 
-        {/* TODO: LOGIN NAV */}
-        <p className="text-highlight ml-4">Already a member? Log in</p>
+        <p className="text-highlight ml-4">
+          Already a member?{' '}
+          <Link to="/login" className="underline">Log in!</Link>
+        </p>
       </div>
 
       {/* <Footer /> */}
