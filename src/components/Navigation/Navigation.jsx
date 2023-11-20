@@ -2,8 +2,17 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import searchIcon from '../../assets/icons/search.svg'
 import profileIcon from '../../assets/icons/profile.svg'
+import { getRecipes } from '../../callApi'
 
 function Navigation() {
+
+  let search = () => {
+    getRecipes({
+      query: 'pasta',
+      cuisine: 'italian',
+    })
+  }
+
   return (
     <div className="flex items-center justify-between bg-highlight px-12 py-6">
       {/* App name */}
@@ -20,7 +29,7 @@ function Navigation() {
 
       {/* Search & Login */}
       <div className="flex">
-        <img src={searchIcon} alt="Search Icon" className="w-6 h-6" />
+        <img src={searchIcon} alt="Search Icon" className="w-6 h-6" onClick={search}/>
         <img src={profileIcon} alt="Profile Icon" className="w-6 h-6 ml-6" />
       </div>
     </div>
