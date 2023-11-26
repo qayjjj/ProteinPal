@@ -12,6 +12,7 @@ export default function BrowseIngredients() {
       </h1>
       <div className="mx-auto mt-10 border-[1px] h-12 w-2/3 rounded-md flex items-center p-2">
         <img src={search} alt="Search Icon" className="w-6 h-6" />
+        <input type="text" className="w-full outline-none bg-background ml-2" />
       </div>
 
       {/* Recipes */}

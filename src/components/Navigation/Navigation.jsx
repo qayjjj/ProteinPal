@@ -1,16 +1,23 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import searchIcon from '../../assets/icons/search.svg'
 import profileIcon from '../../assets/icons/profile.svg'
 import { getRecipes } from '../../callApi'
+import AnimatedInput from '../Input/AnimatedInput'
 
 function Navigation() {
+  const [searching, setSearching] = useState('false')
+  const [searchValue, setSearchValue] = useState('')
 
-  let search = () => {
-    getRecipes({
-      query: 'pasta',
-      cuisine: 'italian',
-    })
+  // let search = () => {
+  //   getRecipes({
+  //     query: 'pasta',
+  //     cuisine: 'italian',
+  //   })
+  // }
+
+  const handleDisplaySearchBar = () => {
+    setSearching((prev) => !prev)
   }
 
   return (
@@ -21,16 +28,26 @@ function Navigation() {
       </h1>
 
       {/* Pages */}
-      <div className="flex justify-between text-background w-1/3">
+      <div className="flex justify-between text-background w-1/3 font-semibold">
         <h2>Recipes</h2>
         <h2>Ingredients</h2>
         <h2>About</h2>
       </div>
 
       {/* Search & Login */}
-      <div className="flex">
-        <img src={searchIcon} alt="Search Icon" className="w-6 h-6" onClick={search}/>
-        <img src={profileIcon} alt="Profile Icon" className="w-6 h-6 ml-6" />
+      <div className="flex relative">
+        <AnimatedInput
+          classNames="w-52 bg-highlight mr-5"
+          labelStyle="-right-6"
+          focusStyle="translate-x-2 text-highlight text-lg"
+          blurStyle="-translate-x-1 text-xl"
+          inputStyle="-mt-2 text-sm text-background-alt"
+          label={<img src={searchIcon} alt="Search Icon" className="w-6 h-6" />}
+          inputType="text"
+          value={searchValue}
+          onChange={(value) => setSearchValue(value)}
+        />
+        <img src={profileIcon} alt="Profile Icon" className="w-6 h-6 ml-8" />
       </div>
     </div>
   )

@@ -1,0 +1,11 @@
+/* input[type='email']:-webkit-autofill:focus, input[type='password']:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0px 1000px rgba(224,238,198,1) inset !important;
+  } */
+
+.filledCredentials {
+    -webkit-box-shadow: 0 0 0px 1000px rgba(224,238,198,1) inset !important;
+}
+
+.filledSearch {
+  -webkit-box-shadow: 0 0 0px 1000px rgba(124,169,130,1) inset !important;
+}
