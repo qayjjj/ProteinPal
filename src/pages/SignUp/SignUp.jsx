@@ -58,7 +58,7 @@ const SignUp = () => {
           value={password}
           onChange={(value) => setPassword(value)}
         />
-        <div className="w-1/3 mx-auto mt-16 text-center">
+        <div className="w-1/3 mx-auto mt-12 text-center">
           <button
             class="w-full bg-highlight-alt text-header font-bold px-20 py-3 rounded hover:shadow-md"
             onClick={handleSignUp}
