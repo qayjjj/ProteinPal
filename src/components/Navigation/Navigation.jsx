@@ -9,11 +9,14 @@ function Navigation() {
   const [searching, setSearching] = useState('false')
   const [searchValue, setSearchValue] = useState('')
 
-  let search = () => {
+  const search = (event) => {
+    event.preventDefault();
     var result = getVegRecipes({
       query: searchValue,
     });
-    
+    console.log(searchValue);
+    console.log(result);
+    setSearchValue('')
   }
 
   const handleDisplaySearchBar = () => {
@@ -38,17 +41,19 @@ function Navigation() {
 
       {/* Search & Login */}
       <div className="flex relative">
-        <AnimatedInput
-          classNames="w-52 bg-highlight mr-5"
-          labelStyle="-right-6"
-          focusStyle="translate-x-2 text-highlight text-lg"
-          blurStyle="-translate-x-1 text-xl"
-          inputStyle="-mt-2 text-sm text-background-alt"
-          label={<img src={searchIcon} alt="Search Icon" className="w-6 h-6" />}
-          inputType="text"
-          value={searchValue}
-          onChange={(value) => setSearchValue(value)}
-        />
+        <form onSubmit={search}>
+          <AnimatedInput
+            classNames="w-52 bg-highlight mr-5"
+            labelStyle="-right-6"
+            focusStyle="translate-x-2 text-highlight text-lg"
+            blurStyle="-translate-x-1 text-xl"
+            inputStyle="-mt-2 text-sm text-background-alt"
+            label={<img src={searchIcon} alt="Search Icon" className="w-6 h-6" />}
+            inputType="text"
+            value={searchValue}
+            onChange={(value) => setSearchValue(value)}
+          />
+        </form>
         <img src={profileIcon} alt="Profile Icon" className="w-6 h-6 ml-8" />
       </div>
     </div>
