@@ -98,8 +98,12 @@ const SAMPLE = {
     ranking: '2'
 }
 
-export async function getRecipes(params) {
-    const urlparams = new URLSearchParams(params);
+export async function getVegRecipes(params) {
+    const vegParams = {
+        diet: 'vegetarian',
+        ...params
+    }
+    const urlparams = new URLSearchParams(vegParams);
     const url = `https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/complexSearch?${urlparams}`
     const options = {
 	method: 'GET',
@@ -110,11 +114,10 @@ export async function getRecipes(params) {
     };
     try {
 	    const response = await fetch(url, options);
-	    const result = await response.text();
+	    const result = await response.json();
 	    console.log(result);
+        return result;
     } catch (error) {
 	    console.error(error);
     }
-
-    return ;
 }

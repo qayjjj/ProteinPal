@@ -2,19 +2,19 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import searchIcon from '../../assets/icons/search.svg'
 import profileIcon from '../../assets/icons/profile.svg'
-import { getRecipes } from '../../callApi'
+import { getVegRecipes } from '../../callApi'
 import AnimatedInput from '../Input/AnimatedInput'
 
 function Navigation() {
   const [searching, setSearching] = useState('false')
   const [searchValue, setSearchValue] = useState('')
 
-  // let search = () => {
-  //   getRecipes({
-  //     query: 'pasta',
-  //     cuisine: 'italian',
-  //   })
-  // }
+  let search = () => {
+    var result = getVegRecipes({
+      query: searchValue,
+    });
+    
+  }
 
   const handleDisplaySearchBar = () => {
     setSearching((prev) => !prev)
