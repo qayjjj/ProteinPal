@@ -8,6 +8,7 @@ import { getVegRecipes } from '../../callApi'
 export default function Recipes() {
 
   const [recipes, setRecipes] = useState([]);
+  const [keyword, setKeyword] = useState([]);
   const location = useLocation();
 
   useEffect(() => {
@@ -24,6 +25,8 @@ export default function Recipes() {
         }
         else {
           document.getElementById('searchHeader').style.display = 'none'; 
+          const data = await getVegRecipes();
+          setRecipes(data.results);
         }
   
       } catch (error) {
@@ -45,6 +48,8 @@ export default function Recipes() {
             backgroundColor="bg-background-alt"
             headerTextColor="text-header"
             bodyTextColor="text-header"
+            recipeImage={item.image}
+            recipeName={item.title}
           />
         ))}
       </div>
