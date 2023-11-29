@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom' 
+import { useNavigate } from 'react-router-dom'
 import searchIcon from '../../assets/icons/search.svg'
 import profileIcon from '../../assets/icons/profile.svg'
 import { getVegRecipes } from '../../callApi'
@@ -8,14 +9,11 @@ import AnimatedInput from '../Input/AnimatedInput'
 function Navigation() {
   const [searching, setSearching] = useState('false')
   const [searchValue, setSearchValue] = useState('')
+  const navigate = useNavigate();
 
-  const search = (event) => {
+  const handleSearch = (event) => {
     event.preventDefault();
-    var result = getVegRecipes({
-      query: searchValue,
-    });
-    console.log(searchValue);
-    console.log(result);
+    navigate(`/recipes?q=${searchValue}`);
     setSearchValue('')
   }
 
@@ -41,7 +39,7 @@ function Navigation() {
 
       {/* Search & Login */}
       <div className="flex relative">
-        <form onSubmit={search}>
+        <form onSubmit={handleSearch}>
           <AnimatedInput
             classNames="w-52 bg-highlight mr-5"
             labelStyle="-right-6"
