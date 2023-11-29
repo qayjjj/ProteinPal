@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom' 
 import { useNavigate } from 'react-router-dom'
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom'
+import { auth } from '../../Firebase';
 import searchIcon from '../../assets/icons/search.svg'
 import profileIcon from '../../assets/icons/profile.svg'
 import { getVegRecipes } from '../../callApi'
@@ -57,5 +58,5 @@ function Navigation() {
     </div>
   )
 }
-
+console.log(auth.currentUser);
 export default Navigation

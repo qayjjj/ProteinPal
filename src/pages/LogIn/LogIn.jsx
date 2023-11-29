@@ -13,6 +13,7 @@ const LogIn = () => {
   const navigate = useNavigate()
 
   const handleLogin = async () => {
+    auth.signOut()
     try {
       const userCredential = await signInWithEmailAndPassword(
         auth,
