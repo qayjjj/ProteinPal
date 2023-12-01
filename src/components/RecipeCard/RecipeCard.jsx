@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types'
-import sample from '../../assets/images/sample.png'
 import { useNavigate } from 'react-router-dom'
 
 function RecipeCard({ backgroundColor, headerTextColor, bodyTextColor, recipeName, recipeImage, recipeId}) {
