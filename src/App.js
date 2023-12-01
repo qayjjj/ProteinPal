@@ -5,6 +5,7 @@ import Recipe from './pages/Recipe/Recipe'
 import SignUp from './pages/SignUp/SignUp'
 import LogIn from './pages/LogIn/LogIn'
 import Recipes from './pages/Recipes/Recipes'
+import Dashboard from './pages/Dashboard/Dashboard'
 
 function App() {
   return (
