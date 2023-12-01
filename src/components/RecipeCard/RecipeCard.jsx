@@ -1,9 +1,17 @@
 import PropTypes from 'prop-types'
 import sample from '../../assets/images/sample.png'
+import { useNavigate } from 'react-router-dom'
 
-function RecipeCard({ backgroundColor, headerTextColor, bodyTextColor, recipeName, recipeImage}) {
+function RecipeCard({ backgroundColor, headerTextColor, bodyTextColor, recipeName, recipeImage, recipeId}) {
+  const navigate = useNavigate();
+
+  const handleClick = (event) => {
+    event.preventDefault();
+    navigate(`/recipe?id=${recipeId}`);
+  }
+
   return (
-    <div className={`w-64 p-6 text-center rounded-xl ${backgroundColor}`}>
+    <div className={`w-64 p-6 text-center rounded-xl ${backgroundColor} cursor-pointer`} onClick={handleClick}>
       <img src={recipeImage} className="rounded-md" />
       <p className={`${headerTextColor} font-bold mt-2`}>{recipeName}</p>
 

@@ -50,6 +50,7 @@ export default function Recipes() {
             bodyTextColor="text-header"
             recipeImage={item.image}
             recipeName={item.title}
+            recipeId={item.id}
           />
         ))}
       </div>
