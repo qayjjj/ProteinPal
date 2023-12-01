@@ -1,5 +1,7 @@
 import React from 'react'
 import dot from '../../../assets/icons/dot.svg'
+import PropTypes from 'prop-types'
+import { useState } from 'react'
 
 const sampleIngredients = [
   '2 tbsp vegetable oil or beef fat',
@@ -8,14 +10,21 @@ const sampleIngredients = [
   '400g can beef consommé',
 ]
 
-export default function Details() {
+function Details({nutrients, ingredients, caloricBreakdown, weightPerServing}) {
+
+  console.log(nutrients)
+  console.log(ingredients)
+  console.log(caloricBreakdown)
+  console.log(weightPerServing)
+
+
   return (
     <div className="flex w-full mt-10">
       {/* Ingredients */}
       <div className="bg-background-alt px-8 py-10 w-1/3 min-h-[30rem]">
         <h2 className="text-5xl font-bold text-header">Ingredients</h2>
         <div className="mt-10 flex flex-col">
-          {sampleIngredients.map((item, index) => (
+          {sampleIngredients.map((item) => (
             <div className="flex items-start">
               <img src={dot} className="w-8 h-8 inline leading-10 mt-1" />
               <p className="inline text-header text-xl leading-10">{item}</p>
@@ -33,10 +42,10 @@ export default function Details() {
         {/* Macros */}
         <div className="flex items-center justify-between h-full items-center">
           <div>
-            <h3 className="text-4xl font-bold leading-[4rem]">331 kcal</h3>
-            <h4 className="text-4xl font-bold leading-[4rem]">Protein 36 g</h4>
-            <h4 className="text-4xl font-bold leading-[4rem]">Fat 18 g</h4>
-            <h4 className="text-4xl font-bold leading-[4rem]">Carbs 1 g</h4>
+            <h3 className="text-4xl font-bold leading-[4rem]">Calories {nutrients[0].name}</h3>
+            {/* <h4 className="text-4xl font-bold leading-[4rem]">Protein {nutrition.nutrients[8].amount}{nutrition.nutrients[8].unit}</h4> */}
+            {/* <h4 className="text-4xl font-bold leading-[4rem]">Fat {nutrition.nutrients[1].amount}{nutrition.nutrients[1].unit}</h4> */}
+            {/* <h4 className="text-4xl font-bold leading-[4rem]">Carbs {nutrition.nutrients[3].amount}{nutrition.nutrients[3].unit}</h4> */}
           </div>
 
           {/* Others */}
@@ -63,3 +72,10 @@ export default function Details() {
     </div>
   )
 }
+Details.propTypes = {
+  nutrients: PropTypes.array,
+  ingredients: PropTypes.array, 
+  caloricBreakdown: PropTypes.array, 
+  weightPerServing: PropTypes.object,
+}
+export default Details

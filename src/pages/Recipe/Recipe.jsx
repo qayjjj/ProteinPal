@@ -10,19 +10,20 @@ export default function Recipe() {
   const location = useLocation();
   const [recipeId, setRecipeId] = useState('');
   const [recipeInfo, setRecipeInfo] = useState({});
+  const [nutritionInfo, setNutritionInfo] = useState({});
 
   useEffect(() => {
     const getRecipeInfo = async () => {
       try {
         const queryParams = new URLSearchParams(location.search);
         const id = queryParams.get('id');
-        console.log(id);
         setRecipeId(id);
 
         if(id) {
           const data = await getRecipeDetails(id);
           setRecipeInfo(data);
-          console.log(data)
+          setNutritionInfo(data.nutrition)
+          console.log(data.nutrition)
         }
 
       } catch (error) {
@@ -41,7 +42,12 @@ export default function Recipe() {
           recipeImage={recipeInfo.image}
           recipeInstructions={recipeInfo.instructions}
           servings={recipeInfo.servings}/>
-        <Details />
+        <Details 
+          nutrients={nutritionInfo.nutrients}
+          ingredients={nutritionInfo.ingredients}
+          weightPerServing={nutritionInfo.weightPerServing}
+          caloricBreakdown={nutritionInfo.caloricBreakdown}
+        />
       </div>
     </div>
   )
