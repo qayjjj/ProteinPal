@@ -7,42 +7,42 @@ import Details from './Details/Details'
 import { getRecipeDetails } from '../../callApi'
 
 export default function Recipe() {
-  const location = useLocation();
-  const [recipeId, setRecipeId] = useState('');
-  const [recipeInfo, setRecipeInfo] = useState({});
-  const [nutritionInfo, setNutritionInfo] = useState({});
+  const location = useLocation()
+  const [recipeId, setRecipeId] = useState('')
+  const [recipeInfo, setRecipeInfo] = useState({})
+  const [nutritionInfo, setNutritionInfo] = useState({})
 
   useEffect(() => {
     const getRecipeInfo = async () => {
       try {
-        const queryParams = new URLSearchParams(location.search);
-        const id = queryParams.get('id');
-        setRecipeId(id);
+        const queryParams = new URLSearchParams(location.search)
+        const id = queryParams.get('id')
+        setRecipeId(id)
 
-        if(id) {
-          const data = await getRecipeDetails(id);
-          setRecipeInfo(data);
+        if (id) {
+          const data = await getRecipeDetails(id)
+          setRecipeInfo(data)
           setNutritionInfo(data.nutrition)
           console.log(data.nutrition)
         }
-
       } catch (error) {
-        console.error('Error fetching recipes:', error);
+        console.error('Error fetching recipes:', error)
       }
-    };
-    getRecipeInfo();
-  }, [location.search]);
+    }
+    getRecipeInfo()
+  }, [location.search])
 
   return (
     <div>
       <Navigation />
       <div className="py-28 px-44">
-        <Overview 
+        <Overview
           recipeName={recipeInfo.title}
           recipeImage={recipeInfo.image}
           recipeInstructions={recipeInfo.instructions}
-          servings={recipeInfo.servings}/>
-        <Details 
+          servings={recipeInfo.servings}
+        />
+        <Details
           nutrients={nutritionInfo.nutrients}
           ingredients={nutritionInfo.ingredients}
           weightPerServing={nutritionInfo.weightPerServing}
