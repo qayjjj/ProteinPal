@@ -36,7 +36,11 @@ export default function Recipe() {
     <div>
       <Navigation />
       <div className="py-28 px-44">
-        <Overview />
+        <Overview 
+          recipeName={recipeInfo.title}
+          recipeImage={recipeInfo.image}
+          recipeInstructions={recipeInfo.instructions}
+          servings={recipeInfo.servings}/>
         <Details />
       </div>
     </div>
