@@ -1,6 +1,6 @@
 function NutritionFacts() {
   return (
-    <div className="flex flex-col bg-background-alt w-1/4 px-6 py-10">
+    <div className="flex flex-col bg-background-alt w-76 px-6 py-10">
       <h1 className="text-3xl text-body-bold font-bold">Nutrition Facts</h1>
 
       {/* Serving size & Calories */}
