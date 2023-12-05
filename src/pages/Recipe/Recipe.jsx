@@ -8,7 +8,6 @@ import { getRecipeDetails } from '../../callApi'
 
 export default function Recipe() {
   const location = useLocation()
-  const [recipeId, setRecipeId] = useState('')
   const [recipeInfo, setRecipeInfo] = useState({})
   const [nutritionInfo, setNutritionInfo] = useState({})
 
@@ -17,7 +16,6 @@ export default function Recipe() {
       try {
         const queryParams = new URLSearchParams(location.search)
         const id = queryParams.get('id')
-        setRecipeId(id)
 
         if (id) {
           const data = await getRecipeDetails(id)

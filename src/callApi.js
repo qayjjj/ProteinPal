@@ -24,6 +24,7 @@ async function callApi(url) {
 export async function getVegRecipes(params) {
     const vegParams = {
         diet: 'vegetarian',
+        number: 100,
         ...params
     }
     const urlparams = new URLSearchParams(vegParams);
