@@ -6,7 +6,7 @@ function CreateRecipe() {
   return (
     <div className="bg-background">
       <Navigation />
-      <div className="py-28 px-44 flex gap-10">
+      <div className="py-28 px-36 flex gap-6">
         <Details />
         <NutritionFacts />
       </div>
