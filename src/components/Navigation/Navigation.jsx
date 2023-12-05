@@ -53,7 +53,7 @@ function Navigation() {
             onChange={(value) => setSearchValue(value)}
           />
         </form>
-        <img src={profileIcon} alt="Profile Icon" className="w-6 h-6 ml-8" />
+        <Link to="/login"><img src={profileIcon} alt="Profile Icon" className="w-6 h-6 ml-8" /></Link>
       </div>
     </div>
   )
