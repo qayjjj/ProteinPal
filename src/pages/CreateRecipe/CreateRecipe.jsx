@@ -8,8 +8,7 @@ function CreateRecipe() {
       <Navigation />
       <div className="py-28 px-36 flex gap-6">
         <Details />
-        <NutritionFacts />
-        <button>save</button>
+        {/* <NutritionFacts /> */}
       </div>
     </div>
   )

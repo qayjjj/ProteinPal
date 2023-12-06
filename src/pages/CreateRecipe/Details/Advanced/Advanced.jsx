@@ -10,7 +10,7 @@ export default function Advanced() {
   return (
     <div className="mt-16 text-body-bold">
       <h2 className="text-3xl font-semibold text-header">Advanced</h2>
-      <div className="flex items-center mt-6">
+      {/* <div className="flex items-center mt-6">
         <h3>Weight after cooking</h3>
         <div className="flex items-center ml-16">
           <input
@@ -19,27 +19,27 @@ export default function Advanced() {
           />
           <UnitSelect classNames="ml-2" />
         </div>
-      </div>
+      </div> */}
       <div className="flex items-center mt-6">
         <div className="flex items-center">
-          <h3>Serving</h3>
-          <select
+          <h3>Number of Servings Per Recipe</h3>
+          {/* <select
             value={servingType}
             onChange={handleServingTypeChange}
             className="ml-2 border-[1px] border-background-bright p-1 rounded-md bg-background outline-0 text-sm"
           >
             <option value="size">size</option>
             <option value="count">count</option>
-          </select>
+          </select> */}
         </div>
         <div className="flex items-cente ml-[5.25rem]">
           <input
             type="number"
             className="border-b border-background-bright bg-transparent outline-none w-20 text-center text-sm"
           />
-          <UnitSelect
+          {/* <UnitSelect
             classNames={`ml-2 ${servingType === 'count' && 'hidden'}`}
-          />
+          /> */}
         </div>
       </div>
     </div>

@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import dot from '../../../assets/icons/dot.svg'
 import search from '../../../assets/icons/search.svg'
 import edit from '../../../assets/icons/edit.svg'
+import NutritionFacts from '../../../components/NutritionFacts/NutritionFacts'
 import SearchResults from './SearchResults/SearchResults'
 import Advanced from './Advanced/Advanced'
 import { getIngredients } from '../../../callApi'
@@ -9,7 +10,7 @@ import { getIngredients } from '../../../callApi'
 const Details = () => {
   const [name, setName] = useState('New Recipe')
   const [inputValue, setInputValue] = useState('');
-  const [nutritionData, setNutritionData] = useState(null);
+  const [nutritionData, setNutritionData] = useState([]);
   const [ingredientList, setIngredientList] = useState([]);
 
   const handleNameChange = (e) => {
@@ -37,8 +38,7 @@ const Details = () => {
 
   const handleData = (data) => {
     if (data && data.length > 0 && data[0].id) {
-      setNutritionData(data);
-
+      parseNutritionData(data);
       // add ingredient to list
       if (inputValue.trim() !== '') {
         setIngredientList(prevList => [...prevList, inputValue]);
@@ -46,8 +46,68 @@ const Details = () => {
       }
     } else if (inputValue) {
       alert(`Was not able to find ingredient "${inputValue}".`);
-      setNutritionData(null);
     }
+  }
+
+  const compiledNutritionData = useRef({
+    calories: { amount: [] },
+    fat: { amount: [], percentOfDailyNeeds: [] },
+    satFat: { amount: [], percentOfDailyNeeds: [] },
+    chol: { amount: [], percentOfDailyNeeds: [] },
+    sodium: { amount: [], percentOfDailyNeeds: [] },
+    carb: { amount: [], percentOfDailyNeeds: [] },
+    fiber: { amount: [], percentOfDailyNeeds: [] },
+    sugar: { amount: [], percentOfDailyNeeds: [] },
+    protein: { amount: [], percentOfDailyNeeds: [] },
+    vitD: { amount: [], percentOfDailyNeeds: [] },
+    calcium: { amount: [], percentOfDailyNeeds: [] },
+    iron: { amount: [], percentOfDailyNeeds: [] },
+    potassium: { amount: [], percentOfDailyNeeds: [] },
+  });
+
+  const parseNutritionData = (data) => {
+    const nutrients = data[0]?.nutrition?.nutrients;
+
+    compiledNutritionData.current.calories.amount.push(nutrients.find(nutrient => nutrient.name === 'Calories')?.amount ?? null);
+
+    compiledNutritionData.current.fat.amount.push(nutrients.find(nutrient => nutrient.name === 'Fat')?.amount ?? null);
+    compiledNutritionData.current.fat.percentOfDailyNeeds.push(nutrients.find(nutrient => nutrient.name === 'Fat')?.percentOfDailyNeeds ?? null);
+
+    compiledNutritionData.current.satFat.amount.push(nutrients.find(nutrient => nutrient.name === 'Saturated Fat')?.amount ?? null);
+    compiledNutritionData.current.satFat.percentOfDailyNeeds.push(nutrients.find(nutrient => nutrient.name === 'Saturated Fat')?.percentOfDailyNeeds ?? null);
+
+    compiledNutritionData.current.chol.amount.push(nutrients.find(nutrient => nutrient.name === 'Cholesterol')?.amount ?? null);
+    compiledNutritionData.current.chol.percentOfDailyNeeds.push(nutrients.find(nutrient => nutrient.name === 'Cholesterol')?.percentOfDailyNeeds ?? null);
+
+    compiledNutritionData.current.sodium.amount.push(nutrients.find(nutrient => nutrient.name === 'Sodium')?.amount ?? null);
+    compiledNutritionData.current.sodium.percentOfDailyNeeds.push(nutrients.find(nutrient => nutrient.name === 'Sodium')?.percentOfDailyNeeds ?? null);
+
+    compiledNutritionData.current.carb.amount.push(nutrients.find(nutrient => nutrient.name === 'Carbohydrates')?.amount ?? null);
+    compiledNutritionData.current.carb.percentOfDailyNeeds.push(nutrients.find(nutrient => nutrient.name === 'Carbohydrates')?.percentOfDailyNeeds ?? null);
+
+    compiledNutritionData.current.fiber.amount.push(nutrients.find(nutrient => nutrient.name === 'Fiber')?.amount ?? null);
+    compiledNutritionData.current.fiber.percentOfDailyNeeds.push(nutrients.find(nutrient => nutrient.name === 'Fiber')?.percentOfDailyNeeds ?? null);
+
+    compiledNutritionData.current.sugar.amount.push(nutrients.find(nutrient => nutrient.name === 'Sugar')?.amount ?? null);
+    compiledNutritionData.current.sugar.percentOfDailyNeeds.push(nutrients.find(nutrient => nutrient.name === 'Sugar')?.percentOfDailyNeeds ?? null);
+
+    compiledNutritionData.current.protein.amount.push(nutrients.find(nutrient => nutrient.name === 'Protein')?.amount ?? null);
+    compiledNutritionData.current.protein.percentOfDailyNeeds.push(nutrients.find(nutrient => nutrient.name === 'Protein')?.percentOfDailyNeeds ?? null);
+
+    compiledNutritionData.current.vitD.amount.push(nutrients.find(nutrient => nutrient.name === 'Vitamin D')?.amount ?? null);
+    compiledNutritionData.current.vitD.percentOfDailyNeeds.push(nutrients.find(nutrient => nutrient.name === 'Vitamin D')?.percentOfDailyNeeds ?? null);
+
+    compiledNutritionData.current.calcium.amount.push(nutrients.find(nutrient => nutrient.name === 'Calcium')?.amount ?? null);
+    compiledNutritionData.current.calcium.percentOfDailyNeeds.push(nutrients.find(nutrient => nutrient.name === 'Calcium')?.percentOfDailyNeeds ?? null);
+
+    compiledNutritionData.current.iron.amount.push(nutrients.find(nutrient => nutrient.name === 'Iron')?.amount ?? null);
+    compiledNutritionData.current.iron.percentOfDailyNeeds.push(nutrients.find(nutrient => nutrient.name === 'Iron')?.percentOfDailyNeeds ?? null);
+
+    compiledNutritionData.current.potassium.amount.push(nutrients.find(nutrient => nutrient.name === 'Potassium')?.amount ?? null);
+    compiledNutritionData.current.potassium.percentOfDailyNeeds.push(nutrients.find(nutrient => nutrient.name === 'Potassium')?.percentOfDailyNeeds ?? null);
+
+    console.log(compiledNutritionData);
+    setNutritionData(compiledNutritionData.current);
   }
 
   return (
@@ -83,19 +143,14 @@ const Details = () => {
           onChange={(e) => setInputValue(e.target.value)}
           onKeyDown={handleKeyDown}
           className="w-full outline-none ml-2 bg-background"
-          placeholder="Enter an ingredient and it's amount then press Enter"
+          placeholder="Enter an ingredient and it's amount then press Enter! (ex. '3 oz honey')"
         />
       </div>
 
-      {nutritionData && (
-        <div>
-          {/* Display nutritional information here */}
-          <p>Name: {nutritionData[0].id}</p>
-        </div>
-      )}
-
+      <NutritionFacts nutritionData={nutritionData} />
       {/* <SearchResults /> */}
       <Advanced />
+      <button class="w-full bg-highlight-alt text-header font-bold px-20 py-3 rounded hover:shadow-md">save</button>
     </div>
   )
 }
