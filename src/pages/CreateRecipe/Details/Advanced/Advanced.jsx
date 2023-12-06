@@ -1,11 +1,16 @@
 import React, { useState } from 'react'
 import UnitSelect from '../../../../components/UnitSelect/UnitSelect'
 
-export default function Advanced() {
+const Advanced = ({ onValueChange }) => {
   const [servingType, setServingType] = useState('size')
   const handleServingTypeChange = (e) => {
     setServingType(e.target.value)
   }
+
+  const handleInputChange = (e) => {
+    const value = parseInt(e.target.value, 10);
+    onValueChange(value);
+  };
 
   return (
     <div className="mt-16 text-body-bold">
@@ -35,6 +40,7 @@ export default function Advanced() {
         <div className="flex items-cente ml-[5.25rem]">
           <input
             type="number"
+            onChange={handleInputChange}
             className="border-b border-background-bright bg-transparent outline-none w-20 text-center text-sm"
           />
           {/* <UnitSelect
@@ -44,4 +50,6 @@ export default function Advanced() {
       </div>
     </div>
   )
-}
+};
+
+export default Advanced;

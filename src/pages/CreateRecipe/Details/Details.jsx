@@ -6,12 +6,15 @@ import NutritionFacts from '../../../components/NutritionFacts/NutritionFacts'
 import SearchResults from './SearchResults/SearchResults'
 import Advanced from './Advanced/Advanced'
 import { getIngredients } from '../../../callApi'
+import { auth, db } from '../../../Firebase'
+import { collection, addDoc } from "firebase/firestore";
 
 const Details = () => {
   const [name, setName] = useState('New Recipe')
   const [inputValue, setInputValue] = useState('');
   const [nutritionData, setNutritionData] = useState([]);
   const [ingredientList, setIngredientList] = useState([]);
+  const [servingSize, setServingSize] = useState(0);
 
   const handleNameChange = (e) => {
     let newName = ''
@@ -34,6 +37,10 @@ const Details = () => {
         alert('There was an error processing your request, try again shortly.');
       }
     }
+  };
+
+  const handleServingSizeChange = (value) => {
+    setServingSize(value);
   };
 
   const handleData = (data) => {
@@ -110,6 +117,26 @@ const Details = () => {
     setNutritionData(compiledNutritionData.current);
   }
 
+  const saveToFirebase = async () => {
+    try {
+      const user = auth.currentUser;
+
+      if (user) {
+        const docRef = await addDoc(collection(db, user.uid), {
+          nutritionData: nutritionData,
+          createdBy: user.uid,
+          servingSize: servingSize
+        });
+
+        console.log('Document written with ID: ', docRef.id);
+      } else {
+        console.error('User not authenticated.');
+      }
+    } catch (error) {
+      console.error('Error adding document: ', error);
+    }
+  };
+
   return (
     <div className="grow">
       <div className="text-5xl font-bold text-header flex">
@@ -149,8 +176,11 @@ const Details = () => {
 
       <NutritionFacts nutritionData={nutritionData} />
       {/* <SearchResults /> */}
-      <Advanced />
-      <button class="w-full bg-highlight-alt text-header font-bold px-20 py-3 rounded hover:shadow-md">save</button>
+      <Advanced onValueChange={handleServingSizeChange} />
+      <button
+        class="w-full bg-highlight-alt text-header font-bold px-20 py-3 rounded hover:shadow-md"
+        onClick={saveToFirebase}
+      >Save Your Recipe!</button>
     </div>
   )
 }
