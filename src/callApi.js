@@ -2,12 +2,13 @@
  * API call methods to Spoontacular
  * */
 import axios from 'axios';
+import { SPOONACULAR_API_KEY } from './app.config';
 
 async function callApi(url) {
     const options = {
         method: 'GET',
         headers: {
-            'X-RapidAPI-Key': '0606b56a87mshdc56e9a6bf0cfd9p12cb18jsnd6f75e8bccb2',
+            'X-RapidAPI-Key': SPOONACULAR_API_KEY,
             'X-RapidAPI-Host': 'spoonacular-recipe-food-nutrition-v1.p.rapidapi.com'
         }
     };
@@ -49,7 +50,7 @@ export async function getIngredients(ingredientText, servings) {
         },
         headers: {
             'content-type': 'application/x-www-form-urlencoded',
-            'X-RapidAPI-Key': '0606b56a87mshdc56e9a6bf0cfd9p12cb18jsnd6f75e8bccb2',
+            'X-RapidAPI-Key': SPOONACULAR_API_KEY,
             'X-RapidAPI-Host': 'spoonacular-recipe-food-nutrition-v1.p.rapidapi.com'
         },
         data: encodedParams,
