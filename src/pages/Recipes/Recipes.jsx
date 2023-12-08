@@ -45,9 +45,11 @@ export default function Recipes() {
       { keyword &&
         <h1 className='m-auto text-3xl text-body-bold pt-12 text-center'>Search results for <span className='font-bold'>{keyword}</span></h1>
       }
+      { !keyword && 
       <h1 className="text-center text-4xl font-bold text-header mt-10">
         Search Vegetarian Recipes
       </h1>
+      }
       <div className="mx-auto mt-10 border-[1px] h-12 w-2/3 bg-background rounded-md flex items-center p-2">
         <img src={search} alt="Search Icon" className="w-6 h-6" />
         <input type="text" className="w-full outline-none bg-background ml-2" value={searchValue}/>
