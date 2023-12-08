@@ -1,11 +1,20 @@
 import React from 'react'
-import RecipeCard from '../../../components/RecipeCard/RecipeCard'
 import arrow from '../../../assets/icons/arrow.svg'
 import Carousel from '../../../components/Carousel/Carousel'
-
-const list = [1, 2, 3, 4]
+import { getVegRecipes } from '../../../callApi'
+import { useState, useEffect } from 'react'
 
 export default function ExploreAllRecipes() {
+  const [carouselRecipes, setCarouselRecipes] = useState([]);
+
+  useEffect(() => {
+    const searchRecipes = async () => {
+      const data = await getVegRecipes({}, 10);
+      setCarouselRecipes(data.results)
+    }
+    searchRecipes();
+  }, []);
+
   return (
     <div className="py-16 px-40 bg-background">
       <h1 className="ml-8 text-4xl font-bold text-body-bold ">
@@ -18,6 +27,7 @@ export default function ExploreAllRecipes() {
           backgroundColor="bg-background-alt"
           headerTextColor="text-highlight-bright"
           bodyTextColor="text-body-bold"
+          recipes={carouselRecipes}
         />
       </div>
 

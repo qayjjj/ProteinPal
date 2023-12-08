@@ -4,13 +4,12 @@ import leftArrowIcon from '../../assets/icons/leftArrow.svg'
 import rightArrowIcon from '../../assets/icons/rightArrow.svg'
 import RecipeCard from '../RecipeCard/RecipeCard'
 
-const list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
-
 export default function Carousel({
   backgroundColor,
   headerTextColor,
   bodyTextColor,
   arrowColor,
+  recipes
 }) {
   let [current, setCurrent] = useState(0)
   const slides = 2
@@ -34,11 +33,14 @@ export default function Carousel({
           transform: `translateX(-${current * 100}%)`,
         }}
       >
-        {list.map((i) => (
+        {recipes?.map((item) => (
           <RecipeCard
-            backgroundColor={backgroundColor}
-            headerTextColor={headerTextColor}
-            bodyTextColor={bodyTextColor}
+            backgroundColor="bg-background-alt"
+            headerTextColor="text-header"
+            bodyTextColor="text-header"
+            recipeImage={item.image}
+            recipeName={item.title}
+            recipeId={item.id}
           />
         ))}
       </div>
@@ -58,4 +60,5 @@ RecipeCard.propTypes = {
   headerTextColor: PropTypes.string,
   bodyTextColor: PropTypes.string,
   arrowColor: PropTypes.string,
+  recipes: PropTypes.array
 }

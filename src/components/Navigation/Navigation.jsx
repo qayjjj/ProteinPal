@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 import { auth } from '../../Firebase';
 import searchIcon from '../../assets/icons/search.svg'
 import profileIcon from '../../assets/icons/profile.svg'
-import { getVegRecipes } from '../../callApi'
 import AnimatedInput from '../Input/AnimatedInput'
 
 function Navigation() {
