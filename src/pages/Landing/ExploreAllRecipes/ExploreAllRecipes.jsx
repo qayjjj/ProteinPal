@@ -9,7 +9,8 @@ export default function ExploreAllRecipes() {
 
   useEffect(() => {
     const searchRecipes = async () => {
-      const data = await getVegRecipes({}, 10);
+      var randOffset = Math.round(Math.random() * 800);
+      const data = await getVegRecipes({offset: randOffset, sort: 'popularity'}, 10);
       setCarouselRecipes(data.results)
     }
     searchRecipes();

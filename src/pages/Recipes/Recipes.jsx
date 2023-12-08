@@ -4,12 +4,14 @@ import { useEffect, useState } from 'react'
 import Navigation from '../../components/Navigation/Navigation'
 import RecipeCard from '../../components/RecipeCard/RecipeCard'
 import { getVegRecipes } from '../../callApi'
+import search from '../../assets/icons/search.svg'
 
 export default function Recipes() {
 
   const [recipes, setRecipes] = useState([]);
   const [keyword, setKeyword] = useState('');
   const location = useLocation();
+  const [searchValue, setSearchValue] = useState('');
 
   useEffect(() => {
     const searchRecipes = async () => {
@@ -23,7 +25,8 @@ export default function Recipes() {
           setRecipes(data.results);
         }
         else {
-          const data = await getVegRecipes();
+          var randOffset = Math.round(Math.random() * 800);
+          const data = await getVegRecipes({offset: randOffset});
           setRecipes(data.results);
         }
 
@@ -42,6 +45,13 @@ export default function Recipes() {
       { keyword &&
         <h1 className='m-auto text-3xl text-body-bold pt-12 text-center'>Search results for <span className='font-bold'>{keyword}</span></h1>
       }
+      <h1 className="text-center text-4xl font-bold text-header mt-10">
+        Search Vegetarian Recipes
+      </h1>
+      <div className="mx-auto mt-10 border-[1px] h-12 w-2/3 bg-background rounded-md flex items-center p-2">
+        <img src={search} alt="Search Icon" className="w-6 h-6" />
+        <input type="text" className="w-full outline-none bg-background ml-2" value={searchValue}/>
+      </div>
       <div className="w-full py-20 px-32 grid grid-cols-4 gap-4">
         {recipes.map((item) => (
           <RecipeCard
