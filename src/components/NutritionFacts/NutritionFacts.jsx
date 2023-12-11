@@ -1,91 +1,303 @@
 const NutritionFacts = ({ nutritionData }) => {
-  const sumCalories = nutritionData && nutritionData.calories && nutritionData.calories.amount.length > 0
-    ? Math.round(nutritionData.calories.amount.reduce((acc, currentValue) => acc + currentValue, 0))
-    : 0;
+  const sumCalories =
+    nutritionData &&
+    nutritionData.calories &&
+    nutritionData.calories.amount.length > 0
+      ? Math.round(
+          nutritionData.calories.amount.reduce(
+            (acc, currentValue) => acc + currentValue,
+            0,
+          ),
+        )
+      : 0
 
-  const sumFat = nutritionData && nutritionData.fat && nutritionData.fat.amount.length > 0
-    ? Math.round(nutritionData.fat.amount.reduce((acc, currentValue) => acc + currentValue, 0))
-    : 0;
-  const sumTotalFat = nutritionData && nutritionData.fat && nutritionData.fat.percentOfDailyNeeds.length > 0
-    ? Math.round(nutritionData.fat.percentOfDailyNeeds.reduce((acc, currentValue) => acc + currentValue, 0))
-    : 0;
+  const sumFat =
+    nutritionData && nutritionData.fat && nutritionData.fat.amount.length > 0
+      ? Math.round(
+          nutritionData.fat.amount.reduce(
+            (acc, currentValue) => acc + currentValue,
+            0,
+          ),
+        )
+      : 0
+  const sumTotalFat =
+    nutritionData &&
+    nutritionData.fat &&
+    nutritionData.fat.percentOfDailyNeeds.length > 0
+      ? Math.round(
+          nutritionData.fat.percentOfDailyNeeds.reduce(
+            (acc, currentValue) => acc + currentValue,
+            0,
+          ),
+        )
+      : 0
 
-  const sumSatFat = nutritionData && nutritionData.satFat && nutritionData.satFat.amount.length > 0
-    ? Math.round(nutritionData.satFat.amount.reduce((acc, currentValue) => acc + currentValue, 0))
-    : 0;
-  const sumTotalSatFat = nutritionData && nutritionData.satFat && nutritionData.satFat.percentOfDailyNeeds.length > 0
-    ? Math.round(nutritionData.satFat.percentOfDailyNeeds.reduce((acc, currentValue) => acc + currentValue, 0))
-    : 0;
+  const sumSatFat =
+    nutritionData &&
+    nutritionData.satFat &&
+    nutritionData.satFat.amount.length > 0
+      ? Math.round(
+          nutritionData.satFat.amount.reduce(
+            (acc, currentValue) => acc + currentValue,
+            0,
+          ),
+        )
+      : 0
+  const sumTotalSatFat =
+    nutritionData &&
+    nutritionData.satFat &&
+    nutritionData.satFat.percentOfDailyNeeds.length > 0
+      ? Math.round(
+          nutritionData.satFat.percentOfDailyNeeds.reduce(
+            (acc, currentValue) => acc + currentValue,
+            0,
+          ),
+        )
+      : 0
 
-  const sumChol = nutritionData && nutritionData.chol && nutritionData.chol.amount.length > 0
-    ? Math.round(nutritionData.chol.amount.reduce((acc, currentValue) => acc + currentValue, 0))
-    : 0;
-  const sumTotalChol = nutritionData && nutritionData.chol && nutritionData.chol.percentOfDailyNeeds.length > 0
-    ? Math.round(nutritionData.chol.percentOfDailyNeeds.reduce((acc, currentValue) => acc + currentValue, 0))
-    : 0;
+  const sumTransFat =
+    nutritionData &&
+    nutritionData.transFat &&
+    nutritionData.transFat.amount.length > 0
+      ? Math.round(
+          nutritionData.transFat.amount.reduce(
+            (acc, currentValue) => acc + currentValue,
+            0,
+          ),
+        )
+      : 0
+  const sumTotalTransFat =
+    nutritionData &&
+    nutritionData.transFat &&
+    nutritionData.transFat.percentOfDailyNeeds.length > 0
+      ? Math.round(
+          nutritionData.transFat.percentOfDailyNeeds.reduce(
+            (acc, currentValue) => acc + currentValue,
+            0,
+          ),
+        )
+      : 0
+  const sumChol =
+    nutritionData && nutritionData.chol && nutritionData.chol.amount.length > 0
+      ? Math.round(
+          nutritionData.chol.amount.reduce(
+            (acc, currentValue) => acc + currentValue,
+            0,
+          ),
+        )
+      : 0
+  const sumTotalChol =
+    nutritionData &&
+    nutritionData.chol &&
+    nutritionData.chol.percentOfDailyNeeds.length > 0
+      ? Math.round(
+          nutritionData.chol.percentOfDailyNeeds.reduce(
+            (acc, currentValue) => acc + currentValue,
+            0,
+          ),
+        )
+      : 0
 
-  const sumSodium = nutritionData && nutritionData.sodium && nutritionData.sodium.amount.length > 0
-    ? Math.round(nutritionData.sodium.amount.reduce((acc, currentValue) => acc + currentValue, 0))
-    : 0;
-  const sumTotalSodium = nutritionData && nutritionData.sodium && nutritionData.sodium.percentOfDailyNeeds.length > 0
-    ? Math.round(nutritionData.sodium.percentOfDailyNeeds.reduce((acc, currentValue) => acc + currentValue, 0))
-    : 0;
+  const sumSodium =
+    nutritionData &&
+    nutritionData.sodium &&
+    nutritionData.sodium.amount.length > 0
+      ? Math.round(
+          nutritionData.sodium.amount.reduce(
+            (acc, currentValue) => acc + currentValue,
+            0,
+          ),
+        )
+      : 0
+  const sumTotalSodium =
+    nutritionData &&
+    nutritionData.sodium &&
+    nutritionData.sodium.percentOfDailyNeeds.length > 0
+      ? Math.round(
+          nutritionData.sodium.percentOfDailyNeeds.reduce(
+            (acc, currentValue) => acc + currentValue,
+            0,
+          ),
+        )
+      : 0
 
-  const sumCarb = nutritionData && nutritionData.carb && nutritionData.carb.amount.length > 0
-    ? Math.round(nutritionData.carb.amount.reduce((acc, currentValue) => acc + currentValue, 0))
-    : 0;
-  const sumTotalCarb = nutritionData && nutritionData.carb && nutritionData.carb.percentOfDailyNeeds.length > 0
-    ? Math.round(nutritionData.carb.percentOfDailyNeeds.reduce((acc, currentValue) => acc + currentValue, 0))
-    : 0;
+  const sumCarb =
+    nutritionData && nutritionData.carb && nutritionData.carb.amount.length > 0
+      ? Math.round(
+          nutritionData.carb.amount.reduce(
+            (acc, currentValue) => acc + currentValue,
+            0,
+          ),
+        )
+      : 0
+  const sumTotalCarb =
+    nutritionData &&
+    nutritionData.carb &&
+    nutritionData.carb.percentOfDailyNeeds.length > 0
+      ? Math.round(
+          nutritionData.carb.percentOfDailyNeeds.reduce(
+            (acc, currentValue) => acc + currentValue,
+            0,
+          ),
+        )
+      : 0
 
-  const sumFiber = nutritionData && nutritionData.fiber && nutritionData.fiber.amount.length > 0
-    ? Math.round(nutritionData.fiber.amount.reduce((acc, currentValue) => acc + currentValue, 0))
-    : 0;
-  const sumTotalFiber = nutritionData && nutritionData.fiber && nutritionData.fiber.percentOfDailyNeeds.length > 0
-    ? Math.round(nutritionData.fiber.percentOfDailyNeeds.reduce((acc, currentValue) => acc + currentValue, 0))
-    : 0;
+  const sumFiber =
+    nutritionData &&
+    nutritionData.fiber &&
+    nutritionData.fiber.amount.length > 0
+      ? Math.round(
+          nutritionData.fiber.amount.reduce(
+            (acc, currentValue) => acc + currentValue,
+            0,
+          ),
+        )
+      : 0
+  const sumTotalFiber =
+    nutritionData &&
+    nutritionData.fiber &&
+    nutritionData.fiber.percentOfDailyNeeds.length > 0
+      ? Math.round(
+          nutritionData.fiber.percentOfDailyNeeds.reduce(
+            (acc, currentValue) => acc + currentValue,
+            0,
+          ),
+        )
+      : 0
 
-  const sumSugar = nutritionData && nutritionData.sugar && nutritionData.sugar.amount.length > 0
-    ? Math.round(nutritionData.sugar.amount.reduce((acc, currentValue) => acc + currentValue, 0))
-    : 0;
-  const sumTotalSugar = nutritionData && nutritionData.sugar && nutritionData.sugar.percentOfDailyNeeds.length > 0
-    ? Math.round(nutritionData.sugar.percentOfDailyNeeds.reduce((acc, currentValue) => acc + currentValue, 0))
-    : 0;
+  const sumSugar =
+    nutritionData &&
+    nutritionData.sugar &&
+    nutritionData.sugar.amount.length > 0
+      ? Math.round(
+          nutritionData.sugar.amount.reduce(
+            (acc, currentValue) => acc + currentValue,
+            0,
+          ),
+        )
+      : 0
+  const sumTotalSugar =
+    nutritionData &&
+    nutritionData.sugar &&
+    nutritionData.sugar.percentOfDailyNeeds.length > 0
+      ? Math.round(
+          nutritionData.sugar.percentOfDailyNeeds.reduce(
+            (acc, currentValue) => acc + currentValue,
+            0,
+          ),
+        )
+      : 0
 
-  const sumProtein = nutritionData && nutritionData.protein && nutritionData.protein.amount.length > 0
-    ? Math.round(nutritionData.protein.amount.reduce((acc, currentValue) => acc + currentValue, 0))
-    : 0;
-  const sumTotalProtein = nutritionData && nutritionData.protein && nutritionData.protein.percentOfDailyNeeds.length > 0
-    ? Math.round(nutritionData.protein.percentOfDailyNeeds.reduce((acc, currentValue) => acc + currentValue, 0))
-    : 0;
+  const sumProtein =
+    nutritionData &&
+    nutritionData.protein &&
+    nutritionData.protein.amount.length > 0
+      ? Math.round(
+          nutritionData.protein.amount.reduce(
+            (acc, currentValue) => acc + currentValue,
+            0,
+          ),
+        )
+      : 0
+  const sumTotalProtein =
+    nutritionData &&
+    nutritionData.protein &&
+    nutritionData.protein.percentOfDailyNeeds.length > 0
+      ? Math.round(
+          nutritionData.protein.percentOfDailyNeeds.reduce(
+            (acc, currentValue) => acc + currentValue,
+            0,
+          ),
+        )
+      : 0
 
-  const sumVitD = nutritionData && nutritionData.vitD && nutritionData.vitD.amount.length > 0
-    ? Math.round(nutritionData.vitD.amount.reduce((acc, currentValue) => acc + currentValue, 0))
-    : 0;
-  const sumTotalVitD = nutritionData && nutritionData.vitD && nutritionData.vitD.percentOfDailyNeeds.length > 0
-    ? Math.round(nutritionData.vitD.percentOfDailyNeeds.reduce((acc, currentValue) => acc + currentValue, 0))
-    : 0;
+  const sumVitD =
+    nutritionData && nutritionData.vitD && nutritionData.vitD.amount.length > 0
+      ? Math.round(
+          nutritionData.vitD.amount.reduce(
+            (acc, currentValue) => acc + currentValue,
+            0,
+          ),
+        )
+      : 0
+  const sumTotalVitD =
+    nutritionData &&
+    nutritionData.vitD &&
+    nutritionData.vitD.percentOfDailyNeeds.length > 0
+      ? Math.round(
+          nutritionData.vitD.percentOfDailyNeeds.reduce(
+            (acc, currentValue) => acc + currentValue,
+            0,
+          ),
+        )
+      : 0
 
-  const sumCalcium = nutritionData && nutritionData.calcium && nutritionData.calcium.amount.length > 0
-    ? Math.round(nutritionData.calcium.amount.reduce((acc, currentValue) => acc + currentValue, 0))
-    : 0;
-  const sumTotalCalcium = nutritionData && nutritionData.calcium && nutritionData.calcium.percentOfDailyNeeds.length > 0
-    ? Math.round(nutritionData.calcium.percentOfDailyNeeds.reduce((acc, currentValue) => acc + currentValue, 0))
-    : 0;
+  const sumCalcium =
+    nutritionData &&
+    nutritionData.calcium &&
+    nutritionData.calcium.amount.length > 0
+      ? Math.round(
+          nutritionData.calcium.amount.reduce(
+            (acc, currentValue) => acc + currentValue,
+            0,
+          ),
+        )
+      : 0
+  const sumTotalCalcium =
+    nutritionData &&
+    nutritionData.calcium &&
+    nutritionData.calcium.percentOfDailyNeeds.length > 0
+      ? Math.round(
+          nutritionData.calcium.percentOfDailyNeeds.reduce(
+            (acc, currentValue) => acc + currentValue,
+            0,
+          ),
+        )
+      : 0
 
-  const sumIron = nutritionData && nutritionData.iron && nutritionData.iron.amount.length > 0
-    ? Math.round(nutritionData.iron.amount.reduce((acc, currentValue) => acc + currentValue, 0))
-    : 0;
-  const sumTotalIron = nutritionData && nutritionData.iron && nutritionData.iron.percentOfDailyNeeds.length > 0
-    ? Math.round(nutritionData.iron.percentOfDailyNeeds.reduce((acc, currentValue) => acc + currentValue, 0))
-    : 0;
+  const sumIron =
+    nutritionData && nutritionData.iron && nutritionData.iron.amount.length > 0
+      ? Math.round(
+          nutritionData.iron.amount.reduce(
+            (acc, currentValue) => acc + currentValue,
+            0,
+          ),
+        )
+      : 0
+  const sumTotalIron =
+    nutritionData &&
+    nutritionData.iron &&
+    nutritionData.iron.percentOfDailyNeeds.length > 0
+      ? Math.round(
+          nutritionData.iron.percentOfDailyNeeds.reduce(
+            (acc, currentValue) => acc + currentValue,
+            0,
+          ),
+        )
+      : 0
 
-  const sumPotassium = nutritionData && nutritionData.potassium && nutritionData.potassium.amount.length > 0
-    ? Math.round(nutritionData.potassium.amount.reduce((acc, currentValue) => acc + currentValue, 0))
-    : 0;
-  const sumTotalPotassium = nutritionData && nutritionData.potassium && nutritionData.potassium.percentOfDailyNeeds.length > 0
-    ? Math.round(nutritionData.potassium.percentOfDailyNeeds.reduce((acc, currentValue) => acc + currentValue, 0))
-    : 0;
+  const sumPotassium =
+    nutritionData &&
+    nutritionData.potassium &&
+    nutritionData.potassium.amount.length > 0
+      ? Math.round(
+          nutritionData.potassium.amount.reduce(
+            (acc, currentValue) => acc + currentValue,
+            0,
+          ),
+        )
+      : 0
+  const sumTotalPotassium =
+    nutritionData &&
+    nutritionData.potassium &&
+    nutritionData.potassium.percentOfDailyNeeds.length > 0
+      ? Math.round(
+          nutritionData.potassium.percentOfDailyNeeds.reduce(
+            (acc, currentValue) => acc + currentValue,
+            0,
+          ),
+        )
+      : 0
 
   return (
     <div className="flex flex-col bg-background-alt w-[21rem] h-min px-6 py-3 rounded-lg">
@@ -95,8 +307,8 @@ const NutritionFacts = ({ nutritionData }) => {
 
       {/* Serving size & Calories */}
       <div className="border-t-8 border-b-4 border-highlight mt-4 py-2">
-        <div className="flex text-body-bold font-bold">
-          <h2>Amount Per Recipe</h2>
+        <div className="flex text-body-bold font-semibold">
+          <h2>Amount Per Serving</h2>
           {/* <span className="ml-2">(4oz)</span> */}
         </div>
         <div className="flex items-center justify-between text-body-bold font-bold text-3xl">
@@ -127,6 +339,15 @@ const NutritionFacts = ({ nutritionData }) => {
             <span className="ml-1">{sumSatFat} g</span>
           </div>
           <span className="font-bold text-body-bold">{sumTotalSatFat} %</span>
+        </div>
+
+        {/* Trans Fat */}
+        <div className="flex justify-between ml-4 border-t border-background-bright p-1">
+          <div className="flex">
+            <h3 className="text-body-bold">Trans Fat</h3>
+            <span className="ml-1">{sumTransFat} g</span>
+          </div>
+          <span className="font-bold text-body-bold">{sumTotalTransFat} %</span>
         </div>
 
         {/* Cholesterol */}
@@ -216,7 +437,9 @@ const NutritionFacts = ({ nutritionData }) => {
             <h3 className="text-body-bold">Potassium</h3>
             <span className="ml-1">{sumPotassium} mg</span>
           </div>
-          <span className="font-bold text-body-bold">{sumTotalPotassium} %</span>
+          <span className="font-bold text-body-bold">
+            {sumTotalPotassium} %
+          </span>
         </div>
 
         <p className="mt-4 text-body-bold text-[0.7rem] text-center p-1">

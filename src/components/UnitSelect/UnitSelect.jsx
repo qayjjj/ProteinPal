@@ -1,32 +1,30 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
-const UnitSelect = ({ classNames }) => {
-  const [selectedUnit, setSelectedUnit] = useState('oz')
+const UnitSelect = ({ classNames, unit, setUnit, units }) => {
+  const [unitOptions, setUnitOptions] = useState([
+    'oz',
+    'ml',
+    'g',
+    'lb',
+    'kg',
+    'tsp',
+    'tbsp',
+  ])
 
-  const unitOptions = [
-    { value: 'oz', label: 'oz (Ounces)' },
-    { value: 'ml', label: 'ml (Milliliters)' },
-    { value: 'g', label: 'g (Grams)' },
-    { value: 'lb', label: 'lb (Pounds)' },
-    { value: 'kg', label: 'kg (Kilograms)' },
-    { value: 'tsp', label: 'tsp (Teaspoons)' },
-    { value: 'tbsp', label: 'tbsp (Tablespoons)' },
-  ]
-
-  const handleUnitChange = (event) => {
-    setSelectedUnit(event.target.value)
-  }
+  useEffect(() => {
+    units && setUnitOptions(units)
+  }, [units])
 
   return (
     <select
       id="unitSelect"
-      value={selectedUnit}
-      onChange={handleUnitChange}
-      className={`border-[1px] border-background-bright p-1 rounded-md bg-background text-sm ${classNames}`}
+      value={unit}
+      onChange={(e) => setUnit(e.target.value)}
+      className={`border-[1px] border-background-bright p-1 rounded-md bg-inherit shadow text-sm ${classNames}`}
     >
       {unitOptions.map((option) => (
-        <option key={option.value} value={option.value}>
-          {option.label}
+        <option key={option} value={option}>
+          {option}
         </option>
       ))}
     </select>
