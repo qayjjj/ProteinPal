@@ -12,10 +12,10 @@ const Advanced = ({
   setServingUnit,
   servingCount,
   setServingCount,
+  servingType,
+  setServingType,
   onValueChange,
 }) => {
-  const [servingType, setServingType] = useState('count')
-
   const handleServingChange = (e) => {
     const value = parseInt(e.target.value, 10)
     servingType === 'size' ? setServingAmount(value) : setServingCount(value)
@@ -24,22 +24,6 @@ const Advanced = ({
   return (
     <div className="mt-8 text-body-bold">
       <h2 className="text-3xl font-semibold text-header">Advanced</h2>
-      <div className="flex items-center mt-6">
-        <h3>Weight after cooking</h3>
-        <div className="flex items-center ml-16">
-          <input
-            type="number"
-            value={weightAmount}
-            className="border-b border-background-bright bg-transparent outline-none w-20 text-center text-sm"
-            onChange={setWeightAmount}
-          />
-          <UnitSelect
-            classNames="ml-2"
-            unit={weightUnit}
-            setUnit={setWeightUnit}
-          />
-        </div>
-      </div>
       <div className="flex items-center mt-6">
         <div className="flex items-center">
           <h3>Serving</h3>
@@ -63,6 +47,27 @@ const Advanced = ({
             unit={servingUnit}
             setUnit={setServingUnit}
             classNames={`ml-2 ${servingType === 'count' && 'hidden'}`}
+          />
+        </div>
+      </div>
+
+      <div
+        className={`flex items-center mt-6 ${
+          servingType === 'count' && 'hidden'
+        }`}
+      >
+        <h3>Weight after cooking</h3>
+        <div className="flex items-center ml-16">
+          <input
+            type="number"
+            value={weightAmount}
+            className="border-b border-background-bright bg-transparent outline-none w-20 text-center text-sm"
+            onChange={(e) => setWeightAmount(e.target.value)}
+          />
+          <UnitSelect
+            classNames="ml-2"
+            unit={weightUnit}
+            setUnit={setWeightUnit}
           />
         </div>
       </div>

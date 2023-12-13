@@ -309,7 +309,6 @@ const NutritionFacts = ({ nutritionData }) => {
       <div className="border-t-8 border-b-4 border-highlight mt-4 py-2">
         <div className="flex text-body-bold font-semibold">
           <h2>Amount Per Serving</h2>
-          {/* <span className="ml-2">(4oz)</span> */}
         </div>
         <div className="flex items-center justify-between text-body-bold font-bold text-3xl">
           <h2>Calories</h2>
