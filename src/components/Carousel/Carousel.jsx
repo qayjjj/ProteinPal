@@ -1,5 +1,4 @@
-import PropTypes from 'prop-types'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import leftArrowIcon from '../../assets/icons/leftArrow.svg'
 import rightArrowIcon from '../../assets/icons/rightArrow.svg'
 import RecipeCard from '../RecipeCard/RecipeCard'
@@ -7,58 +6,66 @@ import RecipeCard from '../RecipeCard/RecipeCard'
 export default function Carousel({
   backgroundColor,
   headerTextColor,
-  bodyTextColor,
-  arrowColor,
-  recipes
+  recipes,
 }) {
-  let [current, setCurrent] = useState(0)
-  const slides = 2
+  const [showArrows, setShowArrows] = useState(true)
+  const [currentStart, setCurrentStart] = useState(0)
+  const cardsToShow = 4
+
+  useEffect(() => {
+    recipes.length < 5 && setShowArrows(false)
+  }, [recipes])
 
   let previousSlide = () => {
-    if (current === 0) setCurrent(slides - 1)
-    else setCurrent(current - 1)
+    const newStart =
+      currentStart - cardsToShow >= 0
+        ? currentStart - cardsToShow
+        : Math.floor(recipes.length / cardsToShow)
+    setCurrentStart(newStart)
   }
 
   let nextSlide = () => {
-    if (current === slides - 1) setCurrent(0)
-    else setCurrent(current + 1)
-  }
+    const newStart =
+      currentStart + cardsToShow < recipes.length
+        ? currentStart + cardsToShow
+        : 0
 
-  // overflow-hidden border-2 grid grid-cols-4
+    setCurrentStart(newStart)
+  }
   return (
-    <div className="w-5/6 overflow-hidden">
+    <div className="w-11/12 overflow-hidden">
       <div
-        className="flex gap-[3.25rem] transition ease-out duration-40"
+        className="flex gap-[1.05rem] transition ease-out duration-40"
         style={{
-          transform: `translateX(-${current * 100}%)`,
+          transform: `translateX(-${currentStart * (100 / cardsToShow)}%)`,
         }}
       >
-        {recipes?.map((item) => (
-          <RecipeCard
-            backgroundColor="bg-background-alt"
-            headerTextColor="text-header"
-            bodyTextColor="text-header"
-            recipeImage={item.image}
-            recipeName={item.title}
-            recipeId={item.id}
-          />
-        ))}
+        {recipes
+          ?.slice(currentStart, currentStart + cardsToShow)
+          .map((item) => (
+            <RecipeCard
+              key={item.id}
+              backgroundColor={backgroundColor}
+              headerTextColor={headerTextColor}
+              recipeImage={item.image}
+              recipeName={item.title}
+              recipeId={item.id}
+            />
+          ))}
       </div>
 
-      <button className="absolute top-28 left-0" onClick={previousSlide}>
+      <button
+        className={`absolute top-28 left-0 ${!showArrows && 'hidden'}`}
+        onClick={previousSlide}
+      >
         <img src={leftArrowIcon} className="w-8 h-8 text-black fill-current" />
       </button>
-      <button className="absolute top-28 right-0" onClick={nextSlide}>
+      <button
+        className={`absolute top-28 right-0 ${!showArrows && 'hidden'}`}
+        onClick={nextSlide}
+      >
         <img src={rightArrowIcon} className="w-8 h-8" />
       </button>
     </div>
   )
-}
-
-RecipeCard.propTypes = {
-  backgroundColor: PropTypes.string,
-  headerTextColor: PropTypes.string,
-  bodyTextColor: PropTypes.string,
-  arrowColor: PropTypes.string,
-  recipes: PropTypes.array
 }

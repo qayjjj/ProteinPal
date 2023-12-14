@@ -1,36 +1,39 @@
 import PropTypes from 'prop-types'
 import { useNavigate } from 'react-router-dom'
+import './index.css'
 
-function RecipeCard({ backgroundColor, headerTextColor, bodyTextColor, recipeName, recipeImage, recipeId}) {
-  const navigate = useNavigate();
+function RecipeCard({
+  backgroundColor,
+  headerTextColor,
+  recipeName,
+  recipeImage,
+  recipeId,
+  classNames,
+}) {
+  const navigate = useNavigate()
 
   const handleClick = (event) => {
-    event.preventDefault();
-    navigate(`/recipe?id=${recipeId}`);
+    event.preventDefault()
+    navigate(`/recipe?id=${recipeId}`)
   }
 
   return (
-    <div className={`w-64 p-6 text-center rounded-xl ${backgroundColor} cursor-pointer`} onClick={handleClick}>
-      <img src={recipeImage} className="rounded-md" />
-      <p className={`${headerTextColor} font-bold mt-2`}>{recipeName}</p>
-
-      {/* Nutrition Facts */}
-      <div className={bodyTextColor}>
-        <span>230</span>
-        <span className="ml-1 text-sm">kcal</span>
-        <span className="ml-2">19g</span>
-        <span className="ml-1 text-sm">protein</span>
+    <div
+      className={`shrink-0 md:w-64 py-2 px-3 md:p-6 md:pb-3 text-center rounded md:rounded-xl cursor-pointer ${backgroundColor} ${classNames}`}
+      onClick={handleClick}
+    >
+      <div className="recipe-image h-[4.5rem] md:w-full md:h-36 overflow-hidden flex items-center">
+        <img src={recipeImage} className="rounded-sm md:rounded-md w-full" />
+      </div>
+      <div className="recipe-name-container w-full h-8 md:h-12">
+        <p
+          className={`${headerTextColor} w-full font-bold text-[0.6rem] md:text-sm mt-1 md:mt-2`}
+        >
+          {recipeName}
+        </p>
       </div>
     </div>
   )
-}
-
-RecipeCard.propTypes = {
-  backgroundColor: PropTypes.string,
-  headerTextColor: PropTypes.string,
-  bodyTextColor: PropTypes.string,
-  recipeName: PropTypes.string,
-  recipeImage: PropTypes.string,
 }
 
 export default RecipeCard

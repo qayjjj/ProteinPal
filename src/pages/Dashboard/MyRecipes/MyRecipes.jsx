@@ -30,7 +30,6 @@ export default function MyRecipes() {
             <RecipeCard
               backgroundColor="bg-background-alt"
               headerTextColor="text-highlight-bright"
-              bodyTextColor="text-body-bold"
               // recipeImage={item.image}
               recipeName="Recipe Name"
               // recipeId={item.id}
