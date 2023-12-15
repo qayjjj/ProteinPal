@@ -37,7 +37,7 @@ export async function getRecipeDetails(recipeId) {
   return callApi(url)
 }
 
-export async function getIngredients(query) {
+export async function getIngredients(query, number = 15) {
   const options = {
     method: 'GET',
     url:
@@ -45,6 +45,7 @@ export async function getIngredients(query) {
     params: {
       query,
       includeNutrition: 'true',
+      number: number,
     },
     headers: {
       'X-RapidAPI-Key': SPOONACULAR_API_KEY,
@@ -69,7 +70,7 @@ export async function getIngredientInformation(id, amount, unit) {
       unit,
     },
     headers: {
-      'X-RapidAPI-Key': '0606b56a87mshdc56e9a6bf0cfd9p12cb18jsnd6f75e8bccb2',
+      'X-RapidAPI-Key': SPOONACULAR_API_KEY,
       'X-RapidAPI-Host': 'spoonacular-recipe-food-nutrition-v1.p.rapidapi.com',
     },
   }
