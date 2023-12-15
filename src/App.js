@@ -7,6 +7,7 @@ import LogIn from './pages/LogIn/LogIn'
 import Recipes from './pages/Recipes/Recipes'
 import Dashboard from './pages/Dashboard/Dashboard'
 import CreateRecipe from './pages/CreateRecipe/CreateRecipe'
+import Ingredients from './pages/Ingredients/Ingredients'
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/login" element={<LogIn />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/create" element={<CreateRecipe />} />
+        <Route path="/ingredients" element={<Ingredients/>} />
       </Routes>
     </BrowserRouter>
   )

@@ -42,7 +42,9 @@ function Navigation() {
         <h2>
           <Link to="/recipes">Recipes</Link>
         </h2>
-        <h2>Ingredients</h2>
+        <h2>
+          <Link to="/ingredients">Ingredients</Link>
+        </h2>
         <h2>About</h2>
       </div>
 
