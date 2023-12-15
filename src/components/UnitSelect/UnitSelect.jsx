@@ -7,8 +7,6 @@ const UnitSelect = ({ classNames, unit, setUnit, units }) => {
     'g',
     'lb',
     'kg',
-    'tsp',
-    'tbsp',
   ])
 
   useEffect(() => {

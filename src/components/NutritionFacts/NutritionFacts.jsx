@@ -1,4 +1,4 @@
-const NutritionFacts = ({ nutritionData }) => {
+const NutritionFacts = ({ nutritionData, servingRatio }) => {
   const sumCalories =
     nutritionData &&
     nutritionData.calories &&
@@ -7,7 +7,7 @@ const NutritionFacts = ({ nutritionData }) => {
           nutritionData.calories.amount.reduce(
             (acc, currentValue) => acc + currentValue,
             0,
-          ),
+          ) / servingRatio,
         )
       : 0
 
@@ -17,7 +17,7 @@ const NutritionFacts = ({ nutritionData }) => {
           nutritionData.fat.amount.reduce(
             (acc, currentValue) => acc + currentValue,
             0,
-          ),
+          ) / servingRatio,
         )
       : 0
   const sumTotalFat =
@@ -28,7 +28,7 @@ const NutritionFacts = ({ nutritionData }) => {
           nutritionData.fat.percentOfDailyNeeds.reduce(
             (acc, currentValue) => acc + currentValue,
             0,
-          ),
+          ) / servingRatio,
         )
       : 0
 
@@ -40,7 +40,7 @@ const NutritionFacts = ({ nutritionData }) => {
           nutritionData.satFat.amount.reduce(
             (acc, currentValue) => acc + currentValue,
             0,
-          ),
+          ) / servingRatio,
         )
       : 0
   const sumTotalSatFat =
@@ -51,7 +51,7 @@ const NutritionFacts = ({ nutritionData }) => {
           nutritionData.satFat.percentOfDailyNeeds.reduce(
             (acc, currentValue) => acc + currentValue,
             0,
-          ),
+          ) / servingRatio,
         )
       : 0
 
@@ -63,18 +63,7 @@ const NutritionFacts = ({ nutritionData }) => {
           nutritionData.transFat.amount.reduce(
             (acc, currentValue) => acc + currentValue,
             0,
-          ),
-        )
-      : 0
-  const sumTotalTransFat =
-    nutritionData &&
-    nutritionData.transFat &&
-    nutritionData.transFat.percentOfDailyNeeds.length > 0
-      ? Math.round(
-          nutritionData.transFat.percentOfDailyNeeds.reduce(
-            (acc, currentValue) => acc + currentValue,
-            0,
-          ),
+          ) / servingRatio,
         )
       : 0
   const sumChol =
@@ -83,7 +72,7 @@ const NutritionFacts = ({ nutritionData }) => {
           nutritionData.chol.amount.reduce(
             (acc, currentValue) => acc + currentValue,
             0,
-          ),
+          ) / servingRatio,
         )
       : 0
   const sumTotalChol =
@@ -94,7 +83,7 @@ const NutritionFacts = ({ nutritionData }) => {
           nutritionData.chol.percentOfDailyNeeds.reduce(
             (acc, currentValue) => acc + currentValue,
             0,
-          ),
+          ) / servingRatio,
         )
       : 0
 
@@ -106,7 +95,7 @@ const NutritionFacts = ({ nutritionData }) => {
           nutritionData.sodium.amount.reduce(
             (acc, currentValue) => acc + currentValue,
             0,
-          ),
+          ) / servingRatio,
         )
       : 0
   const sumTotalSodium =
@@ -117,7 +106,7 @@ const NutritionFacts = ({ nutritionData }) => {
           nutritionData.sodium.percentOfDailyNeeds.reduce(
             (acc, currentValue) => acc + currentValue,
             0,
-          ),
+          ) / servingRatio,
         )
       : 0
 
@@ -127,7 +116,7 @@ const NutritionFacts = ({ nutritionData }) => {
           nutritionData.carb.amount.reduce(
             (acc, currentValue) => acc + currentValue,
             0,
-          ),
+          ) / servingRatio,
         )
       : 0
   const sumTotalCarb =
@@ -138,7 +127,7 @@ const NutritionFacts = ({ nutritionData }) => {
           nutritionData.carb.percentOfDailyNeeds.reduce(
             (acc, currentValue) => acc + currentValue,
             0,
-          ),
+          ) / servingRatio,
         )
       : 0
 
@@ -150,7 +139,7 @@ const NutritionFacts = ({ nutritionData }) => {
           nutritionData.fiber.amount.reduce(
             (acc, currentValue) => acc + currentValue,
             0,
-          ),
+          ) / servingRatio,
         )
       : 0
   const sumTotalFiber =
@@ -161,7 +150,7 @@ const NutritionFacts = ({ nutritionData }) => {
           nutritionData.fiber.percentOfDailyNeeds.reduce(
             (acc, currentValue) => acc + currentValue,
             0,
-          ),
+          ) / servingRatio,
         )
       : 0
 
@@ -173,7 +162,7 @@ const NutritionFacts = ({ nutritionData }) => {
           nutritionData.sugar.amount.reduce(
             (acc, currentValue) => acc + currentValue,
             0,
-          ),
+          ) / servingRatio,
         )
       : 0
   const sumTotalSugar =
@@ -184,7 +173,7 @@ const NutritionFacts = ({ nutritionData }) => {
           nutritionData.sugar.percentOfDailyNeeds.reduce(
             (acc, currentValue) => acc + currentValue,
             0,
-          ),
+          ) / servingRatio,
         )
       : 0
 
@@ -196,7 +185,7 @@ const NutritionFacts = ({ nutritionData }) => {
           nutritionData.protein.amount.reduce(
             (acc, currentValue) => acc + currentValue,
             0,
-          ),
+          ) / servingRatio,
         )
       : 0
   const sumTotalProtein =
@@ -207,7 +196,7 @@ const NutritionFacts = ({ nutritionData }) => {
           nutritionData.protein.percentOfDailyNeeds.reduce(
             (acc, currentValue) => acc + currentValue,
             0,
-          ),
+          ) / servingRatio,
         )
       : 0
 
@@ -217,7 +206,7 @@ const NutritionFacts = ({ nutritionData }) => {
           nutritionData.vitD.amount.reduce(
             (acc, currentValue) => acc + currentValue,
             0,
-          ),
+          ) / servingRatio,
         )
       : 0
   const sumTotalVitD =
@@ -228,7 +217,7 @@ const NutritionFacts = ({ nutritionData }) => {
           nutritionData.vitD.percentOfDailyNeeds.reduce(
             (acc, currentValue) => acc + currentValue,
             0,
-          ),
+          ) / servingRatio,
         )
       : 0
 
@@ -240,7 +229,7 @@ const NutritionFacts = ({ nutritionData }) => {
           nutritionData.calcium.amount.reduce(
             (acc, currentValue) => acc + currentValue,
             0,
-          ),
+          ) / servingRatio,
         )
       : 0
   const sumTotalCalcium =
@@ -251,7 +240,7 @@ const NutritionFacts = ({ nutritionData }) => {
           nutritionData.calcium.percentOfDailyNeeds.reduce(
             (acc, currentValue) => acc + currentValue,
             0,
-          ),
+          ) / servingRatio,
         )
       : 0
 
@@ -261,7 +250,7 @@ const NutritionFacts = ({ nutritionData }) => {
           nutritionData.iron.amount.reduce(
             (acc, currentValue) => acc + currentValue,
             0,
-          ),
+          ) / servingRatio,
         )
       : 0
   const sumTotalIron =
@@ -272,7 +261,7 @@ const NutritionFacts = ({ nutritionData }) => {
           nutritionData.iron.percentOfDailyNeeds.reduce(
             (acc, currentValue) => acc + currentValue,
             0,
-          ),
+          ) / servingRatio,
         )
       : 0
 
@@ -284,7 +273,7 @@ const NutritionFacts = ({ nutritionData }) => {
           nutritionData.potassium.amount.reduce(
             (acc, currentValue) => acc + currentValue,
             0,
-          ),
+          ) / servingRatio,
         )
       : 0
   const sumTotalPotassium =
@@ -295,7 +284,7 @@ const NutritionFacts = ({ nutritionData }) => {
           nutritionData.potassium.percentOfDailyNeeds.reduce(
             (acc, currentValue) => acc + currentValue,
             0,
-          ),
+          ) / servingRatio,
         )
       : 0
 
@@ -346,7 +335,6 @@ const NutritionFacts = ({ nutritionData }) => {
             <h3 className="text-body-bold">Trans Fat</h3>
             <span className="ml-1">{sumTransFat} g</span>
           </div>
-          <span className="font-bold text-body-bold">{sumTotalTransFat} %</span>
         </div>
 
         {/* Cholesterol */}

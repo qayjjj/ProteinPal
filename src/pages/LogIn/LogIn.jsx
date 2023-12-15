@@ -22,9 +22,9 @@ const LogIn = () => {
       )
       const user = userCredential.user
       console.log('Logged in user:', user)
-      navigate('/')
+      navigate('/dashboard')
     } catch (error) {
-      console.error('Login error:', error.message)
+      alert('Login error:', error.message)
     }
   }
 

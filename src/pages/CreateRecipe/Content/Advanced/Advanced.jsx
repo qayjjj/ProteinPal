@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import UnitSelect from '../../../../components/UnitSelect/UnitSelect'
 
 const Advanced = ({
@@ -15,11 +15,30 @@ const Advanced = ({
   servingType,
   setServingType,
   onValueChange,
+  nutrients,
+  calculateNutritionPerServing,
 }) => {
   const handleServingChange = (e) => {
     const value = parseInt(e.target.value, 10)
     servingType === 'size' ? setServingAmount(value) : setServingCount(value)
   }
+
+  useEffect(() => {
+    calculateNutritionPerServing(nutrients, 'calories', 'Calories')
+    calculateNutritionPerServing(nutrients, 'fat', 'Fat')
+    calculateNutritionPerServing(nutrients, 'satFat', 'Saturated Fat')
+    calculateNutritionPerServing(nutrients, 'transFat', 'Trans Fat')
+    calculateNutritionPerServing(nutrients, 'chol', 'Cholesterol')
+    calculateNutritionPerServing(nutrients, 'sodium', 'Sodium')
+    calculateNutritionPerServing(nutrients, 'carb', 'Carbohydrates')
+    calculateNutritionPerServing(nutrients, 'fiber', 'Fiber')
+    calculateNutritionPerServing(nutrients, 'sugar', 'Sugar')
+    calculateNutritionPerServing(nutrients, 'protein', 'Protein')
+    calculateNutritionPerServing(nutrients, 'vitD', 'Vitamin D')
+    calculateNutritionPerServing(nutrients, 'calcium', 'Calcium')
+    calculateNutritionPerServing(nutrients, 'iron', 'Iron')
+    calculateNutritionPerServing(nutrients, 'potassium', 'Potassium')
+  }, [servingCount, servingAmount, weightAmount]);
 
   return (
     <div className="mt-8 text-body-bold">
@@ -39,6 +58,7 @@ const Advanced = ({
         <div className="flex items-cente ml-[5.25rem]">
           <input
             type="number"
+            min="1"
             value={servingType === 'size' ? servingAmount : servingCount}
             onChange={(e) => handleServingChange(e)}
             className="border-b border-background-bright bg-transparent outline-none w-20 text-center text-sm"
@@ -52,14 +72,14 @@ const Advanced = ({
       </div>
 
       <div
-        className={`flex items-center mt-6 ${
-          servingType === 'count' && 'hidden'
-        }`}
+        className={`flex items-center mt-6 ${servingType === 'count' && 'hidden'
+          }`}
       >
         <h3>Weight after cooking</h3>
         <div className="flex items-center ml-16">
           <input
             type="number"
+            min="1"
             value={weightAmount}
             className="border-b border-background-bright bg-transparent outline-none w-20 text-center text-sm"
             onChange={(e) => setWeightAmount(e.target.value)}

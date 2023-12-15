@@ -26,7 +26,7 @@ const SignUp = () => {
 
       alert('User registered successfully!')
     } catch (error) {
-      console.error('Error creating user:', error.message)
+      alert('Error creating user:', error.message)
     }
   }
 

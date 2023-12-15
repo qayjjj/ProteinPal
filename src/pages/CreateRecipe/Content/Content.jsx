@@ -8,8 +8,9 @@ import Advanced from './Advanced/Advanced'
 import { getIngredientInformation, getIngredients } from '../../../callApi'
 import { auth, db } from '../../../Firebase'
 import { collection, addDoc } from 'firebase/firestore'
+import convert from 'convert-units';
 
-const   Content = () => {
+const Content = () => {
   const [name, setName] = useState('New Recipe')
   const [searchValue, setSearchValue] = useState('')
   const [nutritionData, setNutritionData] = useState([])
@@ -17,10 +18,12 @@ const   Content = () => {
   const [searchResults, setSearchResults] = useState([])
   const [selectedIngredient, setSelectedIngredient] = useState(null)
   const [ingredientUnits, setIngredientUnits] = useState([])
+  const [servingRatio, setServingRatio] = useState([])
+  const [nutrients, setNutrients] = useState([]);
   // Advanced state
   const [servingAmount, setServingAmount] = useState(null)
-  const [servingUnit, setServingUnit] = useState(null)
-  const [weightAmount, setWeightAmount] = useState(0)
+  const [servingUnit, setServingUnit] = useState('g')
+  const [weightAmount, setWeightAmount] = useState(1)
   const [weightUnit, setWeightUnit] = useState('g')
   const [servingCount, setServingCount] = useState(1)
   const [servingType, setServingType] = useState('count')
@@ -97,29 +100,31 @@ const   Content = () => {
       nutrients.find((nutrient) => nutrient.name === nutritionLabel)?.amount ??
       null
 
-    console.log('og', originalAmount)
+    // console.log('og', originalAmount)
     const originalPercentOfDailyNeeds =
-      nutrients.find((nutrient) => nutrient.name === 'Fat')
+      nutrients.find((nutrient) => nutrient.name === nutritionLabel)
         ?.percentOfDailyNeeds ?? null
 
+
+    compiledNutritionData.current[nutrition].amount.push(
+      originalAmount && originalAmount,
+    )
+    compiledNutritionData.current[nutrition].percentOfDailyNeeds?.push(
+      originalPercentOfDailyNeeds &&
+      originalPercentOfDailyNeeds,
+    )
+
     if (servingType === 'count') {
-      compiledNutritionData.current[nutrition].amount.push(
-        originalAmount && originalAmount / servingCount,
-      )
-      compiledNutritionData.current[nutrition].percentOfDailyNeeds?.push(
-        originalPercentOfDailyNeeds &&
-          originalPercentOfDailyNeeds / servingCount,
-      )
-      console.log('after', originalAmount / servingCount)
+      setServingRatio(servingCount);
     } else {
-      // conversion for weight after cooking + serving size
-      // count = weight / serving
-      compiledNutritionData.current[nutrition].amount.push(
-        originalAmount && originalAmount / 4,
-      ) // replace 4 with count
-      compiledNutritionData.current[nutrition].percentOfDailyNeeds?.push(
-        originalPercentOfDailyNeeds && originalPercentOfDailyNeeds / 4,
-      ) // replace 4 with count
+      console.log(weightUnit);
+      console.log(servingUnit);
+      const weightUnitToUse = weightUnit === 'ml' ? 'g' : weightUnit;
+      const servingUnitToUse = servingUnit === 'ml' ? 'g' : servingUnit;
+      
+      let convertedAmount = convert(weightAmount).from(weightUnitToUse).to(servingUnitToUse); // convert weight ammount to serving units
+      let calcCount = convertedAmount / servingAmount; // calculate 1 serving using standardized units
+      setServingRatio(calcCount);
     }
   }
 
@@ -127,149 +132,20 @@ const   Content = () => {
     const nutrients = data?.nutrition?.nutrients
 
     calculateNutritionPerServing(nutrients, 'calories', 'Calories')
-
-    // compiledNutritionData.current.calories.amount.push(
-    //   nutrients.find((nutrient) => nutrient.name === 'Calories')?.amount ??
-    //     null,
-    // )
     calculateNutritionPerServing(nutrients, 'fat', 'Fat')
-
-    // compiledNutritionData.current.fat.amount.push(
-    //   nutrients.find((nutrient) => nutrient.name === 'Fat')?.amount ?? null,
-    // )
-    // compiledNutritionData.current.fat.percentOfDailyNeeds.push(
-    //   nutrients.find((nutrient) => nutrient.name === 'Fat')
-    //     ?.percentOfDailyNeeds ?? null,
-    // )
-
     calculateNutritionPerServing(nutrients, 'satFat', 'Saturated Fat')
-
-    // compiledNutritionData.current.satFat.amount.push(
-    //   nutrients.find((nutrient) => nutrient.name === 'Saturated Fat')?.amount ??
-    //     null,
-    // )
-    // compiledNutritionData.current.satFat.percentOfDailyNeeds.push(
-    //   nutrients.find((nutrient) => nutrient.name === 'Saturated Fat')
-    //     ?.percentOfDailyNeeds ?? null,
-    // )
-
     calculateNutritionPerServing(nutrients, 'transFat', 'Trans Fat')
-
-    // compiledNutritionData.current.transFat.amount.push(
-    //   nutrients.find((nutrient) => nutrient.name === 'Trans Fat')?.amount ??
-    //     null,
-    // )
-    // compiledNutritionData.current.transFat.percentOfDailyNeeds.push(
-    //   nutrients.find((nutrient) => nutrient.name === 'Trans Fat')
-    //     ?.percentOfDailyNeeds ?? null,
-    // )
-
     calculateNutritionPerServing(nutrients, 'chol', 'Cholesterol')
-
-    // compiledNutritionData.current.chol.amount.push(
-    //   nutrients.find((nutrient) => nutrient.name === 'Cholesterol')?.amount ??
-    //     null,
-    // )
-    // compiledNutritionData.current.chol.percentOfDailyNeeds.push(
-    //   nutrients.find((nutrient) => nutrient.name === 'Cholesterol')
-    //     ?.percentOfDailyNeeds ?? null,
-    // )
-
     calculateNutritionPerServing(nutrients, 'sodium', 'Sodium')
-
-    // compiledNutritionData.current.sodium.amount.push(
-    //   nutrients.find((nutrient) => nutrient.name === 'Sodium')?.amount ?? null,
-    // )
-    // compiledNutritionData.current.sodium.percentOfDailyNeeds.push(
-    //   nutrients.find((nutrient) => nutrient.name === 'Sodium')
-    //     ?.percentOfDailyNeeds ?? null,
-    // )
-
     calculateNutritionPerServing(nutrients, 'carb', 'Carbohydrates')
-
-    // compiledNutritionData.current.carb.amount.push(
-    //   nutrients.find((nutrient) => nutrient.name === 'Carbohydrates')?.amount ??
-    //     null,
-    // )
-    // compiledNutritionData.current.carb.percentOfDailyNeeds.push(
-    //   nutrients.find((nutrient) => nutrient.name === 'Carbohydrates')
-    //     ?.percentOfDailyNeeds ?? null,
-    // )
-
     calculateNutritionPerServing(nutrients, 'fiber', 'Fiber')
-
-    // compiledNutritionData.current.fiber.amount.push(
-    //   nutrients.find((nutrient) => nutrient.name === 'Fiber')?.amount ?? null,
-    // )
-    // compiledNutritionData.current.fiber.percentOfDailyNeeds.push(
-    //   nutrients.find((nutrient) => nutrient.name === 'Fiber')
-    //     ?.percentOfDailyNeeds ?? null,
-    // )
-
     calculateNutritionPerServing(nutrients, 'sugar', 'Sugar')
-
-    // compiledNutritionData.current.sugar.amount.push(
-    //   nutrients.find((nutrient) => nutrient.name === 'Sugar')?.amount ?? null,
-    // )
-    // compiledNutritionData.current.sugar.percentOfDailyNeeds.push(
-    //   nutrients.find((nutrient) => nutrient.name === 'Sugar')
-    //     ?.percentOfDailyNeeds ?? null,
-    // )
-
     calculateNutritionPerServing(nutrients, 'protein', 'Protein')
-
-    // compiledNutritionData.current.protein.amount.push(
-    //   nutrients.find((nutrient) => nutrient.name === 'Protein')?.amount ?? null,
-    // )
-    // compiledNutritionData.current.protein.percentOfDailyNeeds.push(
-    //   nutrients.find((nutrient) => nutrient.name === 'Protein')
-    //     ?.percentOfDailyNeeds ?? null,
-    // )
-
     calculateNutritionPerServing(nutrients, 'vitD', 'Vitamin D')
-
-    // compiledNutritionData.current.vitD.amount.push(
-    //   nutrients.find((nutrient) => nutrient.name === 'Vitamin D')?.amount ??
-    //     null,
-    // )
-    // compiledNutritionData.current.vitD.percentOfDailyNeeds.push(
-    //   nutrients.find((nutrient) => nutrient.name === 'Vitamin D')
-    //     ?.percentOfDailyNeeds ?? null,
-    // )
-
     calculateNutritionPerServing(nutrients, 'calcium', 'Calcium')
-
-    // compiledNutritionData.current.calcium.amount.push(
-    //   nutrients.find((nutrient) => nutrient.name === 'Calcium')?.amount ?? null,
-    // )
-    // compiledNutritionData.current.calcium.percentOfDailyNeeds.push(
-    //   nutrients.find((nutrient) => nutrient.name === 'Calcium')
-    //     ?.percentOfDailyNeeds ?? null,
-    // )
-
     calculateNutritionPerServing(nutrients, 'iron', 'Iron')
-
-    // compiledNutritionData.current.iron.amount.push(
-    //   nutrients.find((nutrient) => nutrient.name === 'Iron')?.amount ?? null,
-    // )
-    // compiledNutritionData.current.iron.percentOfDailyNeeds.push(
-    //   nutrients.find((nutrient) => nutrient.name === 'Iron')
-    //     ?.percentOfDailyNeeds ?? null,
-    // )
-
     calculateNutritionPerServing(nutrients, 'potassium', 'Potassium')
 
-    // compiledNutritionData.current.potassium.amount.push(
-    //   nutrients.find((nutrient) => nutrient.name === 'Potassium')?.amount ??
-    //     null,
-    // )
-    // compiledNutritionData.current.potassium.percentOfDailyNeeds.push(
-    //   nutrients.find((nutrient) => nutrient.name === 'Potassium')
-    //     ?.percentOfDailyNeeds ?? null,
-    // )
-
-    // compiledNutritionData.current.serving =
-    //   servingType === 'count' ? servingCount : servingAmount + servingUnit
     setNutritionData(compiledNutritionData.current)
   }
 
@@ -285,11 +161,13 @@ const   Content = () => {
         })
 
         console.log('Document written with ID: ', docRef.id)
+        alert("Successfully Saved Recipe!")
       } else {
         console.error('User not authenticated.')
       }
     } catch (error) {
       console.error('Error adding document: ', error)
+      alert("We encountered an error. Please try again shortly.")
     }
   }
 
@@ -354,9 +232,11 @@ const   Content = () => {
             setServingCount={setServingCount}
             servingType={servingType}
             setServingType={setServingType}
+            nutrients={nutrients}
+            calculateNutritionPerServing={calculateNutritionPerServing}
           />
         </div>
-        <NutritionFacts nutritionData={nutritionData} />
+        <NutritionFacts nutritionData={nutritionData} servingRatio={servingRatio} />
       </div>
       <div className="w-1/3 flex gap-2">
         <button class="w-1/2 border-[1px] border-background-bright text-header p-2 rounded-lg hover:shadow-md">
