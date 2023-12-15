@@ -43,7 +43,7 @@ export default function Recipe() {
           ingredients={nutritionInfo.ingredients}
           weightPerServing={nutritionInfo.weightPerServing}
           caloricBreakdown={nutritionInfo.caloricBreakdown}
-          recipeInstructions={recipeInfo.instructions}
+          recipeInstructions={recipeInfo.analyzedInstructions}
         />
       </div>
     </div>

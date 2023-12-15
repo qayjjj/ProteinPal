@@ -11,9 +11,6 @@ function Details({
   recipeInstructions
 }) {
 
-  console.log(weightPerServing)
-  console.log(caloricBreakdown)
-  console.log(recipeInstructions)
   
   const nutritionFacts = {
     calories: { amount: [nutrients?.[0].amount] },
@@ -34,33 +31,39 @@ function Details({
 
 
   return (
-    <div className="flex w-full mt-10">
+    <div className="flex w-full mt-10 flex-wrap">
 
-      <div className="flex flex-col">
+      <div className="flex flex-col flex-wrap w-full lg:w-1/2">
         {/* Ingredients */}
-        <div className="bg-header px-8 py-10 w-10/12 min-h-[20rem] text-background-alt rounded-lg">
+        <div className="bg-header text-background-alt rounded-lg w-full min-h-[20rem] px-8 py-10 my-10">
           <h2 className="text-4xl font-bold text-background-alt">Ingredients</h2>
-          <div className="mt-10 text-background-alt text-base">
+          <div className="mt-6 text-background-alt">
             {ingredients?.map((item, index) => (
               <div key={index} className="flex items-start">
                 <img src={dot} className="w-8 h-8 inline leading-10 mt-1" />
-                <p className="inline text-background-alt text-xl leading-10">
+                <p className="inline text-background-alt text-lg leading-10">
                   {item.amount} {item.unit} {item.name}
                 </p>
               </div>
             ))}
           </div>
         </div>
-        
+
         {/* Instructions */}
-        <div className="bg-background-bright px-8 py-10 mt-10 w-10/12 min-h-[20rem] rounded-lg">
+        <div className="bg-background-bright px-8 py-10 mt-10 w-full min-h-[20rem] rounded-lg">
           <h2 className="text-4xl font-bold text-body">Instructions</h2>
-          <div className="mt-10 text-background-header text-base">{recipeInstructions}</div>
+          <ol className="mt-6 text-background-header text-lg">
+            {recipeInstructions?.[0].steps?.map((item, index) => (
+              <li key={index} className="mt-4">
+                 <span className="text-body-bold font-bold">{item.number}.</span> {item.step}
+              </li>
+            ))}
+          </ol>
         </div>
 
       </div>
 
-      <div className="flex flex-col">
+      <div className="flex mt-20 flex-col w-full lg:w-1/2 lg:mt-10 bg-background-alt lg:bg-transparent items-center rounded-lg">
         {/* Nutrition Facts */}
         <div className="text-xl">
           <NutritionFacts nutritionData={nutritionFacts}/>
@@ -75,6 +78,6 @@ Details.propTypes = {
   ingredients: PropTypes.array,
   caloricBreakdown: PropTypes.array,
   weightPerServing: PropTypes.object,
-  recipeInstructions: PropTypes.string,
+  recipeInstructions: PropTypes.array,
 }
 export default Details
