@@ -21,7 +21,6 @@ export default function Recipe() {
           const data = await getRecipeDetails(id)
           setRecipeInfo(data)
           setNutritionInfo(data.nutrition)
-          console.log(data.nutrition)
         }
       } catch (error) {
         console.error('Error fetching recipes:', error)
@@ -37,7 +36,6 @@ export default function Recipe() {
         <Overview
           recipeName={recipeInfo.title}
           recipeImage={recipeInfo.image}
-          recipeInstructions={recipeInfo.instructions}
           servings={recipeInfo.servings}
         />
         <Details
@@ -45,6 +43,7 @@ export default function Recipe() {
           ingredients={nutritionInfo.ingredients}
           weightPerServing={nutritionInfo.weightPerServing}
           caloricBreakdown={nutritionInfo.caloricBreakdown}
+          recipeInstructions={recipeInfo.instructions}
         />
       </div>
     </div>

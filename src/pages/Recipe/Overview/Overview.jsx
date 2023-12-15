@@ -13,7 +13,7 @@ const list = [
   'Gluten Free',
 ]
 
-function Overview({recipeName, recipeInstructions, recipeImage, servings}) {
+function Overview({recipeName, recipeImage, servings}) {
   const [isSaved, setIsSaved] = useState(false)
 
   const handleSaveRecipe = () => {
@@ -41,9 +41,6 @@ function Overview({recipeName, recipeInstructions, recipeImage, servings}) {
           </div>
 
           <p className="mt-6 font-bold text-body-bold text-2xl">{servings} servings</p>
-          <div className="mt-8 w-fit py-2 px-16 rounded-sm bg-background-bright grid place-items-center">
-            <span className="text-header font-semibold">Instructions</span>
-          </div>
 
           {/* Save button */}
           <img
@@ -58,7 +55,6 @@ function Overview({recipeName, recipeInstructions, recipeImage, servings}) {
 }
 Overview.propTypes = {
   recipeName: PropTypes.string,
-  recipeInstructions: PropTypes.string,
   recipeImage: PropTypes.string,
   servings: PropTypes.number
 }
