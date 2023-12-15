@@ -5,8 +5,7 @@ import savedIcon from '../../../assets/icons/saved.svg'
 import dot from '../../../assets/icons/dot.svg'
 import tag from '../../../assets/icons/tag.svg'
 import { auth, db } from '../../../Firebase'
-import { setDoc, getDoc, doc, deleteDoc, arrayUnion, arrayRemove } from 'firebase/firestore'
-
+import { setDoc, getDoc, doc, arrayUnion, arrayRemove } from 'firebase/firestore'
 
 function Overview({ recipeId, recipeName, recipeImage, servings, dietTags, readyInMinutes }) {
   const [isSaved, setIsSaved] = useState(false)
@@ -27,7 +26,7 @@ function Overview({ recipeId, recipeName, recipeImage, servings, dietTags, ready
     };
 
     fetchSavedStatus();
-  }, [auth.currentUser]);
+  }, [recipeId]);
 
   const handleSaveRecipe = async () => {
     const user = auth.currentUser;
