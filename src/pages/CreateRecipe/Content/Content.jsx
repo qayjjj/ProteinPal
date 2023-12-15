@@ -7,7 +7,7 @@ import SearchResults from './SearchResults/SearchResults'
 import Advanced from './Advanced/Advanced'
 import { getIngredientInformation, getIngredients } from '../../../callApi'
 import { auth, db } from '../../../Firebase'
-import { collection, addDoc } from 'firebase/firestore'
+import { collection, addDoc, doc, setDoc, arrayUnion } from 'firebase/firestore'
 import convert from 'convert-units';
 
 const Content = () => {
@@ -121,7 +121,7 @@ const Content = () => {
       console.log(servingUnit);
       const weightUnitToUse = weightUnit === 'ml' ? 'g' : weightUnit;
       const servingUnitToUse = servingUnit === 'ml' ? 'g' : servingUnit;
-      
+
       let convertedAmount = convert(weightAmount).from(weightUnitToUse).to(servingUnitToUse); // convert weight ammount to serving units
       let calcCount = convertedAmount / servingAmount; // calculate 1 serving using standardized units
       setServingRatio(calcCount);
@@ -155,10 +155,18 @@ const Content = () => {
 
       if (user) {
         const docRef = await addDoc(collection(db, user.uid), {
+          recipeName: name,
           nutritionData: nutritionData,
           servingRatio: servingRatio,
           createdBy: user.uid,
-        })
+        });
+
+        // add new collection name to collection document
+        const collectionsDocRef = doc(db, user.uid, 'collections');
+        await setDoc(collectionsDocRef, {
+          collectionNames: arrayUnion(docRef.id),
+        }, { merge: true });
+
 
         console.log('Document written with ID: ', docRef.id)
         alert("Successfully Saved Recipe!")

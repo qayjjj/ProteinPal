@@ -11,6 +11,7 @@ export default function Recipe() {
   const [recipeInfo, setRecipeInfo] = useState({})
   const [nutritionInfo, setNutritionInfo] = useState({})
   const [dietTags, setDietTags] = useState([])
+  const [recipeId, setRecipeId] = useState(null)
 
   const getAllRecipeTags = (data) => {
     const tags = new Set();
@@ -36,6 +37,7 @@ export default function Recipe() {
       try {
         const queryParams = new URLSearchParams(location.search)
         const id = queryParams.get('id')
+        setRecipeId(id);
 
         if (id) {
           const data = await getRecipeDetails(id)
@@ -59,6 +61,7 @@ export default function Recipe() {
       <Navigation />
       <div className="py-28 px-44">
         <Overview
+          recipeId={recipeId}
           recipeName={recipeInfo.title}
           recipeImage={recipeInfo.image}
           servings={recipeInfo.servings}
