@@ -61,7 +61,7 @@ export default function SavedRecipes() {
               headerTextColor="text-highlight-bright"
               // recipeImage={item.image}
               recipeName={recipe.title}
-            // recipeId={item.id}
+              recipeId={recipe.id}
             />
           ))
         )}
