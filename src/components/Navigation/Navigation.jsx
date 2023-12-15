@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { auth } from '../../Firebase'
 import searchIcon from '../../assets/icons/search.svg'
 import profileIcon from '../../assets/icons/profile.svg'
+import macroMunch from '../../assets/icons/macroMunch.svg'
 import menuIcon from '../../assets/icons/menu.svg'
 import AnimatedInput from '../Input/AnimatedInput'
 
@@ -29,7 +30,11 @@ function Navigation() {
       </div>
       {/* App name */}
       <h1 className="text-header text-3xl lg:text-4xl font-semibold drop-shadow-[-1px_0px_0px_#E0EEC6]">
-        <Link to="/">MacroMunch</Link>
+        <Link to="/">MacroMunch 
+          <span className="leading-10 whitespace-nowrap">                
+            <img src={macroMunch} className="px-0 w-8 h-8 inline ml-1" />
+          </span>
+        </Link>
       </h1>
 
       {/* Pages */}

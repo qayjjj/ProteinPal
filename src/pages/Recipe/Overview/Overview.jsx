@@ -19,7 +19,7 @@ function Overview({recipeName, recipeImage, servings, dietTags, readyInMinutes})
       <div className="flex justify-between h-76 flex-wrap">
 
         {/* Recipe Picture */}
-        <img src={recipeImage} alt="Recipe picture" className="h-full flex-col lg:w-2/5 w-full" />
+        <img src={recipeImage} alt="Recipe picture" className="h-full flex-col lg:w-2/5 w-full rounded-lg" />
 
         {/* Recipe Title and Save Button*/}
         <div className="flex-col w-full lg:w-[55%] lg:mx-4 my-4 mt-10">
