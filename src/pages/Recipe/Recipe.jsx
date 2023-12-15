@@ -63,6 +63,7 @@ export default function Recipe() {
           recipeImage={recipeInfo.image}
           servings={recipeInfo.servings}
           dietTags={dietTags}
+          readyInMinutes={recipeInfo.readyInMinutes}
         />
         <Details
           nutrients={nutritionInfo.nutrients}

@@ -3,9 +3,10 @@ import PropTypes from 'prop-types'
 import saveIcon from '../../../assets/icons/save.svg'
 import savedIcon from '../../../assets/icons/saved.svg'
 import dot from '../../../assets/icons/dot.svg'
+import tag from '../../../assets/icons/tag.svg'
 
 
-function Overview({recipeName, recipeImage, servings, dietTags}) {
+function Overview({recipeName, recipeImage, servings, dietTags, readyInMinutes}) {
   const [isSaved, setIsSaved] = useState(false)
 
   const handleSaveRecipe = () => {
@@ -25,7 +26,10 @@ function Overview({recipeName, recipeImage, servings, dietTags}) {
           <div className="flex md:flex-nowrap flex-wrap">
 
             {/* Title */}
-            <h1 className="flex-row text-5xl font-bold text-header w-10/12">{recipeName}</h1>
+            <div className="flex-row w-10/12">
+              <h1 className="text-5xl font-bold text-header ">{recipeName}</h1>
+              <p className="mt-6 text-body-bold text-xl">Makes {servings} servings &emsp; | &emsp; Ready in {readyInMinutes} minutes</p>
+            </div>
 
             {/* Save Button */}
             <div className="flex-row min-w-[30px] w-3/10 md:ml-10 sm:mt-0 mt-10">
@@ -38,20 +42,22 @@ function Overview({recipeName, recipeImage, servings, dietTags}) {
           </div>
         </div>
 
-
-          {/* Labels */}
-          <div className="mt-8 text-body-bold w-5/6 flex-col">
-            {dietTags.map((item, index) => {
-              return (
-                <span className="leading-10 whitespace-nowrap mr-6">
-                  <img src={dot} className="px-0 w-8 h-8 inline" />
-                  <span className="whitespace-nowrap">{item}</span>
-                </span>
-              )
-            })}
-          </div>
-
-          <p className="mt-6 font-bold text-body-bold text-2xl">{servings} servings</p>
+        {/* Labels */}
+        <div className="mt-8 text-body-bold w-10/12 flex-col lg:m-auto lg:text-center lg:mt-12">
+          <span className="leading-10 whitespace-nowrap mr-6">                
+            <img src={tag} className="px-0 w-8 h-8 inline" />
+          </span>
+          {dietTags.map((item, index) => {
+            return (
+              <span className="leading-10 whitespace-nowrap mr-6">
+                {index !== 0 &&
+                <img src={dot} className="px-0 w-8 h-8 inline" />
+                }
+                <span className="whitespace-nowrap">{item}</span>
+              </span>
+            )
+          })}
+        </div>
 
       </div>
     </div>
@@ -61,6 +67,7 @@ Overview.propTypes = {
   recipeName: PropTypes.string,
   recipeImage: PropTypes.string,
   servings: PropTypes.number,
-  dietTags: PropTypes.array
+  dietTags: PropTypes.array,
+  readyInMinutes: PropTypes.number
 }
 export default Overview
