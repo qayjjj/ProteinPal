@@ -9,7 +9,7 @@ import { getIngredientInformation, getIngredients } from '../../../callApi'
 import { auth, db } from '../../../Firebase'
 import { collection, addDoc } from 'firebase/firestore'
 
-const Content = () => {
+const   Content = () => {
   const [name, setName] = useState('New Recipe')
   const [searchValue, setSearchValue] = useState('')
   const [nutritionData, setNutritionData] = useState([])
@@ -273,25 +273,25 @@ const Content = () => {
     setNutritionData(compiledNutritionData.current)
   }
 
-  // const saveToFirebase = async () => {
-  //   try {
-  //     const user = auth.currentUser
+  const saveToFirebase = async () => {
+    try {
+      const user = auth.currentUser
 
-  //     if (user) {
-  //       const docRef = await addDoc(collection(db, user.uid), {
-  //         nutritionData: nutritionData,
-  //         createdBy: user.uid,
-  //         servingSize: serving,
-  //       })
+      if (user) {
+        const docRef = await addDoc(collection(db, user.uid), {
+          nutritionData: nutritionData,
+          createdBy: user.uid,
+          // servingSize: serving,
+        })
 
-  //       console.log('Document written with ID: ', docRef.id)
-  //     } else {
-  //       console.error('User not authenticated.')
-  //     }
-  //   } catch (error) {
-  //     console.error('Error adding document: ', error)
-  //   }
-  // }
+        console.log('Document written with ID: ', docRef.id)
+      } else {
+        console.error('User not authenticated.')
+      }
+    } catch (error) {
+      console.error('Error adding document: ', error)
+    }
+  }
 
   return (
     <div className="py-28 px-36">
@@ -364,7 +364,7 @@ const Content = () => {
         </button>
         <button
           class="w-1/2 bg-background-bright text-header p-2 rounded-lg hover:shadow-md"
-          // onClick={saveToFirebase}
+          onClick={saveToFirebase}
         >
           Save
         </button>
