@@ -8,8 +8,11 @@ import { getIngredientInformation, getIngredients } from '../../callApi'
 export default function Ingredients() {
   const [searchValue, setSearchValue] = useState('')
   const [searchResults, setSearchResults] = useState([])
+  const [selectedIngredient, setSelectedIngredient] = useState({})
+  const [ingredientInfo, setIngredientInfo] = useState({})
 
-  const fetchData = async () => {
+
+  const fetchSearchData = async () => {
     try {
       const data = await getIngredients(searchValue, 100);
       setSearchResults(data.results);
@@ -21,16 +24,32 @@ export default function Ingredients() {
     }
   };
 
+  const fetchSingleIngredientData = async (id) => {
+    try {
+      const ingredientData = await getIngredientInformation(id, 100, "g");
+      setIngredientInfo(ingredientData);
+      console.log(ingredientData)
+
+    } catch (error) {
+      console.error('Error fetching search results:', error);
+      alert('There was an error processing your request, try again shortly.')
+    }
+  }
+
+  const handleCardOnClick = (item) => {
+    console.log(item)
+    setSelectedIngredient({ id: item.id, name: item.name, image: item.image })
+    fetchSingleIngredientData(item.id)
+  }
+
   const handleSearch = (event) => {
     event.preventDefault()
-    console.log(searchValue);
-    fetchData()
+    fetchSearchData()
     setSearchValue('')
   }
 
   const updateSearch = (event) => {
     setSearchValue(event.target.value)
-    console.log(searchValue)
   }
 
   return (
@@ -59,6 +78,7 @@ export default function Ingredients() {
           backgroundColor="bg-background-bright"
           headerTextColor="text-background"
           bodyTextColor="text-body-bold"
+          onClick={() => handleCardOnClick(item)}
           />
         ))}
       </div>
