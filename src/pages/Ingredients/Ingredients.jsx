@@ -1,16 +1,21 @@
 import React from 'react'
-import { useEffect, useState } from 'react'
+import {useState } from 'react'
 import Navigation from '../../components/Navigation/Navigation'
 import IngredientCard from '../../components/IngredientCard/IngredientCard'
 import search from '../../assets/icons/search.svg'
 import { getIngredientInformation, getIngredients } from '../../callApi'
+import IngredientModal from './IngredientModal/IngredientModal'
 
 export default function Ingredients() {
   const [searchValue, setSearchValue] = useState('')
   const [searchResults, setSearchResults] = useState([])
   const [selectedIngredient, setSelectedIngredient] = useState({})
-  const [ingredientInfo, setIngredientInfo] = useState({})
 
+  const [ingredientInfo, setIngredientInfo] = useState({})
+  const [ingredientNutrients, setIngredientNutrients] = useState([])
+  const [ingredientUnit, setIngredientUnit] = useState('')
+
+  const [showModal, setShowModal] = useState(false);
 
   const fetchSearchData = async () => {
     try {
@@ -26,20 +31,41 @@ export default function Ingredients() {
 
   const fetchSingleIngredientData = async (id) => {
     try {
+      // Try getting ingredient info for 100g serving
       const ingredientData = await getIngredientInformation(id, 100, "g");
       setIngredientInfo(ingredientData);
-      console.log(ingredientData)
+      setIngredientNutrients(ingredientData.nutrition?.nutrients);
+      setIngredientUnit("g")
 
     } catch (error) {
-      console.error('Error fetching search results:', error);
-      alert('There was an error processing your request, try again shortly.')
+      // If the ingredient does not have g in the measure, find out which measures it has
+      try {
+        const ingredientData = await getIngredientInformation(id);
+        setIngredientInfo(ingredientData);
+        const unit = ingredientData.possibleUnits?.[0]
+        setIngredientUnit(unit)
+
+        const ingredientDataWithNutrition = await getIngredientInformation(id, 10, unit);
+        setIngredientNutrients(ingredientDataWithNutrition.nutrition?.nutrients);
+      
+      } catch (error) {
+        console.error('Error fetching search results:', error);
+        alert('There was an error processing your request, try again shortly.')
+      }
+
     }
   }
 
   const handleCardOnClick = (item) => {
     console.log(item)
     setSelectedIngredient({ id: item.id, name: item.name, image: item.image })
+    setShowModal(true);
     fetchSingleIngredientData(item.id)
+  }
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+    setSelectedIngredient({})
   }
 
   const handleSearch = (event) => {
@@ -55,10 +81,13 @@ export default function Ingredients() {
   return (
     <div className="bg-background">
       <Navigation/>
+
+      {/* Title */}
       <h1 className="text-center text-4xl font-bold text-header mt-10">
         Search Ingredient Database
       </h1>
 
+      {/* Search Bar */}
       <div className="mx-auto mt-10 border-[1px] h-12 w-2/3 bg-background rounded-md flex items-center p-2">
         <img src={search} alt="Search Icon" className="w-6 h-6" />
         <form onSubmit={handleSearch}>
@@ -70,6 +99,8 @@ export default function Ingredients() {
           />
         </form>
       </div>
+
+      {/* Search Results */}
       <div className="w-full py-20 px-32 grid grid-cols-4 gap-4">
         {searchResults?.map((item) => (
           <IngredientCard
@@ -82,6 +113,17 @@ export default function Ingredients() {
           />
         ))}
       </div>
+      
+      {/* Modal */}
+      <IngredientModal
+        isOpen={showModal}
+        closeModal={handleCloseModal}
+        ingredientData={ingredientInfo}
+        nutrients={ingredientNutrients}
+        image={ingredientInfo.image}
+        ingredientUnit={ingredientUnit}
+      />
+
     </div>
   )
 }
