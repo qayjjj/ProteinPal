@@ -38,7 +38,7 @@ const Advanced = ({
     calculateNutritionPerServing(nutrients, 'calcium', 'Calcium')
     calculateNutritionPerServing(nutrients, 'iron', 'Iron')
     calculateNutritionPerServing(nutrients, 'potassium', 'Potassium')
-  }, [servingCount, servingAmount, weightAmount]);
+  }, [servingCount, servingAmount, weightAmount, servingUnit, weightUnit]);
 
   return (
     <div className="mt-8 text-body-bold">
