@@ -10,6 +10,26 @@ export default function Recipe() {
   const location = useLocation()
   const [recipeInfo, setRecipeInfo] = useState({})
   const [nutritionInfo, setNutritionInfo] = useState({})
+  const [dietTags, setDietTags] = useState([])
+
+  const getAllRecipeTags = (data) => {
+    const tags = new Set();
+
+    data.diets?.map((item) => tags.add(item));
+    data.cuisines?.map((item) => tags.add(item));
+
+    if(data?.glutenFree) {
+      tags.add("gluten free")
+    }
+    if(data?.vegan) {
+      tags.add("vegan")
+    }
+    if(data?.dairyFree) {
+      tags.add("dairy free")
+    }
+    
+    return Array.from(tags)
+  }
 
   useEffect(() => {
     const getRecipeInfo = async () => {
@@ -21,6 +41,10 @@ export default function Recipe() {
           const data = await getRecipeDetails(id)
           setRecipeInfo(data)
           setNutritionInfo(data.nutrition)
+          console.log(data)
+          const tags = getAllRecipeTags(data)
+          setDietTags(tags);
+          console.log(tags)
         }
       } catch (error) {
         console.error('Error fetching recipes:', error)
@@ -28,6 +52,7 @@ export default function Recipe() {
     }
     getRecipeInfo()
   }, [location.search])
+
 
   return (
     <div>
@@ -37,6 +62,7 @@ export default function Recipe() {
           recipeName={recipeInfo.title}
           recipeImage={recipeInfo.image}
           servings={recipeInfo.servings}
+          dietTags={dietTags}
         />
         <Details
           nutrients={nutritionInfo.nutrients}
