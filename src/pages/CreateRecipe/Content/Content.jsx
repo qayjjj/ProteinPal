@@ -156,8 +156,8 @@ const Content = () => {
       if (user) {
         const docRef = await addDoc(collection(db, user.uid), {
           nutritionData: nutritionData,
+          servingRatio: servingRatio,
           createdBy: user.uid,
-          // servingSize: serving,
         })
 
         console.log('Document written with ID: ', docRef.id)
