@@ -15,6 +15,9 @@ module.exports = {
         'background-bright': '#81B688',
         transparent: 'transparent !important',
       },
+      screens: {
+        '3xl': '2200px',
+      },
     },
   },
   plugins: [],

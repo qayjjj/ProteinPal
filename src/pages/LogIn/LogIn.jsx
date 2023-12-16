@@ -6,6 +6,7 @@ import { auth } from '../../Firebase'
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
+import Footer from '../../components/Footer/Footer'
 
 const LogIn = () => {
   const [email, setEmail] = useState('')
@@ -31,15 +32,17 @@ const LogIn = () => {
   return (
     <div className="bg-background">
       <Navigation />
-      <div className="w-1/3 mx-auto h-44 pt-20">
-        <h1 className="text-4xl font-bold text-body-bold">Welcome Back</h1>
+      <div className="w-2/3 py-10 md:w-1/3 mx-auto md:h-44 md:pt-20">
+        <h1 className="text-xl md:text-4xl font-bold text-body-bold">
+          Welcome Back
+        </h1>
       </div>
 
-      <div className="bg-background-alt py-16">
+      <div className="bg-background-alt py-6 md:py-16">
         <AnimatedInput
-          classNames="w-1/3 mx-auto bg-background-alt"
-          focusStyle="-translate-y-3 text-highlight text-lg"
-          blurStyle="translate-y-2 text-xl"
+          classNames="w-2/3 md:w-1/3 mx-auto bg-background-alt"
+          focusStyle="-translate-y-3 text-highlight text-sm md:text-lg"
+          blurStyle="translate-y-2 text-lg md:text-xl"
           inputStyle="mt-4 text-header"
           label="Email"
           inputType="email"
@@ -47,9 +50,9 @@ const LogIn = () => {
           onChange={(value) => setEmail(value)}
         />
         <AnimatedInput
-          classNames="w-1/3 mt-12 mx-auto bg-background-alt"
-          focusStyle="-translate-y-3 text-highlight text-lg"
-          blurStyle="translate-y-2 text-xl"
+          classNames="w-2/3 md:w-1/3 mt-8 md:mt-12 mx-auto bg-background-alt"
+          focusStyle="-translate-y-3 text-highlight  text-sm md:text-lg"
+          blurStyle="translate-y-2 text-lg md:text-xl"
           inputStyle="mt-4 text-header"
           label="Password"
           inputType="password"
@@ -57,15 +60,15 @@ const LogIn = () => {
           onChange={(value) => setPassword(value)}
         />
 
-        <div className="w-1/3 mx-auto mt-12 text-center">
+        <div className="w-2/3 md:w-1/3 mx-auto mt-12 text-center">
           <button
-            class="w-full bg-highlight-alt text-header font-bold px-20 py-3 rounded hover:shadow-md"
+            class="w-full bg-highlight-alt text-header font-bold py-2 md:py-3 rounded hover:shadow-md"
             onClick={handleLogin}
           >
             Sign In
           </button>
 
-          <p className="text-highlight mt-6">
+          <p className="text-highlight mt-6 text-sm md:text-base">
             New here?{' '}
             <Link to="/signup" className="underline">
               Sign up
@@ -74,7 +77,7 @@ const LogIn = () => {
         </div>
       </div>
 
-      {/* <Footer /> */}
+      <Footer />
     </div>
   )
 }

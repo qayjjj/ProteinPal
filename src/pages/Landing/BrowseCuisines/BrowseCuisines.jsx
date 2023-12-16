@@ -1,11 +1,13 @@
 import React from 'react'
 import search from '../../../assets/icons/search.svg'
+import loading from '../../../assets/icons/loading.gif'
 import Carousel from '../../../components/Carousel/Carousel'
 import { getVegRecipes } from '../../../callApi'
 import { useState, useEffect } from 'react'
 import RecipeCard from '../../../components/RecipeCard/RecipeCard'
 
 export default function BrowseCuisines() {
+  const [isLoading, setIsLoading] = useState(false)
   const [recipes, setRecipes] = useState([])
   const [searchValue, setSearchValue] = useState('korean')
 
@@ -14,8 +16,10 @@ export default function BrowseCuisines() {
   }
 
   const searchRecipes = async () => {
+    setIsLoading(true)
     const data = await getVegRecipes({ cuisine: searchValue }, 10)
     setRecipes(data.results)
+    setIsLoading(false)
   }
 
   useEffect(() => {
@@ -23,42 +27,45 @@ export default function BrowseCuisines() {
   }, [searchValue])
 
   return (
-    <div className="p-8 md:py-16 md:px-40 bg-background">
-      <h1 className="text-center text-lg sm:text-xl md:text-4xl font-bold text-body-bold">
+    <div className="p-8 pb-4 sm:px-16 sm:py-12 lg:py-12 lg:px-40 xl:py-20 xl:pb-32 xl:px-32 2xl:px-48 3xl:px-80 3xl:py-28 bg-background">
+      <h1 className="text-center text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-body-bold ">
         Browse recipes based on your favorite cuisines
       </h1>
 
-      <div className="md:mx-auto mt-4 md:mt-10 border-[1px] h-8 md:h-12 w-full md:w-2/3 rounded-md flex items-center p-2">
-        <img src={search} alt="Search Icon" className="w-5 h-5 md:w-6 md:h-6" />
+      <div className="md:mx-auto mt-4 md:mt-10 xl:mt-12 2xl:mt-16 border-[1px] xl:border-2 h-8 md:h-12 w-full md:w-2/3 xl:h-16 rounded-md flex items-center p-2">
+        <img
+          src={search}
+          alt="Search Icon"
+          className="w-5 h-5 md:w-6 md:h-6 "
+        />
         <input
           type="text"
-          className="w-full outline-none bg-background ml-2 text-xs md:text-base"
+          className="w-full outline-none bg-background ml-2 text-xs md:text-base xl:text-lg 2xl:text-xl"
           value={searchValue}
           onChange={(e) => updateSearch(e)}
         />
       </div>
-      {/* <div className="w-full grid justify-items-center relative mt-12">
-        <Carousel
-          backgroundColor="bg-background-alt"
-          headerTextColor="text-background-bright"
-          bodyTextColor="text-body-bold"
-          recipes={carouselRecipes}
-        />
-      </div> */}
 
-      <div className="grid grid-cols-2 gap-3 md:gap-0 md:w-11/12 md:mx-auto md:flex md:justify-between md:items-start mt-6 md:mt-12">
-        {recipes?.slice(0, 4).map((item) => (
-          <RecipeCard
-            key={item.id}
-            backgroundColor="bg-background-alt"
-            headerTextColor="text-background-bright"
-            recipeImage={item.image}
-            recipeName={item.title}
-            recipeId={item.id}
-            classNames="h-full"
-          />
-        ))}
-      </div>
+      {/* Recipes */}
+      {isLoading ? (
+        <div className="grid place-items-center w-full h-[27.5rem] sm:h-[19.25rem] md:h-[27.25rem] lg:h-[15.5rem]">
+          <img src={loading} className="w-10" />
+        </div>
+      ) : (
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:px-4 lg:grid-cols-4 lg:overflow-hidden lg:h-40 xl:h-fit xl:grid-cols-6 md:justify-items-center md:items-start mt-6 md:mt-12 xl:mt-20">
+          {recipes?.slice(0, 6).map((item) => (
+            <RecipeCard
+              key={item.id}
+              backgroundColor="bg-background-alt"
+              headerTextColor="text-background-bright"
+              recipeImage={item.image}
+              recipeName={item.title}
+              recipeId={item.id}
+              classNames="lg:h-40 xl:h-fit"
+            />
+          ))}
+        </div>
+      )}
     </div>
   )
 }
