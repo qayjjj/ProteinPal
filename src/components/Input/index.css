@@ -9,3 +9,15 @@
 .filledSearch {
   -webkit-box-shadow: 0 0 0px 1000px rgba(124,169,130,1) inset !important;
 }
+
+#nav-search {
+  & .input-container {
+    border-bottom: #243E36;
+    border-color: #243E36;
+    border-width: 1px;
+
+    & .filledSearch {
+      -webkit-box-shadow: unset !important;
+    }
+  }
+}

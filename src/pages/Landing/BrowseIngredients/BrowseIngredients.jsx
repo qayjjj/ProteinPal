@@ -27,16 +27,21 @@ export default function BrowseIngredients() {
   }, [searchValue])
   return (
     <div className="p-8 pb-4 sm:px-16 sm:py-12 lg:py-10 lg:px-40 xl:px-32 xl:pb-16 2xl:px-48 3xl:px-80 3xl:py-28 bg-background align-center">
-      <h1 className="text-center text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-body-bold ">
+      <h1 className="text-center text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-bold text-body-bold ">
         Find recipes using the ingredients you already have
       </h1>
 
-      <div className="md:mx-auto mt-4 md:mt-10 border-[1px] h-8 md:h-12 w-full md:w-2/3 rounded-md flex items-center p-2">
-        <img src={search} alt="Search Icon" className="w-5 h-5 md:w-6 md:h-6" />
+      <div className="md:mx-auto mt-4 md:mt-10 xl:mt-12 2xl:mt-16 border-[1px] xl:border-2 h-8 md:h-12 w-full md:w-2/3 2xl:h-16 rounded-md flex items-center p-2">
+        <img
+          src={search}
+          alt="Search Icon"
+          className="w-5 h-5 md:w-6 md:h-6 "
+        />
         <input
           type="text"
-          className="w-full outline-none bg-background ml-2 text-xs md:text-base"
+          className="w-full outline-none bg-background ml-2 text-xs md:text-base xl:text-lg 2xl:text-xl 3xl:text-2xl"
           value={searchValue}
+          onChange={(e) => updateSearch(e)}
         />
       </div>
 
@@ -46,7 +51,7 @@ export default function BrowseIngredients() {
           <img src={loading} className="w-10" />
         </div>
       ) : (
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:px-4 lg:grid-cols-4 lg:overflow-hidden lg:h-40 xl:h-fit xl:grid-cols-6 md:justify-items-center md:items-start mt-6 md:mt-12 lg:mt-10">
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:px-4 lg:grid-cols-4 lg:overflow-hidden lg:h-40 xl:h-fit xl:grid-cols-6 md:justify-items-center md:items-start mt-6 md:mt-12 lg:mt-10 xl:mt-20">
           {recipes?.slice(0, 6).map((item) => (
             <RecipeCard
               key={item.id}

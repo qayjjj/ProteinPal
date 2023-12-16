@@ -27,7 +27,7 @@ export default function ExploreAllRecipes() {
 
   return (
     <div className="p-8 pb-4 sm:px-16 sm:py-12 lg:py-20 lg:px-40 xl:px-32 2xl:px-48 3xl:px-80 3xl:py-28 bg-background">
-      <h1 className="md:ml-2 text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-body-bold ">
+      <h1 className="md:ml-2 text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-bold text-body-bold ">
         Explore delicious vegetarian recipes
       </h1>
 
@@ -47,7 +47,7 @@ export default function ExploreAllRecipes() {
                 recipeImage={item.image}
                 recipeName={item.title}
                 recipeId={item.id}
-                classNames="lg:h-40 xl:h-44 2xl:h-56 3xl:h-72"
+                classNames="lg:h-40 xl:h-fit"
               />
             ))}
           </div>

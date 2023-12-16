@@ -7,6 +7,7 @@ import profileIcon from '../../assets/icons/profile.svg'
 import macroMunch from '../../assets/icons/macroMunch.svg'
 import menuIcon from '../../assets/icons/menu.svg'
 import AnimatedInput from '../Input/AnimatedInput'
+import '../Input/index.css'
 
 function Navigation() {
   const [searching, setSearching] = useState(false)
@@ -87,6 +88,7 @@ function Navigation() {
         <h2 className="border-b-[1px] border-body-bold py-2 px-6 md:px-9">
           <Link to="/about">About</Link>
         </h2>
+
         {loggedIn ? (
           <>
             <h2 className="border-b-[1px] border-body-bold py-2 px-6 md:px-9">
@@ -104,6 +106,28 @@ function Navigation() {
             <Link to="/login">Log In</Link>
           </h2>
         )}
+        <form
+          id="nav-search"
+          onSubmit={handleSearch}
+          className="border-b-[1px] border-body-bold py-2 px-6"
+        >
+          <AnimatedInput
+            classNames="w-full bg-background-alt "
+            labelStyle="right-0"
+            focusStyle="bg-background-alt"
+            inputStyle="bg-background-alt text-sm text-body-bold p-2 nav-search"
+            label={
+              <img
+                src={searchIcon}
+                alt="Search Icon"
+                className="w-6 h-6 mt-[0.15rem] lg:mt-0 lg:w-5 lg:h-5"
+              />
+            }
+            inputType="text"
+            value={searchValue}
+            onChange={(value) => setSearchValue(value)}
+          />
+        </form>
       </div>
 
       {/* Pages */}
@@ -135,13 +159,11 @@ function Navigation() {
           />
         </form>
         {loggedIn ? (
-          <Link to="/dashboard">
-            <img
-              src={profileIcon}
-              alt="Profile Icon"
-              className="w-6 h-6 ml-8"
-            />
-          </Link>
+          <img
+            src={profileIcon}
+            alt="Profile Icon"
+            className="hover:cursor-pointer w-6 h-6 ml-8"
+          />
         ) : (
           <Link to="/login" className="ml-6 text-sm lg:text-base xl:text-2xl">
             Log In

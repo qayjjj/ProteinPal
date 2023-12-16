@@ -27,7 +27,7 @@ function RecipeCard({
       </div>
       <div className="recipe-name-container w-full h-8 md:h-12 2xl:h-[3.5rem] 3xl:h-[3.75rem] overflow-hidden">
         <p
-          className={`${headerTextColor} w-full font-bold text-[0.6rem] md:text-sm 2xl:text-base mt-1 xl:mt-2`}
+          className={`${headerTextColor} w-full font-bold text-[0.6rem] md:text-sm 2xl:text-base 3xl:text-lg  mt-1 xl:mt-2`}
         >
           {recipeName}
         </p>
