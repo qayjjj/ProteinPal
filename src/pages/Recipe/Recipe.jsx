@@ -59,7 +59,7 @@ export default function Recipe() {
   return (
     <div>
       <Navigation />
-      <div className="py-28 px-44">
+      <div className="lg:py-28 lg:px-44 py-12 px-20 mx-auto">
         <Overview
           recipeId={recipeId}
           recipeName={recipeInfo.title}

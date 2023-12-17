@@ -31,17 +31,18 @@ function Details({
 
 
   return (
-    <div className="flex w-full mt-10 flex-wrap">
+    <div className="flex w-full mt-10 flex-wrap m-auto bg-red-100">
 
-      <div className="flex flex-col flex-wrap w-full lg:w-1/2">
+      {/* <div className="flex flex-col flex-wrap w-full lg:w-1/2"> */}
         {/* Ingredients */}
-        <div className="bg-header text-background-alt rounded-lg w-full min-h-[20rem] px-8 py-10 my-10">
-          <h2 className="text-4xl font-bold text-background-alt">Ingredients</h2>
-          <div className="mt-6 text-background-alt">
+        <div className="bg-background-alt text-header rounded-lg
+        lg:w-3/5 m:w-full sm:w-full w-full min-h-[20rem] px-8 py-8 my-10">
+          <h2 className="lg:text-4xl md:text-3xl sm:text-2xl text-2xl font-bold text-header">Ingredients</h2>
+          <div className="mt-6 text-header lg:text-base md:text-base sm:text-sm text-sm">
             {ingredients?.map((item, index) => (
               <div key={index} className="flex items-start">
-                <img src={dot} className="w-8 h-8 inline leading-10 mt-1" />
-                <p className="inline text-background-alt text-lg leading-10">
+                <img src={dot} className="w-8 h-8 inline lg:leading-10 md:leading-10 sm:leading-5 leading-5 lg:mt-1 md:mt-1 sm:mt-[-0.25rem] mt-[-0.25rem]" />
+                <p className="inline text-header lg:leading-10 md:leading-10 sm:leading-5 leading-5">
                   {item.amount} {item.unit} {item.name}
                 </p>
               </div>
@@ -50,9 +51,10 @@ function Details({
         </div>
 
         {/* Instructions */}
-        <div className="bg-background-bright px-8 py-10 mt-10 w-full min-h-[20rem] rounded-lg">
-          <h2 className="text-4xl font-bold text-body">Instructions</h2>
-          <ol className="mt-6 text-background-header text-lg">
+        <div className="bg-background-bright min-h-[20rem] rounded-lg
+         lg:w-3/5 m:w-full sm:w-full w-full min-h-[20rem] px-8 py-8 my-10">
+          <h2 className="lg:text-4xl md:text-3xl sm:text-2xl text-2xl font-bold text-body">Instructions</h2>
+          <ol className="mt-6 text-background-header lg:text-base md:text-base sm:text-sm text-sm">
             {recipeInstructions?.[0].steps?.map((item, index) => (
               <li key={index} className="mt-4">
                  <span className="text-body-bold font-bold">{item.number}.</span> {item.step}
@@ -61,11 +63,11 @@ function Details({
           </ol>
         </div>
 
-      </div>
+      {/* </div> */}
 
       <div className="flex mt-20 flex-col w-full lg:w-1/2 lg:mt-10 bg-background-alt lg:bg-transparent items-center rounded-lg">
         {/* Nutrition Facts */}
-        <div className="text-xl">
+        <div className="lg:text-base md:text-base sm:text-sm text-sm">
           <NutritionFacts nutritionData={nutritionFacts}/>
         </div>
       </div>

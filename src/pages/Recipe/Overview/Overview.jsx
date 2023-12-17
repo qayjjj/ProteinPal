@@ -64,36 +64,38 @@ function Overview({ recipeId, recipeName, recipeImage, servings, dietTags, ready
   return (
     <div>
 
-      <div className="flex justify-between h-76 flex-wrap">
+      <div className="flex w-full m-auto justify-between h-76 flex-wrap bg-indigo-100">
 
         {/* Recipe Picture */}
-        <img src={recipeImage} alt="Recipe picture" className="h-full flex-col lg:w-2/5 w-full rounded-lg" />
+        <img src={recipeImage} alt="Recipe picture" className="h-full lg:w-3/5 md:w-3/4 sm:w-full w-full rounded-lg" />
 
         {/* Recipe Title and Save Button*/}
-        <div className="flex-col w-full lg:w-[55%] lg:mx-4 my-4 mt-10">
-          <div className="flex md:flex-nowrap flex-wrap">
+        <div className="w-full lg:w-3/5 md:w-3/4 sm:w-full lg:mx-4 my-4 mt-10
+        flex lg:flex-nowrap md:flex-wrap sm:flex-wrap flex-wrap">
 
             {/* Title */}
-            <div className="flex-row w-10/12">
-              <h1 className="text-5xl font-bold text-header ">{recipeName}</h1>
-              <p className="mt-6 text-body-bold text-xl">Makes {servings} servings &emsp; | &emsp; Ready in {readyInMinutes} minutes</p>
+            <div className="flex-row lg:w-10/12 md:w-10/12 sm:w-full w-full">
+              <h1 className="lg:text-5xl md:text-4xl text-xl font-bold text-header">{recipeName}</h1>
+              <p className="lg:mt-6 md:mt-4 sm:mt-3 mt-3 text-body-bold 
+              lg:text-xl md:text-xl sm:text-base text-base">Makes {servings} servings &emsp; | &emsp; Ready in {readyInMinutes} minutes</p>
             </div>
 
             {/* Save Button */}
-            <div className="flex-row min-w-[30px] w-3/10 md:ml-10 sm:mt-0 mt-10">
+            <div className="flex-row min-w-[20px] lg:w-3/10 md:w-2/12 sm:w-2/12 w-2/12 lg:ml-10 md:ml-0 sm:mt-5 mt-5 items-right">
               <img
                 src={isSaved ? savedIcon : saveIcon}
-                className="w-12 h-12 cursor-pointer"
+                className="lg:w-12 lg:h-12 md:w-12 md:h-12 sm:w-8 sm:h-8 w-8 h-8 cursor-pointer"
                 onClick={handleSaveRecipe}
               />
             </div>
-          </div>
+
         </div>
 
         {/* Labels */}
-        <div className="mt-8 text-body-bold w-10/12 flex-col lg:m-auto lg:text-center lg:mt-12">
-          <span className="leading-10 whitespace-nowrap mr-6">
-            <img src={tag} className="px-0 w-8 h-8 inline" />
+        <div className="mt-8 p-2 text-body-bold mt-12 lg:text-lg md:text-base sm:text-sm text-sm
+        w-full lg:w-3/5 md:w-3/4 sm:w-full lg:mx-4 my-4 mt-10">
+          <span className="leading-10 whitespace-nowrap mr-6">                
+            <img src={tag} className="px-0 lg:w-8 lg:h-8 md:w-8 md:h-8 sm:w-6 sm:h-6 w-6 h-6 inline" />
           </span>
           {dietTags.map((item, index) => {
             return (
