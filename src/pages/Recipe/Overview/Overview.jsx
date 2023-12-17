@@ -64,7 +64,7 @@ function Overview({ recipeId, recipeName, recipeImage, servings, dietTags, ready
   return (
     <div>
 
-      <div className="flex w-full m-auto justify-between h-76 flex-wrap bg-indigo-100">
+      <div className="flex w-full m-auto justify-between h-76 flex-wrap">
 
         {/* Recipe Picture */}
         <img src={recipeImage} alt="Recipe picture" className="h-full lg:w-3/5 md:w-3/4 sm:w-full w-full rounded-lg" />
@@ -75,7 +75,7 @@ function Overview({ recipeId, recipeName, recipeImage, servings, dietTags, ready
 
             {/* Title */}
             <div className="flex-row lg:w-10/12 md:w-10/12 sm:w-full w-full">
-              <h1 className="lg:text-5xl md:text-4xl text-xl font-bold text-header">{recipeName}</h1>
+              <h1 className="lg:text-5xl md:text-4xl sm:text-2xl text-2xl font-bold text-header">{recipeName}</h1>
               <p className="lg:mt-6 md:mt-4 sm:mt-3 mt-3 text-body-bold 
               lg:text-xl md:text-xl sm:text-base text-base">Makes {servings} servings &emsp; | &emsp; Ready in {readyInMinutes} minutes</p>
             </div>
@@ -99,7 +99,7 @@ function Overview({ recipeId, recipeName, recipeImage, servings, dietTags, ready
           </span>
           {dietTags.map((item, index) => {
             return (
-              <span className="leading-10 whitespace-nowrap mr-6">
+              <span className="lg:leading-10 md:leading-8 sm:leading-6 leading-6 whitespace-nowrap mr-6">
                 {index !== 0 &&
                   <img src={dot} className="px-0 w-8 h-8 inline" />
                 }
