@@ -102,6 +102,12 @@ export default function Ingredients() {
         </form>
       </div>
 
+      <h2 className="text-center text-sm sm:text-base md:text-base xl:text-xl 2xl:text-2xl 3xl:text-3xl text-body mt-3">
+        {!searchValue && searchResults &&
+        <span>Enter ingredient keyword</span>
+        }
+      </h2>
+
       {/* Search Results */}
       <div className="w-full py-8 px-10 lg:py-20 lg:px-20 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2 lg:gap-4">
         {searchResults?.map((item) => (
