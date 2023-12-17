@@ -76,7 +76,7 @@ function Details({
 
           {/* Divider */}
           <div className="lg:w-2/5 md:w-2/5 sm:w-3/5 w-3/5 h-1 bg-body-bold ml-1 lg:mt-4 md:mt-4 sm:mt-2 mt-2 rounded"></div>
-          <p className="lg:text-base md:text-base sm:text-sm text-sm ml-2 mt-2"> per {weightPerServing?.amount}{weightPerServing?.unit} serving (recipes makes {servings})</p>
+          <p className="lg:text-base md:text-base sm:text-sm text-sm ml-2 mt-2"> per {weightPerServing?.amount}{weightPerServing?.unit} serving (recipe makes {servings})</p>
 
           {/* Extended Nutritions */}
           <div className="w-full mt-10 text-header lg:text-sm md:text-sm sm:text-xs text-xs ">
@@ -151,6 +151,11 @@ function Details({
               <div className="flex w-full p-2 border-t-2 border-background-alt">
                   <div className="flex-row w-full"><b>Potassium</b>: {nutrients?.[16]?.amount}{nutrients?.[16]?.unit} </div>
                   <div className="flex-row w-full text-right">{nutrients?.[16]?.percentOfDailyNeeds}%</div>
+              </div>
+
+              {/* Disclaimer */}
+              <div className="flex w-full p-2 border-t-2 border-background-alt">
+                  <div className="flex-row w-full">* Percentage Daily Values are based on a 2,000 calorie diet</div>
               </div>
               
           </div>

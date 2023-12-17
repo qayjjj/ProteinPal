@@ -17,8 +17,6 @@ export default function Ingredients() {
 
   const [showModal, setShowModal] = useState(false)
 
-  console.log(searchResults)
-
   const fetchSearchData = async () => {
     try {
       const data = await getIngredients(searchValue, 100)
@@ -37,6 +35,8 @@ export default function Ingredients() {
       setIngredientInfo(ingredientData)
       setIngredientNutrients(ingredientData.nutrition?.nutrients)
       setIngredientUnit('g')
+      console.log(ingredientData)
+
     } catch (error) {
       // If the ingredient does not have g in the measure, find out which measures it has
       try {
@@ -81,11 +81,11 @@ export default function Ingredients() {
   }
 
   return (
-    <div className="bg-background">
+    <div className="bg-background h-screen w-screen">
       <Navigation />
 
       {/* Title */}
-      <h1 className="text-center text-4xl font-bold text-header mt-10">
+      <h1 className="text-center text-xl sm:text-2xl md:text-3xl xl:text-4xl 2xl:text-5xl 3xl:text-6xl font-bold text-header mt-10">
         Search Ingredient Database
       </h1>
 
@@ -103,7 +103,7 @@ export default function Ingredients() {
       </div>
 
       {/* Search Results */}
-      <div className="w-full py-20 px-32 grid grid-cols-4 gap-4">
+      <div className="w-full py-8 px-10 lg:py-20 lg:px-20 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2 lg:gap-4">
         {searchResults?.map((item) => (
           <IngredientCard
             name={item.name}
@@ -122,7 +122,6 @@ export default function Ingredients() {
         closeModal={handleCloseModal}
         ingredientData={ingredientInfo}
         nutrients={ingredientNutrients}
-        image={ingredientInfo.image}
         ingredientUnit={ingredientUnit}
       />
     </div>
