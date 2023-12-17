@@ -92,14 +92,14 @@ function Overview({ recipeId, recipeName, recipeImage, servings, dietTags, ready
         </div>
 
         {/* Labels */}
-        <div className="mt-8 p-2 text-body-bold mt-12 lg:text-lg md:text-base sm:text-sm text-sm
-        w-full lg:w-3/5 md:w-3/4 sm:w-full lg:mx-4 my-4 mt-10">
+        <div className="p-2 text-body-bold lg:text-lg md:text-base sm:text-sm text-sm
+        w-full lg:w-3/5 md:w-3/4 sm:w-full lg:mx-4 lg:mt-10 md:mt-10 sm:mt-3 mt-3 lg:my-4 md:my-4 sm:my-2 my-0">
           <span className="leading-10 whitespace-nowrap mr-6">                
             <img src={tag} className="px-0 lg:w-8 lg:h-8 md:w-8 md:h-8 sm:w-6 sm:h-6 w-6 h-6 inline" />
           </span>
           {dietTags.map((item, index) => {
             return (
-              <span className="lg:leading-10 md:leading-8 sm:leading-6 leading-6 whitespace-nowrap mr-6">
+              <span className="lg:leading-10 md:leading-8 sm:leading-4 leading-4 whitespace-nowrap mr-5">
                 {index !== 0 &&
                   <img src={dot} className="px-0 w-8 h-8 inline" />
                 }

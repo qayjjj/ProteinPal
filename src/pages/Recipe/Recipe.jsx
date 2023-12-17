@@ -71,7 +71,6 @@ export default function Recipe() {
         <Details
           nutrients={nutritionInfo.nutrients}
           ingredients={nutritionInfo.ingredients}
-          servings={recipeInfo.servings}
           weightPerServing={nutritionInfo.weightPerServing}
           caloricBreakdown={nutritionInfo.caloricBreakdown}
           recipeInstructions={recipeInfo.analyzedInstructions}

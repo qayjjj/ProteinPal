@@ -6,13 +6,13 @@ import NutritionFacts from '../../../components/NutritionFacts/NutritionFacts'
 function Details({
   nutrients,
   ingredients,
-  servings,
   caloricBreakdown,
   weightPerServing,
   recipeInstructions
 }) {
 
 
+  console.log(nutrients)
   
   const nutritionFacts = {
     calories: { amount: nutrients?.[0].amount },
@@ -24,7 +24,7 @@ function Details({
     carb: { amount: nutrients?.[4].amount, percentOfDailyNeeds: nutrients?.[4].percentOfDailyNeeds },
     fiber: { amount: nutrients?.[21].amount, percentOfDailyNeeds: nutrients?.[21].percentOfDailyNeeds },
     sugar: { amount: nutrients?.[5].amount, percentOfDailyNeeds: nutrients?.[5].percentOfDailyNeeds },
-    protein: { amount: nutrients?.[9].amount, percentOfDailyNeeds: nutrients?.[9].percentOfDailyNeeds },
+    protein: { amount: nutrients?.[8].amount, percentOfDailyNeeds: nutrients?.[8].percentOfDailyNeeds },
     vitD: { amount: nutrients?.[25].amount, percentOfDailyNeeds: nutrients?.[25].percentOfDailyNeeds },
     calcium: { amount: nutrients?.[20].amount, percentOfDailyNeeds: nutrients?.[20].percentOfDailyNeeds },
     iron: { amount: nutrients?.[17].amount, percentOfDailyNeeds: nutrients?.[17].percentOfDailyNeeds },
@@ -34,15 +34,14 @@ function Details({
   console.log(caloricBreakdown)
   console.log(nutritionFacts)
   console.log(weightPerServing)
-  console.log(servings)
 
 
   return (
     <div className="flex w-full mt-10 flex-wrap m-auto">
 
         {/* Ingredients */}
-        <div className="bg-background-alt text-header rounded-lg px-8 py-8 
-        lg:w-3/5 m:w-full sm:w-full w-full min-h-[12rem] lg:my-10 md:my-8 sm:my-6 my-6">
+        <section className="bg-background-alt text-header rounded-lg px-8 py-8 
+        lg:w-3/5 m:w-full sm:w-full w-full min-h-[12rem] lg:my-10 md:my-8 sm:my-4 my-4">
           <h2 className="lg:text-4xl md:text-3xl sm:text-2xl text-2xl font-bold text-header">Ingredients</h2>
           <div className="mt-6 text-header lg:text-base md:text-base sm:text-sm text-sm">
             {ingredients?.map((item, index) => (
@@ -54,11 +53,11 @@ function Details({
               </div>
             ))}
           </div>
-        </div>
+        </section>
 
         {/* Instructions */}
-        <div className="bg-transparent min-h-[12rem] rounded-lg px-8 py-8
-         lg:w-3/5 m:w-full sm:w-full w-full lg:my-10 md:my-8 sm:my-6 my-6">
+        <section className="bg-transparent min-h-[12rem] rounded-lg px-8 py-8
+         lg:w-3/5 m:w-full sm:w-full w-full lg:my-10 md:my-8 sm:my-4 my-4">
           <h2 className="lg:text-4xl md:text-3xl sm:text-2xl text-2xl font-bold text-body">Instructions</h2>
           <ol className="mt-6 text-background-header lg:text-base md:text-base sm:text-sm text-sm">
             {recipeInstructions?.[0].steps?.map((item, index) => (
@@ -67,16 +66,23 @@ function Details({
               </li>
             ))}
           </ol>
-        </div>
+        </section>
 
       {/* Nutrition Information */}
-      <div className="bg-transparent text-header rounded-lg px-8 py-8
-        lg:w-3/5 m:w-full sm:w-full w-full min-h-[12rem] lg:my-10 md:my-8 sm:my-6 my-6">
-          <h2 className="lg:text-4xl md:text-3xl sm:text-2xl text-2xl font-bold text-header">Nutrition</h2>
+      <section className="bg-transparent text-header rounded-lg px-8 py-8
+        lg:w-3/5 m:w-full sm:w-full w-full min-h-[12rem] lg:my-10 md:my-8 sm:my-4 my-4">
+          <h2 className="lg:text-4xl md:text-3xl sm:text-2xl text-2xl font-bold text-header">Nutrition Facts 
+            <span className="lg:text-base md:text-base sm:text-sm text-sm font-normal ml-2"> (per {weightPerServing?.amount}{weightPerServing?.unit} serving)</span>
+          </h2>
           <div className="mt-6 text-header lg:text-base md:text-base sm:text-sm text-sm">
-           
+           <p>{nutrients?.[0].amount} {nutrients?.[0].unit}</p>
+           <p>Carbohydrates {nutrients?.[4].amount} {nutrients?.[4].unit}</p>
+           <p>Fat {nutrients?.[1].amount} {nutrients?.[1].unit}</p>
+           <p>Protein {nutritionFacts.protein.amount} {nutritionFacts.protein.unit}</p>
+
+
           </div>
-      </div>
+      </section>
 
       </div>
   )
