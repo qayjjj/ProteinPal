@@ -15,6 +15,7 @@ function Navigation() {
   const [loggedIn, setLoggedIn] = useState(false)
   const navigate = useNavigate()
   const [showCollapsibleNav, setShowCollapsibleNav] = useState(false)
+  const [showDesktopMenu, setShowDesktopMenu] = useState(false)
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -162,13 +163,35 @@ function Navigation() {
           <img
             src={profileIcon}
             alt="Profile Icon"
-            className="hover:cursor-pointer w-6 h-6 ml-8"
+            className="z-[150] hover:cursor-pointer w-6 h-6 ml-8"
+            onMouseEnter={() => setShowDesktopMenu(true)}
+            onMouseLeave={() => setShowDesktopMenu(false)}
           />
         ) : (
           <Link to="/login" className="ml-6 text-sm lg:text-base xl:text-2xl">
             Log In
           </Link>
         )}
+      </div>
+
+      {/* Collapsible menu for dashboard and log out on larger screens */}
+      <div
+        className={`flex flex-col absolute text-right top-14 right-8 w-36  text-header shadow-lg ${
+          !showDesktopMenu && 'hidden'
+        }`}
+        onMouseEnter={() => setShowDesktopMenu(true)}
+        onMouseLeave={() => setShowDesktopMenu(false)}
+      >
+        <div className="bg-transparent h-6"></div>
+        <h2 className="py-3 pr-6 bg-highlight ">
+          <Link to="/dashboard">Dashboard</Link>
+        </h2>
+        <h2
+          className="pt-1 pb-3 pr-6 bg-highlight rounded-e"
+          onClick={handleLogOut}
+        >
+          Log Out
+        </h2>
       </div>
     </div>
   )
