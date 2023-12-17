@@ -71,17 +71,31 @@ function Details({
       {/* Nutrition Information */}
       <section className="bg-transparent text-header rounded-lg px-8 py-8
         lg:w-3/5 m:w-full sm:w-full w-full min-h-[12rem] lg:my-10 md:my-8 sm:my-4 my-4">
-          <h2 className="lg:text-4xl md:text-3xl sm:text-2xl text-2xl font-bold text-header">Nutrition Facts 
-            <span className="lg:text-base md:text-base sm:text-sm text-sm font-normal ml-2"> (per {weightPerServing?.amount}{weightPerServing?.unit} serving)</span>
-          </h2>
-          <div className="mt-6 text-header lg:text-base md:text-base sm:text-sm text-sm">
-           <p>{nutrients?.[0].amount} {nutrients?.[0].unit}</p>
-           <p>Carbohydrates {nutrients?.[4].amount} {nutrients?.[4].unit}</p>
-           <p>Fat {nutrients?.[1].amount} {nutrients?.[1].unit}</p>
-           <p>Protein {nutritionFacts.protein.amount} {nutritionFacts.protein.unit}</p>
-
-
+          <h2 className="lg:text-4xl md:text-3xl sm:text-2xl text-2xl font-bold text-header">Nutrition Facts </h2>
+          <div className="flex w-full mt-6 text-header lg:text-base md:text-base sm:text-sm text-sm lg:flex-nowrap md:flex-nowrap sm:flex-wrap flex-wrap">
+              {/* Calories */}
+              <div className="flex-col p-3 bg-background-alt lg:w-2/5 md:w-2/5 sm:w-2/5 w-2/5 rounded-lg mr-2 lg:my-0 md:my-0 sm:my-2 my-2">
+                <p className="font-bold">{nutrients?.[0].amount}</p> 
+                <p>{nutrients?.[0].unit}</p>
+              </div>
+              {/* Carbs */}
+              <div className="flex-col p-3 bg-background-alt lg:w-2/5 md:w-2/5 sm:w-2/5 w-2/5 rounded-lg mr-2 lg:my-0 md:my-0 sm:my-2 my-2">
+                <p className="font-bold">{nutrients?.[4].amount}{nutrients?.[4].unit}</p> 
+                <p>Carbs</p>              
+              </div>
+              {/* Fat */}
+              <div className="flex-col p-3 bg-background-alt lg:w-2/5 md:w-2/5 sm:w-2/5 w-2/5 rounded-lg mr-2 lg:my-0 md:my-0 sm:my-2 my-2">
+                <p className="font-bold"> {nutrients?.[1].amount} {nutrients?.[1].unit}</p>
+                <p>Fat</p>
+              </div>
+              <div className="flex-col p-3 bg-background-alt lg:w-2/5 md:w-2/5 sm:w-2/5 w-2/5 rounded-lg mr-2 lg:my-0 md:my-0 sm:my-2 my-2">
+                <p className="font-bold">{nutrients?.[8].amount} {nutrients?.[8].unit}</p>
+                <p>Protein</p>
+              </div> 
           </div>
+          <div className="lg:w-2/5 md:w-2/5 sm:w-3/5 w-3/5 h-1 bg-body-bold ml-1 lg:mt-4 md:mt-4 sm:mt-2 mt-2 rounded"></div>
+          <p className="lg:text-base md:text-base sm:text-sm text-sm ml-2 mt-2"> per {weightPerServing?.amount}{weightPerServing?.unit} serving</p>
+
       </section>
 
       </div>
