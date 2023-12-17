@@ -168,7 +168,10 @@ function Navigation() {
             onMouseLeave={() => setShowDesktopMenu(false)}
           />
         ) : (
-          <Link to="/login" className="ml-6 text-sm lg:text-base xl:text-2xl">
+          <Link
+            to="/login"
+            className="ml-6 text-sm lg:text-base xl:text-xl 2xl:text-2xl"
+          >
             Log In
           </Link>
         )}

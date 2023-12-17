@@ -29,8 +29,10 @@ export default function Dashboard() {
   return (
     <div className="bg-background">
       <Navigation />
-      <div className="py-28 px-56">
-        <h1 className="text-4xl font-bold text-header">Dashboard</h1>
+      <div className="p-8 sm:py-10 sm:px-16 md:py-12 md:px-20 lg:py-28 lg:px-40 2xl:py-32 2xl:px-52">
+        <h1 className="text-2xl sm:text-3xl lg:text-4xl 2xl:text-5xl 3xl:text-6xl font-bold text-header">
+          Dashboard
+        </h1>
         <MyRecipes />
         <SavedRecipes />
       </div>
