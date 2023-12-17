@@ -81,7 +81,7 @@ function Overview({ recipeId, recipeName, recipeImage, servings, dietTags, ready
             </div>
 
             {/* Save Button */}
-            <div className="flex-row min-w-[20px] lg:w-3/10 md:w-2/12 sm:w-2/12 w-2/12 lg:ml-10 md:ml-0 sm:mt-5 mt-5 items-right">
+            <div className="flex-row min-w-[20px] lg:w-3/10 md:w-2/12 sm:w-2/12 w-2/12 lg:ml-12 md:ml-0 sm:mt-5 mt-5 items-right">
               <img
                 src={isSaved ? savedIcon : saveIcon}
                 className="lg:w-12 lg:h-12 md:w-12 md:h-12 sm:w-8 sm:h-8 w-8 h-8 cursor-pointer"
