@@ -74,6 +74,7 @@ export default function Recipe() {
           weightPerServing={nutritionInfo.weightPerServing}
           caloricBreakdown={nutritionInfo.caloricBreakdown}
           recipeInstructions={recipeInfo.analyzedInstructions}
+          servings={recipeInfo.servings}
         />
       </div>
     </div>
