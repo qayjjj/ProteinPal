@@ -11,27 +11,27 @@ export default function SavedRecipes() {
 
   useEffect(() => {
     const fetchRecipes = async () => {
-      const user = auth.currentUser;
+      const user = auth.currentUser
       if (user) {
-        const firestore = getFirestore();
-        const savedRecipesRef = doc(firestore, user.uid, 'savedRecipes');
-        const savedRecipesSnap = await getDoc(savedRecipesRef);
+        const firestore = getFirestore()
+        const savedRecipesRef = doc(firestore, user.uid, 'savedRecipes')
+        const savedRecipesSnap = await getDoc(savedRecipesRef)
 
         if (savedRecipesSnap.exists()) {
-          const savedRecipesData = savedRecipesSnap.data();
-          const recipesData = [];
-          console.log(savedRecipesData);
+          const savedRecipesData = savedRecipesSnap.data()
+          const recipesData = []
+          console.log(savedRecipesData)
 
           for (const id of savedRecipesData.recipeIds) {
-            const data = await getRecipeDetails(id);
-            recipesData.push(data);
+            const data = await getRecipeDetails(id)
+            recipesData.push(data)
           }
-          setRecipes(recipesData);
+          setRecipes(recipesData)
         }
       }
-    };
-    fetchRecipes();
-  }, [auth.currentUser]);
+    }
+    fetchRecipes()
+  }, [auth.currentUser])
 
   return (
     <div className="mt-12">
@@ -47,8 +47,9 @@ export default function SavedRecipes() {
         </button>
       </div>
       <div
-        className={`rounded-lg mt-6 min-h-[24rem] w-full bg-background-alt grid ${recipes.length !== 0 && 'grid-cols-4'
-          }`}
+        className={`rounded-lg mt-6 min-h-[24rem] w-full bg-background-alt grid ${
+          recipes.length !== 0 && 'grid-cols-4'
+        }`}
       >
         {recipes.length === 0 ? (
           <p className="place-self-center text-background-bright">
@@ -57,9 +58,9 @@ export default function SavedRecipes() {
         ) : (
           recipes.map((recipe) => (
             <RecipeCard
-              backgroundColor="bg-background-alt"
+              backgroundColor="bg-background-bright"
               headerTextColor="text-highlight-bright"
-              // recipeImage={item.image}
+              recipeImage={recipe.image ?? null}
               recipeName={recipe.title}
               recipeId={recipe.id}
             />

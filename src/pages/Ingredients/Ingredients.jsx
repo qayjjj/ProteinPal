@@ -1,5 +1,5 @@
 import React from 'react'
-import {useState } from 'react'
+import { useState } from 'react'
 import Navigation from '../../components/Navigation/Navigation'
 import IngredientCard from '../../components/IngredientCard/IngredientCard'
 import search from '../../assets/icons/search.svg'
@@ -15,56 +15,58 @@ export default function Ingredients() {
   const [ingredientNutrients, setIngredientNutrients] = useState([])
   const [ingredientUnit, setIngredientUnit] = useState('')
 
-  const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState(false)
+
+  console.log(searchResults)
 
   const fetchSearchData = async () => {
     try {
-      const data = await getIngredients(searchValue, 100);
-      setSearchResults(data.results);
+      const data = await getIngredients(searchValue, 100)
+      setSearchResults(data.results)
       console.log(data)
-
     } catch (error) {
-      console.error('Error fetching search results:', error);
+      console.error('Error fetching search results:', error)
       alert('There was an error processing your request, try again shortly.')
     }
-  };
+  }
 
   const fetchSingleIngredientData = async (id) => {
     try {
       // Try getting ingredient info for 100g serving
-      const ingredientData = await getIngredientInformation(id, 100, "g");
-      setIngredientInfo(ingredientData);
-      setIngredientNutrients(ingredientData.nutrition?.nutrients);
-      setIngredientUnit("g")
-
+      const ingredientData = await getIngredientInformation(id, 100, 'g')
+      setIngredientInfo(ingredientData)
+      setIngredientNutrients(ingredientData.nutrition?.nutrients)
+      setIngredientUnit('g')
     } catch (error) {
       // If the ingredient does not have g in the measure, find out which measures it has
       try {
-        const ingredientData = await getIngredientInformation(id);
-        setIngredientInfo(ingredientData);
+        const ingredientData = await getIngredientInformation(id)
+        setIngredientInfo(ingredientData)
         const unit = ingredientData.possibleUnits?.[0]
         setIngredientUnit(unit)
 
-        const ingredientDataWithNutrition = await getIngredientInformation(id, 10, unit);
-        setIngredientNutrients(ingredientDataWithNutrition.nutrition?.nutrients);
-      
+        const ingredientDataWithNutrition = await getIngredientInformation(
+          id,
+          10,
+          unit,
+        )
+        setIngredientNutrients(ingredientDataWithNutrition.nutrition?.nutrients)
       } catch (error) {
-        console.error('Error fetching search results:', error);
+        console.error('Error fetching search results:', error)
         alert('There was an error processing your request, try again shortly.')
       }
-
     }
   }
 
   const handleCardOnClick = (item) => {
     console.log(item)
     setSelectedIngredient({ id: item.id, name: item.name, image: item.image })
-    setShowModal(true);
+    setShowModal(true)
     fetchSingleIngredientData(item.id)
   }
 
   const handleCloseModal = () => {
-    setShowModal(false);
+    setShowModal(false)
     setSelectedIngredient({})
   }
 
@@ -80,7 +82,7 @@ export default function Ingredients() {
 
   return (
     <div className="bg-background">
-      <Navigation/>
+      <Navigation />
 
       {/* Title */}
       <h1 className="text-center text-4xl font-bold text-header mt-10">
@@ -104,16 +106,16 @@ export default function Ingredients() {
       <div className="w-full py-20 px-32 grid grid-cols-4 gap-4">
         {searchResults?.map((item) => (
           <IngredientCard
-          name={item.name}
-          image={item.image}
-          backgroundColor="bg-background-bright"
-          headerTextColor="text-background"
-          bodyTextColor="text-body-bold"
-          onClick={() => handleCardOnClick(item)}
+            name={item.name}
+            image={item.image}
+            backgroundColor="bg-background-bright"
+            headerTextColor="text-background"
+            bodyTextColor="text-body-bold"
+            onClick={() => handleCardOnClick(item)}
           />
         ))}
       </div>
-      
+
       {/* Modal */}
       <IngredientModal
         isOpen={showModal}
@@ -123,7 +125,6 @@ export default function Ingredients() {
         image={ingredientInfo.image}
         ingredientUnit={ingredientUnit}
       />
-
     </div>
   )
 }

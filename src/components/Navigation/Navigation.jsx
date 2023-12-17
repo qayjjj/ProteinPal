@@ -132,7 +132,7 @@ function Navigation() {
       </div>
 
       {/* Pages */}
-      <div className="hidden lg:flex justify-between text-background w-1/3 font-semibold text-sm lg:text-base xl:text-2xl">
+      <div className="hidden lg:flex justify-between text-background w-1/3 font-semibold text-sm lg:text-base xl:text-lg 2xl:text-xl 3xl:text-2xl">
         <h2>
           <Link to="/recipes">Recipes</Link>
         </h2>
