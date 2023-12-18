@@ -289,7 +289,7 @@ const NutritionFacts = ({ nutritionData, servingRatio }) => {
       : 0
 
   return (
-    <div className="flex flex-col bg-background-alt mt-8 w-full sm:w-2/3 md:w-1/2 lg:w-1/3 xl:w-[25%] h-min px-6 py-3 rounded-lg">
+    <div className="flex flex-col bg-background-alt mt-8 w-full sm:w-2/3 md:w-1/2 lg:w-[35%] 2xl:w-[40%] 3xl:w-[30%] h-min px-6 py-3 rounded-lg">
       <h1 className="text-xl sm:text-2xl lg:text-3xl 2xl:text-4xl 3xl:text-5xl  text-body-bold font-bold mt-4 lg:mt-8">
         Nutrition Facts
       </h1>
