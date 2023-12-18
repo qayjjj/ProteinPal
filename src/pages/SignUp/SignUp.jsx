@@ -32,7 +32,7 @@ const SignUp = () => {
           Create Account
         </h1>
       </div>
-      <div className="bg-background-alt py-20 md:py-16 h-full">
+      <div className="bg-background-alt py-20 md:py-16 md:h-[65vh]">
         <AnimatedInput
           classNames="w-2/3 md:w-1/3 mx-auto bg-background-alt"
           focusStyle="-translate-y-3 text-highlight text-lg"
