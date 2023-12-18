@@ -9,12 +9,14 @@ import Dashboard from './pages/Dashboard/Dashboard'
 import CreateRecipe from './pages/CreateRecipe/CreateRecipe'
 import Ingredients from './pages/Ingredients/Ingredients'
 import CustomRecipe from './pages/CustomRecipe/CustomRecipe'
+import About from './pages/About/About'
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Landing />} />
+        <Route path="/about" element={<About />} />
         <Route path="/recipe" element={<Recipe />} />
         <Route path="/recipes" element={<Recipes />} />
         <Route path="/signup" element={<SignUp />} />
