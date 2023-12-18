@@ -190,7 +190,7 @@ function Navigation() {
           <Link to="/dashboard">Dashboard</Link>
         </h2>
         <h2
-          className="pt-1 pb-3 pr-6 bg-highlight rounded-e"
+          className="pt-1 pb-3 pr-6 bg-highlight rounded-b"
           onClick={handleLogOut}
         >
           Log Out

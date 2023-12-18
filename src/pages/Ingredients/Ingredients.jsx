@@ -36,7 +36,6 @@ export default function Ingredients() {
       setIngredientNutrients(ingredientData.nutrition?.nutrients)
       setIngredientUnit('g')
       console.log(ingredientData)
-
     } catch (error) {
       // If the ingredient does not have g in the measure, find out which measures it has
       try {
@@ -90,22 +89,24 @@ export default function Ingredients() {
       </h1>
 
       {/* Search Bar */}
-      <div className="mx-auto mt-10 border-[1px] h-12 w-2/3 bg-background rounded-md flex items-center p-2">
+      <div className="mx-auto mt-6 lg:mt-10 2xl:mt-12 border-[1px] h-8 lg:h-12 w-3/4 lg:w-2/3 2xl:border-2 bg-background rounded-md flex items-center p-2">
         <img src={search} alt="Search Icon" className="w-6 h-6" />
-        <form onSubmit={handleSearch}>
+        <form className="w-full" onSubmit={handleSearch}>
           <input
             type="text"
-            className="w-full outline-none bg-background ml-2"
+            className="w-full outline-none bg-background ml-2 text-xs lg:text-sm 2xl:text-base 3xl:text-lg"
             value={searchValue}
             onChange={(e) => updateSearch(e)}
           />
         </form>
       </div>
 
-      <h2 className="text-center text-sm sm:text-base md:text-base xl:text-xl 2xl:text-2xl 3xl:text-3xl text-body mt-3">
-        {!searchValue && searchResults &&
-        <span>Enter ingredient keyword</span>
-        }
+      <h2 className="text-center text-xs sm:text-sm xl:text-base 2xl:text-xl text-body mt-1">
+        {!searchValue && searchResults.length < 1 && (
+          <span className="text-background-bright">
+            Enter ingredient keyword
+          </span>
+        )}
       </h2>
 
       {/* Search Results */}
@@ -117,6 +118,7 @@ export default function Ingredients() {
             backgroundColor="bg-background-bright"
             headerTextColor="text-background"
             bodyTextColor="text-body-bold"
+            classNames="ingredients-page-item"
             onClick={() => handleCardOnClick(item)}
           />
         ))}

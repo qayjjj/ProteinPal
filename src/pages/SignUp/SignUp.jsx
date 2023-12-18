@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Navigation from '../../components/Navigation/Navigation'
-// import Footer from '../../components/Footer/Footer'
+import Footer from '../../components/Footer/Footer'
 import AnimatedInput from '../../components/Input/AnimatedInput'
 import { auth } from '../../Firebase'
 import { createUserWithEmailAndPassword } from 'firebase/auth'
@@ -18,12 +18,6 @@ const SignUp = () => {
         email,
         password,
       )
-
-      // const user = userCredential.user;
-      // await firestore.collection('users').doc(user.uid).set({
-      //   email: user.email,
-      // });
-
       alert('User registered successfully!')
     } catch (error) {
       alert('Error creating user:', error.message)
@@ -33,13 +27,14 @@ const SignUp = () => {
   return (
     <div className="bg-background">
       <Navigation />
-      <div className="w-1/3 mx-auto h-44 pt-20">
-        <h1 className="text-4xl font-bold text-body-bold">Create Account</h1>
+      <div className="w-2/3 py-10 md:w-1/3 mx-auto md:h-44 md:pt-20">
+        <h1 className="text-xl md:text-3xl lg:text-4xl font-bold text-body-bold">
+          Create Account
+        </h1>
       </div>
-
-      <div className="bg-background-alt py-16">
+      <div className="bg-background-alt py-20 md:py-16 h-full">
         <AnimatedInput
-          classNames="w-1/3 mx-auto bg-background-alt"
+          classNames="w-2/3 md:w-1/3 mx-auto bg-background-alt"
           focusStyle="-translate-y-3 text-highlight text-lg"
           blurStyle="translate-y-2 text-xl"
           inputStyle="mt-4 text-header"
@@ -49,7 +44,7 @@ const SignUp = () => {
           onChange={(value) => setEmail(value)}
         />
         <AnimatedInput
-          classNames="w-1/3 mt-12 mx-auto bg-background-alt"
+          classNames="w-2/3 md:w-1/3 mt-8 md:mt-12 mx-auto bg-background-alt"
           focusStyle="-translate-y-3 text-highlight text-lg"
           blurStyle="translate-y-2 text-xl"
           inputStyle="mt-4 text-header"
@@ -58,15 +53,15 @@ const SignUp = () => {
           value={password}
           onChange={(value) => setPassword(value)}
         />
-        <div className="w-1/3 mx-auto mt-12 text-center">
+        <div className="w-2/3 md:w-1/3 mx-auto mt-12 text-center">
           <button
-            class="w-full bg-highlight-alt text-header font-bold px-20 py-3 rounded hover:shadow-md"
+            class="w-full bg-highlight-alt text-header font-bold py-2 md:py-3 rounded hover:shadow-md"
             onClick={handleSignUp}
           >
             Create Account
           </button>
 
-          <p className="text-highlight mt-6">
+          <p className="text-highlight mt-6 text-sm md:text-base">
             Already a member?{' '}
             <Link to="/login" className="underline">
               Log in
@@ -75,7 +70,7 @@ const SignUp = () => {
         </div>
       </div>
 
-      {/* <Footer /> */}
+      <Footer />
     </div>
   )
 }

@@ -59,7 +59,7 @@ export default function Recipes() {
           Search Vegetarian Recipes
         </h1>
       )}
-      <div className="mx-auto mt-10 lg:mt-16 border-[1px] h-8 lg:h-12 w-3/4 lg:w-2/3 2xl:border-2 bg-background rounded-md flex items-center p-2">
+      <div className="mx-auto mt-6 lg:mt-10 2xl:mt-12  border-[1px] h-8 lg:h-12 w-3/4 lg:w-2/3 2xl:border-2 bg-background rounded-md flex items-center p-2">
         <img src={search} alt="Search Icon" className="w-6 h-6" />
         <input
           type="text"

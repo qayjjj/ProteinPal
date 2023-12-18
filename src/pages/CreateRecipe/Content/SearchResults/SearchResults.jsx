@@ -23,7 +23,6 @@ export default function SearchResults({
   const checkOverflow = () => {
     const container = containerRef.current
     if (container.scrollHeight > container.clientHeight) {
-      // Content overflows
       !isOverflow && setIsOverflow(true)
     } else {
       isOverflow && setIsOverflow(false)
@@ -42,16 +41,18 @@ export default function SearchResults({
   }
 
   return (
-    <div className="relative mt-6 w-full">
+    <div className="relative mt-6 2xl:mt-10 w-full">
       <div
         ref={containerRef}
         className={`w-full min-h-[8rem] max-h-[26.5rem] grid ${
-          !isEnteringAmount && searchResults.length !== 0 && 'grid-cols-4'
+          !isEnteringAmount &&
+          searchResults.length !== 0 &&
+          'grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6'
         } ${isOverflow && 'overflow-y-scroll overflow-x-hidden'} ${
           isEnteringAmount && 'bg-background-alt'
         }
-        
-        gap-3 shadow-inner rounded-xl p-2`}
+         
+        gap-3 shadow-inner rounded-xl p-2 2xl:p-4`}
       >
         {isEnteringAmount ? (
           <Amount
