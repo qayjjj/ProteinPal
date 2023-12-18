@@ -1,6 +1,7 @@
 import React from 'react'
 import Navigation from '../../components/Navigation/Navigation'
 import veggies from '../../assets/images/veggies.png'
+import Footer from '../../components/Footer/Footer'
 
 export default function About() {
 
@@ -12,11 +13,8 @@ export default function About() {
       About
     </h1>
 
-    <section className="bg-background-alt text-header rounded-lg px-8 py-8 m-auto
-      lg:w-3/5 m:w-3/4 sm:w-11/12 w-11/12 min-h-[12rem] lg:my-10 md:my-8 sm:my-4 my-4">
-
-        <img src={veggies} alt="vegetables in a basket" 
-        className="lg:w-1/2 md:w-3/4 sm:w-full w-full m-auto"/>
+    <section className="bg-background-alt text-header rounded-lg mx-auto lg:p-8 md:p-6 sm:p4 p-4
+      lg:w-3/5 m:w-3/5 sm:w-10/12 w-11/12 min-h-[12rem] lg:my-10 md:my-8 sm:my-4 my-4">
 
         <div className="w-full text-header lg:text-base md:text-base sm:text-sm text-sm">
          <p>
@@ -46,7 +44,9 @@ export default function About() {
         </div>
     </section>
 
-
+    <div className="bottom-0 mt-10 w-full">   
+    <Footer/>
+    </div> 
   </div>
 
 )}
