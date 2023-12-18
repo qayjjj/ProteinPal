@@ -13,13 +13,13 @@ export default function Ingredients() {
   const [selectedIngredient, setSelectedIngredient] = useState({})
   const [searched, setSearched] = useState(false)
 
-
   const [ingredientInfo, setIngredientInfo] = useState({})
   const [ingredientNutrients, setIngredientNutrients] = useState([])
   const [ingredientUnit, setIngredientUnit] = useState('')
 
   const [showModal, setShowModal] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
+  const [isLoadingModal, setIsLoadingModal] = useState(false)
 
   const fetchSearchData = async () => {
     setIsLoading(true)
@@ -27,7 +27,6 @@ export default function Ingredients() {
       const data = await getIngredients(searchValue, 100)
       setSearchResults(data.results)
       setIsLoading(false)
-
     } catch (error) {
       console.error('Error fetching search results:', error)
       alert('There was an error processing your request, try again shortly.')
@@ -35,13 +34,14 @@ export default function Ingredients() {
   }
 
   const fetchSingleIngredientData = async (id) => {
+    setIsLoadingModal(true)
     try {
       // Try getting ingredient info for 100g serving
       const ingredientData = await getIngredientInformation(id, 100, 'g')
       setIngredientInfo(ingredientData)
       setIngredientNutrients(ingredientData.nutrition?.nutrients)
       setIngredientUnit('g')
-
+      setIsLoadingModal(false)
     } catch (error) {
       // If the ingredient does not have g in the measure, find out which measures it has
       try {
@@ -56,13 +56,14 @@ export default function Ingredients() {
           unit,
         )
         setIngredientNutrients(ingredientDataWithNutrition.nutrition?.nutrients)
+        setIsLoadingModal(false)
       } catch (error) {
         console.error('Error fetching search results:', error)
         alert('There was an error processing your request, try again shortly.')
       }
     }
   }
-
+  console.log(isLoadingModal)
   const handleCardOnClick = (item) => {
     setSelectedIngredient({ id: item.id, name: item.name, image: item.image })
     setShowModal(true)
@@ -88,15 +89,13 @@ export default function Ingredients() {
   return (
     <div className="bg-background h-screen w-screen">
       <Navigation />
-
+      <h1 className="text-center text-xl sm:text-2xl md:text-3xl xl:text-4xl 2xl:text-5xl 3xl:text-6xl font-bold text-header mt-10 lg:mt-16">
+        Search Ingredients
+      </h1>
       {/* Title */}
-      {searchValue && searchResults.length > 0 && searched && !isLoading ? (
-        <h1 className="m-auto text-xl sm:text-2xl md:text-3xl xl:text-4xl 2xl:text-5xl 3xl:text-6xl text-body-bold pt-12 text-center">
-          Search results for <b>{searchValue}</b>
-        </h1>
-      ) : (
-        <h1 className="text-center text-xl sm:text-2xl md:text-3xl xl:text-4xl 2xl:text-5xl 3xl:text-6xl font-bold text-header mt-10 lg:mt-16">
-          Search Ingredient Database
+      {searchValue && searchResults.length > 0 && searched && !isLoading && (
+        <h1 className="m-auto mt-2 lg:mt-4 2xl:mt-8 md:text-lg xl:text-xl 2xl:text-2xl 3xl:text-3xl text-body-bold text-center">
+          results for <b>{searchValue}</b>
         </h1>
       )}
 
@@ -114,16 +113,16 @@ export default function Ingredients() {
       </div>
 
       {!searchValue && searchResults.length < 1 && (
-      <h2 className="text-center text-xs sm:text-sm xl:text-base 2xl:text-xl text-body mt-2"> 
-        Enter ingredient keyword
-      </h2>)
-      }
+        <h2 className="text-center text-xs sm:text-sm xl:text-base 2xl:text-xl text-body mt-2">
+          Enter ingredient keyword
+        </h2>
+      )}
 
       {searchValue && searchResults.length === 0 && !isLoading && searched && (
         <h2 className="text-center text-sm sm:text-sm md:text-base xl:text-base 2xl:text-lg 3xl:text-lg text-body-bold mt-10 lg:mt-16">
           No results found for <b>{searchValue}</b>
-        </h2>)
-      }
+        </h2>
+      )}
 
       {/* Search Results */}
       {isLoading ? (
@@ -131,19 +130,19 @@ export default function Ingredients() {
           <img src={loading} className="w-8" />
         </div>
       ) : (
-      <div className="w-full py-8 px-10 lg:py-20 lg:px-20 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2 lg:gap-4">
-        {searchResults?.map((item) => (
-          <IngredientCard
-            name={item.name}
-            image={item.image}
-            backgroundColor="bg-background-bright"
-            headerTextColor="text-background"
-            bodyTextColor="text-body-bold"
-            classNames="ingredients-page-item"
-            onClick={() => handleCardOnClick(item)}
-          />
-        ))}
-      </div>
+        <div className="w-full py-8 px-10 lg:py-12 lg:px-20 2xl:px-32 3xl:px-60 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2 lg:gap-4">
+          {searchResults?.map((item) => (
+            <IngredientCard
+              name={item.name}
+              image={item.image}
+              backgroundColor="bg-background-bright"
+              headerTextColor="text-background"
+              bodyTextColor="text-body-bold"
+              classNames="ingredients-page-item"
+              onClick={() => handleCardOnClick(item)}
+            />
+          ))}
+        </div>
       )}
 
       {/* Modal */}
@@ -153,6 +152,7 @@ export default function Ingredients() {
         closeModal={handleCloseModal}
         nutrients={ingredientNutrients}
         ingredientUnit={ingredientUnit}
+        isLoadingModal={isLoadingModal}
       />
     </div>
   )
