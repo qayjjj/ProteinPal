@@ -11,6 +11,8 @@ export default function Ingredients() {
   const [searchValue, setSearchValue] = useState('')
   const [searchResults, setSearchResults] = useState([])
   const [selectedIngredient, setSelectedIngredient] = useState({})
+  const [searched, setSearched] = useState(false)
+
 
   const [ingredientInfo, setIngredientInfo] = useState({})
   const [ingredientNutrients, setIngredientNutrients] = useState([])
@@ -25,6 +27,7 @@ export default function Ingredients() {
       const data = await getIngredients(searchValue, 100)
       setSearchResults(data.results)
       setIsLoading(false)
+
     } catch (error) {
       console.error('Error fetching search results:', error)
       alert('There was an error processing your request, try again shortly.')
@@ -74,11 +77,12 @@ export default function Ingredients() {
   const handleSearch = (event) => {
     event.preventDefault()
     fetchSearchData()
+    setSearched(true)
   }
 
   const updateSearch = (event) => {
     setSearchValue(event.target.value)
-    setSearchResults([])
+    setSearched(false)
   }
 
   return (
@@ -86,18 +90,13 @@ export default function Ingredients() {
       <Navigation />
 
       {/* Title */}
-      {/* <h1 className="text-center text-xl sm:text-2xl md:text-3xl xl:text-4xl 2xl:text-5xl 3xl:text-6xl font-bold text-header mt-10">
-        Search Ingredient Database
-      </h1> */}
-
-      {searchValue && searchResults.length !== 0 && !isLoading && (
+      {searchValue && searchResults.length > 0 && searched && !isLoading ? (
         <h1 className="m-auto text-xl sm:text-2xl md:text-3xl xl:text-4xl 2xl:text-5xl 3xl:text-6xl text-body-bold pt-12 text-center">
           Search results for <b>{searchValue}</b>
         </h1>
-      )}
-      {!searchValue && !isLoading && (
+      ) : (
         <h1 className="text-center text-xl sm:text-2xl md:text-3xl xl:text-4xl 2xl:text-5xl 3xl:text-6xl font-bold text-header mt-10 lg:mt-16">
-          Search Vegetarian Recipes
+          Search Ingredient Database
         </h1>
       )}
 
@@ -114,15 +113,13 @@ export default function Ingredients() {
         </form>
       </div>
 
-      <h2 className="text-center text-xs sm:text-sm xl:text-base 2xl:text-xl text-body mt-1">
-        {!searchValue && searchResults.length < 1 && (
-          <span className="text-background-bright">
-            Enter ingredient keyword
-          </span>
-        )}
-      </h2>
+      {!searchValue && searchResults.length < 1 && (
+      <h2 className="text-center text-xs sm:text-sm xl:text-base 2xl:text-xl text-body mt-2"> 
+        Enter ingredient keyword
+      </h2>)
+      }
 
-      {searchValue && searchResults.length === 0 && !isLoading && (
+      {searchValue && searchResults.length === 0 && !isLoading && searched && (
         <h2 className="text-center text-sm sm:text-sm md:text-base xl:text-base 2xl:text-lg 3xl:text-lg text-body-bold mt-10 lg:mt-16">
           No results found for <b>{searchValue}</b>
         </h2>)
