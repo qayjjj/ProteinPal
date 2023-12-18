@@ -7,6 +7,7 @@ import { getVegRecipes } from '../../callApi'
 import search from '../../assets/icons/search.svg'
 import loading from '../../assets/icons/loading.gif'
 import Footer from '../../components/Footer/Footer'
+import { useNavigate } from 'react-router-dom'
 
 export default function Recipes() {
   const [isLoading, setIsLoading] = useState(false)
@@ -14,6 +15,8 @@ export default function Recipes() {
   const [keyword, setKeyword] = useState('')
   const location = useLocation()
   const [searchValue, setSearchValue] = useState('')
+  const navigate = useNavigate()
+  
 
   useEffect(() => {
     searchRecipes()
@@ -30,6 +33,7 @@ export default function Recipes() {
         const data = await getVegRecipes({ query: userKeyword })
         setRecipes(data.results)
         setIsLoading(false)
+
       } else {
         var randOffset = Math.round(Math.random() * 800)
         const data = await getVegRecipes({ offset: randOffset })
@@ -45,14 +49,19 @@ export default function Recipes() {
     setSearchValue(e.target.value)
   }
 
-  console.log(recipes)
+  const handleSearchSubmit = (event) => {
+    event.preventDefault()
+    navigate(`/recipes?q=${searchValue}`)
+    setSearchValue('')
+  }
+
 
   return (
     <div className="bg-background">
       <Navigation />
-      {keyword && (
+      {keyword && recipes.length !== 0 && (
         <h1 className="m-auto text-lg text-body-bold pt-12 text-center">
-          Search results for <span className="font-bold">{keyword}</span>
+          Search results for <b>{keyword}</b>
         </h1>
       )}
       {!keyword && (
@@ -62,13 +71,20 @@ export default function Recipes() {
       )}
       <div className="mx-auto mt-6 lg:mt-10 2xl:mt-12  border-[1px] h-8 lg:h-12 w-3/4 lg:w-2/3 2xl:border-2 bg-background rounded-md flex items-center p-2">
         <img src={search} alt="Search Icon" className="w-6 h-6" />
-        <input
-          type="text"
-          className="w-full outline-none bg-background ml-2 text-xs lg:text-sm 2xl:text-base 3xl:text-lg"
-          onChange={(e) => handleSearch(e)}
-          value={searchValue}
-        />
+        <form onSubmit={handleSearchSubmit}>
+          <input
+            type="text"
+            className="w-full outline-none bg-background ml-2 text-xs lg:text-sm 2xl:text-base 3xl:text-lg"
+            onChange={(e) => handleSearch(e)}
+            value={searchValue}
+          />
+        </form>
       </div>
+      {keyword && recipes.length === 0 && (
+        <h2 className="text-center text-sm sm:text-sm md:text-base xl:text-base 2xl:text-lg 3xl:text-lg text-body-bold mt-10 lg:mt-16">
+          No results found for <b>{keyword}</b>
+        </h2>)
+      }
       {isLoading ? (
         <div className="grid place-items-center w-full h-[30rem] lg:h-[40rem]">
           <img src={loading} className="w-8" />
