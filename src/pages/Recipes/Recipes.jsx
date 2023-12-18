@@ -28,10 +28,21 @@ export default function Recipes() {
       const userKeyword = queryParams.get('q')
       setKeyword(userKeyword)
 
+      // If a user typed in a keyword to search
       if (userKeyword) {
-        const data = await getVegRecipes({ query: userKeyword })
-        setRecipes(data.results)
-        setIsLoading(false)
+        // If user's keyword contains a comma, assume they are ingredients, make sure each ingredient is included
+        if (userKeyword.includes(',')) {
+          const data = await getVegRecipes({ query: userKeyword, includeIngredients: userKeyword})
+          setRecipes(data.results)
+          setIsLoading(false)
+        }
+        // If it is just a keyword with no comma, regular search
+        else {
+          const data = await getVegRecipes({ query: userKeyword })
+          setRecipes(data.results)
+          setIsLoading(false)
+        }
+      // No keyword, Regular explore page data with random recipes
       } else {
         var randOffset = Math.round(Math.random() * 800)
         const data = await getVegRecipes({ offset: randOffset })
