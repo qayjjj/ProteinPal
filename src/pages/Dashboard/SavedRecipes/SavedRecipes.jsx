@@ -59,7 +59,7 @@ export default function SavedRecipes() {
         }`}
       >
         {!isLoading && recipes.length === 0 ? (
-          <p className="place-self-center text-background-bright">
+          <p className="place-self-center text-background-bright text-xs md:text-sm lg:text-lg xl:text-xl 2xl:text-2xl 3xl:text-3xl">
             Save a recipe and find it here!
           </p>
         ) : isLoading ? (

@@ -5,6 +5,7 @@ import Navigation from '../../components/Navigation/Navigation'
 import SignOut from '../../components/SignOut/SignOut'
 import { auth } from '../../Firebase'
 import { useNavigate } from 'react-router-dom'
+import Footer from '../../components/Footer/Footer'
 
 export default function Dashboard() {
   const [userEmail, setUserEmail] = useState('')
@@ -36,6 +37,7 @@ export default function Dashboard() {
         <MyRecipes />
         <SavedRecipes />
       </div>
+      <Footer />
     </div>
   )
 }
