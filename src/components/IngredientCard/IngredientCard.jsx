@@ -3,17 +3,17 @@ import './index.css'
 export default function IngredientCard({
   backgroundColor,
   headerTextColor,
-  bodyTextColor,
+  classNames,
   name,
   image,
   onClick,
 }) {
   return (
     <div
-      className={`p-4 text-left rounded-xl ${backgroundColor} cursor-pointer`}
+      className={`p-2 lg:py-3 xl:p-4 text-left rounded-lg lg:rounded-xl ${backgroundColor} ${classNames} cursor-pointer`}
       onClick={onClick}
     >
-      <div className="w-full h-28 grid place-items-center bg-white rounded-md">
+      <div className="w-full grid place-items-center bg-white rounded h-[75%] overflow-hidden">
         <img
           src={`https://spoonacular.com/cdn/ingredients_100x100/${image}`}
           alt="Ingredient image"
@@ -21,7 +21,7 @@ export default function IngredientCard({
         />
       </div>
       <p
-        className={`${headerTextColor} mt-2 text-sm font-bold truncate ingredient-name`}
+        className={`${headerTextColor} mt-2 text-xs font-bold truncate ingredient-name`}
       >
         {name}
       </p>

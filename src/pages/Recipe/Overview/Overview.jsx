@@ -64,7 +64,7 @@ function Overview({ recipeId, recipeName, recipeImage, servings, dietTags, ready
   return (
     <div>
 
-      <div className="flex w-full m-auto justify-between h-76 flex-wrap">
+      <div className="flex w-full m-auto h-76 flex-wrap justify-center">
 
         {/* Recipe Picture */}
         <img src={recipeImage} alt="Recipe picture" className="h-full lg:w-3/5 md:w-3/4 sm:w-full w-full rounded-lg" />

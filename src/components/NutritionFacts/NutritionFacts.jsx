@@ -289,24 +289,24 @@ const NutritionFacts = ({ nutritionData, servingRatio }) => {
       : 0
 
   return (
-    <div className="flex flex-col bg-background-alt w-[21rem] h-min px-6 py-3 rounded-lg">
-      <h1 className="text-3xl text-body-bold font-bold mt-8">
+    <div className="flex flex-col bg-background-alt mt-8 w-full sm:w-2/3 md:w-1/2 lg:w-1/3 xl:w-[25%] h-min px-6 py-3 rounded-lg">
+      <h1 className="text-xl sm:text-2xl lg:text-3xl 2xl:text-4xl 3xl:text-5xl  text-body-bold font-bold mt-4 lg:mt-8">
         Nutrition Facts
       </h1>
 
       {/* Serving size & Calories */}
       <div className="border-t-8 border-b-4 border-highlight mt-4 py-2">
-        <div className="flex text-body-bold font-semibold">
+        <div className="flex text-body-bold font-semibold sm:text-lg lg:text-xl 2xl:text-2xl 3xl:text-3xl">
           <h2>Amount Per Serving</h2>
         </div>
-        <div className="flex items-center justify-between text-body-bold font-bold text-3xl">
+        <div className="flex items-center justify-between text-body-bold font-bold text-xl sm:text-2xl lg:text-3xl 2xl:text-4xl 3xl:text-5xl ">
           <h2>Calories</h2>
           <span>{sumCalories}</span>
         </div>
       </div>
 
       {/* Nutrition Details */}
-      <div>
+      <div className="text-xs sm:text-sm md:text-base 2xl:text-lg">
         <p className="text-body-bold text-xs font-semibold text-right p-1">
           %Daily Value*
         </p>
@@ -429,7 +429,7 @@ const NutritionFacts = ({ nutritionData, servingRatio }) => {
           </span>
         </div>
 
-        <p className="mt-4 text-body-bold text-[0.7rem] text-center p-1">
+        <p className="mt-4 text-body-bold text-[0.6rem] md:text-[0.7rem] text-center p-1">
           * Percent Daily Values are based on a 2000 calorie diet
         </p>
       </div>

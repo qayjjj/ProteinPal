@@ -9,7 +9,7 @@ import { auth } from '../../../Firebase'
 export default function MyRecipes() {
   const [isLoading, setIsLoading] = useState(true)
   const [recipes, setRecipes] = useState([])
-  const [id, setId] = useState("")
+  const [id, setId] = useState('')
 
   useEffect(() => {
     fetchRecipes()
@@ -62,23 +62,25 @@ export default function MyRecipes() {
         </button>
       </div>
       <div
-        className={`shadow-inner rounded-lg mt-6 xl:mt-10 h-60 md:h-80 lg:h-96 xl:h-[30rem] 2xl:h-[34rem] w-full p-4 bg-background-alt ${isLoading ? 'grid' : 'overflow-y-auto'
-          }`}
+        className={`shadow-inner rounded-lg mt-6 xl:mt-10 h-60 md:h-80 lg:h-96 xl:h-[30rem] 2xl:h-[34rem] w-full p-4 bg-background-alt ${
+          isLoading ? 'grid' : 'overflow-y-auto'
+        }`}
       >
         <div
-          className={`w-full ${isLoading
+          className={`w-full ${
+            isLoading
               ? 'grid'
               : recipes.length < 1
-                ? 'grid h-full'
-                : 'flex flex-wrap gap-2'
-            } `}
+              ? 'grid h-full'
+              : 'flex flex-wrap gap-2'
+          } `}
         >
           {isLoading ? (
             <div className="grid place-items-center w-full h-56 md:h-72 lg:h-80 xl:h-[29rem] 2xl:h-[33rem] ">
               <img src={loading} className="w-10" alt="Loading" />
             </div>
           ) : recipes.length === 0 ? (
-            <div className="grid place-items-center text-background-bright">
+            <div className="grid place-items-center text-background-bright text-xs md:text-sm lg:text-lg xl:text-xl 2xl:text-2xl 3xl:text-3xl">
               <span>You don't have any recipes yet!</span>
             </div>
           ) : (
