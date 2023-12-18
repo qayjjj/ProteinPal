@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Navigation from '../../components/Navigation/Navigation'
-// import Footer from '../../components/Footer/Footer'
+import Footer from '../../components/Footer/Footer'
 import AnimatedInput from '../../components/Input/AnimatedInput'
 import { auth } from '../../Firebase'
 import { createUserWithEmailAndPassword } from 'firebase/auth'
@@ -75,7 +75,7 @@ const SignUp = () => {
         </div>
       </div>
 
-      {/* <Footer /> */}
+      <Footer />
     </div>
   )
 }
