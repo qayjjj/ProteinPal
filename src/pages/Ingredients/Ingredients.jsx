@@ -89,10 +89,12 @@ export default function Ingredients() {
   return (
     <div className="bg-background h-screen w-screen">
       <Navigation />
+
+      {/* Title */}
       <h1 className="text-center text-xl sm:text-2xl md:text-3xl xl:text-4xl 2xl:text-5xl 3xl:text-6xl font-bold text-header mt-10 lg:mt-16">
         Search Ingredients
       </h1>
-      {/* Title */}
+
       {searchValue && searchResults.length > 0 && searched && !isLoading && (
         <h1 className="m-auto mt-2 lg:mt-4 2xl:mt-8 md:text-lg xl:text-xl 2xl:text-2xl 3xl:text-3xl text-body-bold text-center">
           results for <b>{searchValue}</b>
