@@ -1,7 +1,7 @@
 import React from 'react';
 import close from '../../../assets/icons/close.svg'
 
-const IngredientModal = ({ isOpen, closeModal, ingredientData, nutrients, ingredientUnit }) => {
+const IngredientModal = ({ name, isOpen, closeModal, nutrients, ingredientUnit }) => {
 
   /**
    * Helper to find the object corresponding to the nutrition item since 
@@ -35,7 +35,7 @@ const IngredientModal = ({ isOpen, closeModal, ingredientData, nutrients, ingred
           <div className="justify-center align-center mt-0">
 
             {/* Ingredient Name */}
-            <h2 className="lg:text-4xl md:text-3xl sm:text-2xl text-2xl text-center font-bold text-header">{ingredientData?.name} </h2>
+            <h2 className="lg:text-4xl md:text-3xl sm:text-2xl text-2xl text-center font-bold text-header">{name}</h2>
             
             {/* Nutrition Container */}
             <div className="flex justify-center mx-auto w-full mt-4 text-header lg:text-base md:text-base sm:text-sm text-sm flex-wrap">
