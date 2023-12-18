@@ -30,7 +30,7 @@ const LogIn = () => {
   }
 
   return (
-    <div className="bg-background">
+    <div className="bg-background h-screen">
       <Navigation />
       <div className="w-2/3 py-10 md:w-1/3 mx-auto md:h-44 md:pt-20">
         <h1 className="text-xl md:text-4xl font-bold text-body-bold">
