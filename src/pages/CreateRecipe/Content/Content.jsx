@@ -9,6 +9,7 @@ import { getIngredientInformation, getIngredients } from '../../../callApi'
 import { auth, db } from '../../../Firebase'
 import { collection, addDoc, doc, setDoc, arrayUnion } from 'firebase/firestore'
 import convert from 'convert-units';
+import { useNavigate } from 'react-router-dom'
 
 const Content = () => {
   const [name, setName] = useState('New Recipe')
@@ -27,6 +28,7 @@ const Content = () => {
   const [weightUnit, setWeightUnit] = useState('g')
   const [servingCount, setServingCount] = useState(1)
   const [servingType, setServingType] = useState('count')
+  const navigate = useNavigate()
 
   const handleNameChange = (e) => {
     let newName = ''
@@ -171,6 +173,7 @@ const Content = () => {
 
         console.log('Document written with ID: ', docRef.id)
         alert("Successfully Saved Recipe!")
+        navigate('/dashboard')
       } else {
         console.error('User not authenticated.')
       }
