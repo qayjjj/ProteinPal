@@ -8,6 +8,7 @@ import Recipes from './pages/Recipes/Recipes'
 import Dashboard from './pages/Dashboard/Dashboard'
 import CreateRecipe from './pages/CreateRecipe/CreateRecipe'
 import Ingredients from './pages/Ingredients/Ingredients'
+import CustomRecipe from './pages/CustomRecipe/CustomRecipe'
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/create" element={<CreateRecipe />} />
         <Route path="/ingredients" element={<Ingredients/>} />
+        <Route path="/customrecipe" element={<CustomRecipe/>} />
       </Routes>
     </BrowserRouter>
   )
