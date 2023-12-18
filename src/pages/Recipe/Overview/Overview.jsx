@@ -1,123 +1,72 @@
 import React, { useEffect, useState } from 'react'
-import PropTypes from 'prop-types'
 import saveIcon from '../../../assets/icons/save.svg'
 import savedIcon from '../../../assets/icons/saved.svg'
-import dot from '../../../assets/icons/dot.svg'
 import tag from '../../../assets/icons/tag.svg'
-import { auth, db } from '../../../Firebase'
-import { setDoc, getDoc, doc, arrayUnion, arrayRemove } from 'firebase/firestore'
 
-function Overview({ recipeId, recipeName, recipeImage, servings, dietTags, readyInMinutes }) {
-  const [isSaved, setIsSaved] = useState(false)
-
-  useEffect(() => {
-    const fetchSavedStatus = async () => {
-      const user = auth.currentUser;
-      if (user) {
-        const docRef = doc(db, user.uid, 'savedRecipes');
-        const docSnap = await getDoc(docRef);
-        if (docSnap.exists()) {
-          const data = docSnap.data();
-          if (data.recipeIds.includes(recipeId)) {
-            setIsSaved(true);
-          }
-        }
-      }
-    };
-
-    fetchSavedStatus();
-  }, [recipeId]);
-
-  const handleSaveRecipe = async () => {
-    const user = auth.currentUser;
-    if (user) {
-      try {
-        const docRef = doc(db, user.uid, 'savedRecipes');
-        const docSnap = await getDoc(docRef);
-
-        if (docSnap.exists()) {
-          const data = docSnap.data();
-          if (data.recipeIds.includes(recipeId)) {
-            // in array, remove
-            await setDoc(docRef, { recipeIds: arrayRemove(recipeId) }, { merge: true });
-            console.log('RecipeId removed: ', recipeId);
-          } else {
-            // not in array, add
-            await setDoc(docRef, { recipeIds: arrayUnion(recipeId) }, { merge: true });
-            console.log('RecipeId added: ', recipeId);
-          }
-        } else {
-          // doc dne create
-          await setDoc(docRef, { recipeIds: [recipeId] });
-          console.log('Document created with recipeId: ', recipeId);
-        }
-
-        setIsSaved((prev) => !prev);
-      } catch (error) {
-        console.error('Error adding or removing recipeId: ', error);
-      }
-    } else {
-      console.error('User not authenticated.');
-    }
-  };
-
+function Overview({
+  recipeId,
+  recipeName,
+  recipeImage,
+  servings,
+  dietTags,
+  readyInMinutes,
+  isSaved,
+  handleSaveRecipe,
+}) {
   return (
-    <div>
+    <div className="flex w-full flex-wrap justify-center">
+      {/* Recipe Picture */}
+      <img
+        src={recipeImage}
+        alt="Recipe picture"
+        className="h-full lg:w-4/5 md:w-3/4 w-full rounded-lg"
+      />
 
-      <div className="flex w-full m-auto h-76 flex-wrap justify-center">
-
-        {/* Recipe Picture */}
-        <img src={recipeImage} alt="Recipe picture" className="h-full lg:w-3/5 md:w-3/4 sm:w-full w-full rounded-lg" />
-
-        {/* Recipe Title and Save Button*/}
-        <div className="w-full lg:w-3/5 md:w-3/4 sm:w-full lg:mx-4 my-4 mt-10
-        flex lg:flex-nowrap md:flex-wrap sm:flex-wrap flex-wrap">
-
-            {/* Title */}
-            <div className="flex-row lg:w-10/12 md:w-10/12 sm:w-full w-full">
-              <h1 className="lg:text-5xl md:text-4xl sm:text-2xl text-2xl font-bold text-header">{recipeName}</h1>
-              <p className="lg:mt-6 md:mt-4 sm:mt-3 mt-3 text-body-bold 
-              lg:text-xl md:text-xl sm:text-base text-base">Makes {servings} servings &emsp; | &emsp; Ready in {readyInMinutes} minutes</p>
-            </div>
-
-            {/* Save Button */}
-            <div className="flex-row min-w-[20px] lg:w-3/10 md:w-2/12 sm:w-2/12 w-2/12 lg:ml-12 md:ml-0 sm:mt-5 mt-5 items-right">
-              <img
-                src={isSaved ? savedIcon : saveIcon}
-                className="lg:w-12 lg:h-12 md:w-12 md:h-12 sm:w-8 sm:h-8 w-8 h-8 cursor-pointer"
-                onClick={handleSaveRecipe}
-              />
-            </div>
-
+      {/* Recipe Title and Save Button*/}
+      <div
+        className="w-full lg:w-4/5 md:w-3/4 lg:mx-4 mt-4 lg:mt-8
+        flex lg:flex-nowrap flex-wrap"
+      >
+        {/* Title */}
+        <div className="flex-row lg:w-10/12 md:w-10/12 sm:w-full w-full">
+          <h1 className="3xl:text-6xl lg:text-5xl md:text-4xl sm:text-2xl text-2xl font-bold text-header">
+            {recipeName}
+          </h1>
+          <p
+            className="lg:mt-6 md:mt-4 sm:mt-3 mt-3 text-body-bold 
+              2xl:text-3xl xl:text-2xl md:text-xl text-sm"
+          >
+            Makes {servings} servings&emsp;|&emsp;Ready in {readyInMinutes}{' '}
+            minutes
+          </p>
         </div>
 
-        {/* Labels */}
-        <div className="p-2 text-body-bold lg:text-lg md:text-base sm:text-sm text-sm
-        w-full lg:w-3/5 md:w-3/4 sm:w-full lg:mx-4 lg:mt-10 md:mt-10 sm:mt-3 mt-3 lg:my-4 md:my-4 sm:my-2 my-0">
-          <span className="leading-10 whitespace-nowrap mr-6">                
-            <img src={tag} className="px-0 lg:w-8 lg:h-8 md:w-8 md:h-8 sm:w-6 sm:h-6 w-6 h-6 inline" />
-          </span>
-          {dietTags.map((item, index) => {
-            return (
-              <span className="lg:leading-10 md:leading-8 sm:leading-4 leading-4 whitespace-nowrap mr-5">
-                {index !== 0 &&
-                  <img src={dot} className="px-0 w-8 h-8 inline" />
-                }
-                <span className="whitespace-nowrap">{item}</span>
-              </span>
-            )
-          })}
+        {/* Save Button */}
+        <div className="hidden lg:block relative w-1/5">
+          <img
+            src={isSaved ? savedIcon : saveIcon}
+            className="w-10 2xl:w-12 3xl:w-16 cursor-pointer absolute right-0 top-2"
+            onClick={handleSaveRecipe}
+          />
         </div>
+      </div>
 
+      {/* Labels */}
+      <div
+        className="text-body-bold 3xl:text-3xl 2xl:text-2xl xl:text-xl lg:text-lg md:text-base text-xs text-highlight
+        w-full lg:w-4/5 md:w-3/4 sm:w-full lg:mx-4 md:mt-10 mt-4"
+      >
+        {dietTags.map((item, index) => {
+          return (
+            <span className="lg:leading-10 md:leading-8 leading-6 whitespace-nowrap mr-3">
+              <img src={tag} className="inline w-4 md:w-6 2xl:w-8" />
+              <span className="whitespace-nowrap ml-1 ">{item}</span>
+            </span>
+          )
+        })}
       </div>
     </div>
   )
 }
-Overview.propTypes = {
-  recipeName: PropTypes.string,
-  recipeImage: PropTypes.string,
-  servings: PropTypes.number,
-  dietTags: PropTypes.array,
-  readyInMinutes: PropTypes.number
-}
+
 export default Overview
