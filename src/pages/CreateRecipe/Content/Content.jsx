@@ -156,6 +156,7 @@ const Content = () => {
       if (user) {
         const docRef = await addDoc(collection(db, user.uid), {
           recipeName: name,
+          ingredientList: ingredientList,
           nutritionData: nutritionData,
           servingRatio: servingRatio,
           createdBy: user.uid,

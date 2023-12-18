@@ -14,7 +14,7 @@ function RecipeCard({
 
   const handleClick = (event) => {
     event.preventDefault()
-    navigate(`/recipe?id=${recipeId}`)
+    navigate(`/recipe?id=${recipeId}`);
   }
 
   return (

@@ -9,6 +9,7 @@ import { auth } from '../../../Firebase'
 export default function MyRecipes() {
   const [isLoading, setIsLoading] = useState(true)
   const [recipes, setRecipes] = useState([])
+  const [id, setId] = useState("")
 
   useEffect(() => {
     fetchRecipes()
@@ -31,7 +32,7 @@ export default function MyRecipes() {
           const recipeRef = doc(firestore, user.uid, coll)
           const recipeSnap = await getDoc(recipeRef)
           if (recipeSnap.exists()) {
-            recipesData.push(recipeSnap.data())
+            recipesData.push([recipeSnap.data(), coll])
           }
         }
         setRecipes(recipesData)
@@ -61,18 +62,16 @@ export default function MyRecipes() {
         </button>
       </div>
       <div
-        className={`shadow-inner rounded-lg mt-6 xl:mt-10 h-60 md:h-80 lg:h-96 xl:h-[30rem] 2xl:h-[34rem] w-full p-4 bg-background-alt ${
-          isLoading ? 'grid' : 'overflow-y-auto'
-        }`}
+        className={`shadow-inner rounded-lg mt-6 xl:mt-10 h-60 md:h-80 lg:h-96 xl:h-[30rem] 2xl:h-[34rem] w-full p-4 bg-background-alt ${isLoading ? 'grid' : 'overflow-y-auto'
+          }`}
       >
         <div
-          className={`w-full ${
-            isLoading
+          className={`w-full ${isLoading
               ? 'grid'
               : recipes.length < 1
-              ? 'grid h-full'
-              : 'flex flex-wrap gap-2'
-          } `}
+                ? 'grid h-full'
+                : 'flex flex-wrap gap-2'
+            } `}
         >
           {isLoading ? (
             <div className="grid place-items-center w-full h-56 md:h-72 lg:h-80 xl:h-[29rem] 2xl:h-[33rem] ">
@@ -84,9 +83,11 @@ export default function MyRecipes() {
             </div>
           ) : (
             recipes.map((recipe) => (
-              <div className="border-[1px] h-8 md:h-10 flex items-center rounded-lg py-1 px-2 md:px-3 xl:h-12 xl:py-2 xl:px-4 bg-background-bright text-background hover:shadow-lg hover:cursor-pointer text-sm md:text-base lg:text-lg 2xl:text-xl 3xl:text-2xl">
-                {recipe.recipeName}
-              </div>
+              <Link to={`/customrecipe?id=${recipe[1]}`}>
+                <div className="border-[1px] h-8 md:h-10 flex items-center rounded-lg py-1 px-2 md:px-3 xl:h-12 xl:py-2 xl:px-4 bg-background-bright text-background hover:shadow-lg hover:cursor-pointer text-sm md:text-base lg:text-lg 2xl:text-xl 3xl:text-2xl">
+                  {recipe[0].recipeName}
+                </div>
+              </Link>
             ))
           )}
         </div>
