@@ -43,8 +43,6 @@ export default function About() {
          </p>
         </div>
     </section>
-
-    <Footer/>
   </div>
 
 )}
