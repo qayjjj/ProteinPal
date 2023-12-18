@@ -139,7 +139,9 @@ function Navigation() {
         <h2>
           <Link to="/ingredients">Ingredients</Link>
         </h2>
-        <h2>About</h2>
+        <h2>
+          <Link to="/about">About</Link>
+        </h2>
       </div>
 
       {/* Search & Login */}
