@@ -16,11 +16,11 @@ function Details({
   console.log(weightPerServing)
 
   return (
-    <div className="flex w-full mt-10 flex-wrap m-auto">
+    <div className="flex w-full mt-10 flex-wrap m-auto justify-center">
 
         {/* Ingredients */}
         <section className="bg-background-alt text-header rounded-lg px-8 py-8 
-        lg:w-3/5 m:w-full sm:w-full w-full min-h-[12rem] lg:my-10 md:my-8 sm:my-4 my-4">
+        lg:w-3/5 m:w-3/4 sm:w-full w-full min-h-[12rem] lg:my-10 md:my-8 sm:my-4 my-4">
           <h2 className="lg:text-4xl md:text-3xl sm:text-2xl text-2xl font-bold text-header">Ingredients</h2>
           <div className="mt-6 text-header lg:text-base md:text-base sm:text-sm text-sm">
             {ingredients?.map((item, index) => (
@@ -36,7 +36,7 @@ function Details({
 
         {/* Instructions */}
         <section className="bg-transparent min-h-[12rem] rounded-lg px-8 py-8
-         lg:w-3/5 m:w-full sm:w-full w-full lg:my-10 md:my-8 sm:my-4 my-4">
+         lg:w-3/5 m:w-3/4 sm:w-full w-full lg:my-10 md:my-8 sm:my-4 my-4">
           <h2 className="lg:text-4xl md:text-3xl sm:text-2xl text-2xl font-bold text-body">Instructions</h2>
           <ol className="mt-6 text-background-header lg:text-base md:text-base sm:text-sm text-sm">
             {recipeInstructions?.[0]?.steps?.map((item, index) => (
@@ -49,7 +49,7 @@ function Details({
 
       {/* Nutrition Information */}
       <section className="bg-transparent text-header rounded-lg px-8 py-8
-        lg:w-3/5 m:w-full sm:w-full w-full min-h-[12rem] lg:my-10 md:my-8 sm:my-4 my-4">
+        lg:w-3/5 m:w-3/4 sm:w-full w-full min-h-[12rem] lg:my-10 md:my-8 sm:my-4 my-4">
           <h2 className="lg:text-4xl md:text-3xl sm:text-2xl text-2xl font-bold text-header">Nutrition Facts </h2>
           <div className="flex w-full mt-6 text-header lg:text-base md:text-base sm:text-sm text-sm lg:flex-nowrap md:flex-nowrap sm:flex-wrap flex-wrap">
               {/* Calories */}
