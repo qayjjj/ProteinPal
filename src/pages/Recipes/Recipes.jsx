@@ -29,6 +29,7 @@ export default function Recipes() {
       if (userKeyword) {
         const data = await getVegRecipes({ query: userKeyword })
         setRecipes(data.results)
+        setIsLoading(false)
       } else {
         var randOffset = Math.round(Math.random() * 800)
         const data = await getVegRecipes({ offset: randOffset })
