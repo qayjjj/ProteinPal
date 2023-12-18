@@ -5,6 +5,7 @@ import IngredientCard from '../../components/IngredientCard/IngredientCard'
 import search from '../../assets/icons/search.svg'
 import { getIngredientInformation, getIngredients } from '../../callApi'
 import IngredientModal from './IngredientModal/IngredientModal'
+import loading from '../../assets/icons/loading.gif'
 
 export default function Ingredients() {
   const [searchValue, setSearchValue] = useState('')
@@ -16,12 +17,14 @@ export default function Ingredients() {
   const [ingredientUnit, setIngredientUnit] = useState('')
 
   const [showModal, setShowModal] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
 
   const fetchSearchData = async () => {
+    setIsLoading(true)
     try {
       const data = await getIngredients(searchValue, 100)
       setSearchResults(data.results)
-      console.log(data)
+      setIsLoading(false)
     } catch (error) {
       console.error('Error fetching search results:', error)
       alert('There was an error processing your request, try again shortly.')
@@ -35,7 +38,7 @@ export default function Ingredients() {
       setIngredientInfo(ingredientData)
       setIngredientNutrients(ingredientData.nutrition?.nutrients)
       setIngredientUnit('g')
-      console.log(ingredientData)
+
     } catch (error) {
       // If the ingredient does not have g in the measure, find out which measures it has
       try {
@@ -58,7 +61,6 @@ export default function Ingredients() {
   }
 
   const handleCardOnClick = (item) => {
-    console.log(item)
     setSelectedIngredient({ id: item.id, name: item.name, image: item.image })
     setShowModal(true)
     fetchSingleIngredientData(item.id)
@@ -72,11 +74,11 @@ export default function Ingredients() {
   const handleSearch = (event) => {
     event.preventDefault()
     fetchSearchData()
-    setSearchValue('')
   }
 
   const updateSearch = (event) => {
     setSearchValue(event.target.value)
+    setSearchResults([])
   }
 
   return (
@@ -84,9 +86,20 @@ export default function Ingredients() {
       <Navigation />
 
       {/* Title */}
-      <h1 className="text-center text-xl sm:text-2xl md:text-3xl xl:text-4xl 2xl:text-5xl 3xl:text-6xl font-bold text-header mt-10">
+      {/* <h1 className="text-center text-xl sm:text-2xl md:text-3xl xl:text-4xl 2xl:text-5xl 3xl:text-6xl font-bold text-header mt-10">
         Search Ingredient Database
-      </h1>
+      </h1> */}
+
+      {searchValue && searchResults.length !== 0 && !isLoading && (
+        <h1 className="m-auto text-xl sm:text-2xl md:text-3xl xl:text-4xl 2xl:text-5xl 3xl:text-6xl text-body-bold pt-12 text-center">
+          Search results for <b>{searchValue}</b>
+        </h1>
+      )}
+      {!searchValue && !isLoading && (
+        <h1 className="text-center text-xl sm:text-2xl md:text-3xl xl:text-4xl 2xl:text-5xl 3xl:text-6xl font-bold text-header mt-10 lg:mt-16">
+          Search Vegetarian Recipes
+        </h1>
+      )}
 
       {/* Search Bar */}
       <div className="mx-auto mt-6 lg:mt-10 2xl:mt-12 border-[1px] h-8 lg:h-12 w-3/4 lg:w-2/3 2xl:border-2 bg-background rounded-md flex items-center p-2">
@@ -109,7 +122,18 @@ export default function Ingredients() {
         )}
       </h2>
 
+      {searchValue && searchResults.length === 0 && !isLoading && (
+        <h2 className="text-center text-sm sm:text-sm md:text-base xl:text-base 2xl:text-lg 3xl:text-lg text-body-bold mt-10 lg:mt-16">
+          No results found for <b>{searchValue}</b>
+        </h2>)
+      }
+
       {/* Search Results */}
+      {isLoading ? (
+        <div className="grid place-items-center w-full h-[30rem] lg:h-[40rem]">
+          <img src={loading} className="w-8" />
+        </div>
+      ) : (
       <div className="w-full py-8 px-10 lg:py-20 lg:px-20 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2 lg:gap-4">
         {searchResults?.map((item) => (
           <IngredientCard
@@ -123,12 +147,13 @@ export default function Ingredients() {
           />
         ))}
       </div>
+      )}
 
       {/* Modal */}
       <IngredientModal
+        name={selectedIngredient.name}
         isOpen={showModal}
         closeModal={handleCloseModal}
-        ingredientData={ingredientInfo}
         nutrients={ingredientNutrients}
         ingredientUnit={ingredientUnit}
       />
