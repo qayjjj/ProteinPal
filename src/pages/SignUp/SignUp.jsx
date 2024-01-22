@@ -4,11 +4,12 @@ import Footer from '../../components/Footer/Footer'
 import AnimatedInput from '../../components/Input/AnimatedInput'
 import { auth } from '../../Firebase'
 import { createUserWithEmailAndPassword } from 'firebase/auth'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const SignUp = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const navigate = useNavigate()
 
   const handleSignUp = async () => {
     try {
@@ -19,6 +20,7 @@ const SignUp = () => {
         password,
       )
       alert('User registered successfully!')
+      navigate('/dashboard')
     } catch (error) {
       alert('Error creating user:', error.message)
     }

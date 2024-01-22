@@ -50,7 +50,7 @@ export default function CustomRecipe(recipeId) {
           const recipeData = recipeDocSnap.data()
           console.log(recipeData)
           setRecipeName(recipeData.recipeName)
-          setServingRatio(recipeData.servingRatio)
+          setServingRatio(parseFloat(recipeData.servingRatio).toFixed(2))
           setNutritionData(recipeData.nutritionData)
           setIngredients(recipeData.ingredientList)
           setIsLoading(false)
